@@ -13,8 +13,14 @@ const common = [
 ];
 const chromiumFiles = ["manifest.json", ...common];
 const safariExtras = ["PRIVACY.md", "platform/safari/README.md"];
+const storeKitFiles = [
+  "docs/CHROME_WEB_STORE_SUBMISSION_RU.md",
+  "assets/store/screenshot-chat-sync.png", "assets/store/screenshot-dashboard.png",
+  "assets/store/promo-small.png", "assets/store/promo-marquee.png",
+  "icons/icon128.png", "PRIVACY.md"
+];
 
-for (const file of [...chromiumFiles, "platform/firefox/manifest.json", ...safariExtras]) {
+for (const file of [...chromiumFiles, "platform/firefox/manifest.json", ...safariExtras, ...storeKitFiles]) {
   await access(resolve(root, file));
 }
 
@@ -136,10 +142,26 @@ try {
   await rm(safariOutput, { force: true });
   await zipDirectory(safariDir, safariOutput);
 
+  const storeKitDir = resolve(work, "chrome-store-kit");
+  await mkdir(resolve(storeKitDir, "03-store-assets"), { recursive: true });
+  await cp(chromiumOutput, resolve(storeKitDir, "01-upload-to-chrome-web-store.zip"));
+  await cp(resolve(root, "docs/CHROME_WEB_STORE_SUBMISSION_RU.md"), resolve(storeKitDir, "02-field-by-field-ru.md"));
+  for (const file of [
+    "screenshot-chat-sync.png", "screenshot-dashboard.png", "promo-small.png", "promo-marquee.png"
+  ]) {
+    await cp(resolve(root, "assets/store", file), resolve(storeKitDir, "03-store-assets", file));
+  }
+  await cp(resolve(root, "icons/icon128.png"), resolve(storeKitDir, "03-store-assets/icon128.png"));
+  await cp(resolve(root, "PRIVACY.md"), resolve(storeKitDir, "04-privacy-policy.md"));
+  const storeKitOutput = resolve(dist, `maglasync-chrome-store-submission-kit-v${chromiumManifest.version}.zip`);
+  await rm(storeKitOutput, { force: true });
+  await zipDirectory(storeKitDir, storeKitOutput);
+
   console.log(`Built ${chromiumOutput}`);
   console.log(`Built ${safariPreservedOutput}`);
   console.log(`Built ${firefoxOutput}`);
   console.log(`Built ${safariOutput}`);
+  console.log(`Built ${storeKitOutput}`);
 } finally {
   await rm(work, { recursive: true, force: true });
 }

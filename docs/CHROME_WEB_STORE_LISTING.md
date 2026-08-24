@@ -10,7 +10,7 @@ Safari can automatically extract downloaded ZIP files. If that happens, download
 
 **Name:** MaglaSync Free
 
-**Category:** Productivity
+**Category:** Workflow & Planning
 
 **Primary language:** English
 
@@ -39,9 +39,9 @@ Safari can automatically extract downloaded ZIP files. If that happens, download
 
 ## Required URLs
 
-- Homepage: `https://sync.magla.ru/en/`
+- Homepage: `https://340867-ux.github.io/MaglaSync/en/`
 - Support: `https://github.com/340867-ux/MaglaSync/issues`
-- Privacy policy: `https://github.com/340867-ux/MaglaSync/blob/main/PRIVACY.md`
+- Privacy policy: `https://340867-ux.github.io/MaglaSync/privacy/`
 
 ## Graphic assets
 

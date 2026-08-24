@@ -41,6 +41,7 @@ jobs:
             maglasync-free-chromium-v*.zip.keep \
             maglasync-free-firefox-v*.zip \
             maglasync-free-safari-source-v*.zip \
+            maglasync-chrome-store-submission-kit-v*.zip \
             > SHA256SUMS.txt
       - id: version
         run: |
@@ -57,6 +58,7 @@ jobs:
               "dist/maglasync-free-chromium-v${VERSION}.zip.keep" \
               "dist/maglasync-free-firefox-v${VERSION}.zip" \
               "dist/maglasync-free-safari-source-v${VERSION}.zip" \
+              "dist/maglasync-chrome-store-submission-kit-v${VERSION}.zip" \
               dist/SHA256SUMS.txt \
               --clobber
             echo "Updated reproducible packages and Safari-preserved publisher archive for v${VERSION}"
@@ -67,6 +69,7 @@ jobs:
             "dist/maglasync-free-chromium-v${VERSION}.zip.keep" \
             "dist/maglasync-free-firefox-v${VERSION}.zip" \
             "dist/maglasync-free-safari-source-v${VERSION}.zip" \
+            "dist/maglasync-chrome-store-submission-kit-v${VERSION}.zip" \
             dist/SHA256SUMS.txt \
             assets/promo/maglasync-tiktok-ru.mp4 \
             assets/promo/maglasync-youtube-ru.mp4 \

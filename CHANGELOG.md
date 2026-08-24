@@ -12,6 +12,7 @@
 - Added safe migration from earlier versions: keep the project passport, disconnect old chats, and remove records captured by the old automatic mode.
 - Expanded the defensive test suite from 8 to 17 tests.
 - Added a Safari-preserved `.zip.keep` copy of the Chromium publisher package and documented how to rename it back to `.zip` before Chrome Web Store upload.
+- Added a complete Russian Chrome Web Store submission checklist, a public browser-friendly privacy page, and a ready-to-use submission kit with all listing images and copy.
 
 ## 1.1.0 — 2026-08-24
 

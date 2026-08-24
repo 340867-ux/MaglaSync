@@ -25,3 +25,4 @@ jobs:
             dist/maglasync-free-chromium-v*.zip
             dist/maglasync-free-firefox-v*.zip
             dist/maglasync-free-safari-source-v*.zip
+            dist/maglasync-chrome-store-submission-kit-v*.zip
