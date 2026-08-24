@@ -5,7 +5,7 @@ Canonical links:
 - Product: https://sync.magla.ru/
 - Product (temporary): https://340867-ux.github.io/MaglaSync/
 - Source: https://github.com/340867-ux/MaglaSync
-- Release: https://github.com/340867-ux/MaglaSync/releases/latest
+- Download: https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip
 
 ## Show HN
 

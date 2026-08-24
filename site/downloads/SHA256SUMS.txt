@@ -1,0 +1,3 @@
+bcc3c1503c450914b32cb8952082f5e05732cc7eaba58cc676a96c200c11663f  maglasync-free-chromium-v1.2.0.zip
+dce17eb14ec530c23cee984bdf12ca3df71c31a3a111c7c9ab4d5041bb3d297e  maglasync-free-firefox-v1.2.0.zip
+2ff8d6954d01c3128843a5acd9595e2d42354e352e3c6538e71fa73bd4015919  maglasync-free-safari-source-v1.2.0.zip

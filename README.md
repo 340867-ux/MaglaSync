@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/340867-ux/MaglaSync/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/v/release/340867-ux/MaglaSync"></a>
+  <a href="https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip"><img alt="MaglaSync 1.2.0 download" src="https://img.shields.io/badge/download-v1.2.0-6d28d9"></a>
   <a href="https://github.com/340867-ux/MaglaSync/actions/workflows/quality.yml"><img alt="Quality" src="https://github.com/340867-ux/MaglaSync/actions/workflows/quality.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-56d6b6"></a>
   <a href="https://github.com/340867-ux/MaglaSync/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/340867-ux/MaglaSync?style=flat"></a>
@@ -16,7 +16,7 @@
 <p align="center">
   <a href="https://sync.magla.ru/">Product page</a> ·
   <a href="https://sync.magla.ru/en/">English</a> ·
-  <a href="https://github.com/340867-ux/MaglaSync/releases/latest">Download</a> ·
+  <a href="https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip">Download</a> ·
   <a href="INSTALL.md">2-minute install</a> ·
   <a href="PRIVACY.md">Privacy</a>
 </p>
@@ -70,7 +70,7 @@ At the start of a connected project conversation, MaglaSync includes a small con
 
 Until the Chrome Web Store listing is approved, the GitHub release installs through Chrome's standard developer mode:
 
-1. Download `maglasync-free-chromium-v1.2.0.zip` from [Releases](https://github.com/340867-ux/MaglaSync/releases/latest).
+1. [Download `maglasync-free-chromium-v1.2.0.zip`](https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip).
 2. Unzip it.
 3. Open `chrome://extensions` in Chrome or Edge.
 4. Turn on **Developer mode**.

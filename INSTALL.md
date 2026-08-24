@@ -4,8 +4,8 @@ The public store listings are the intended one-click installers and automatic up
 
 ## Chrome, Microsoft Edge, Brave, or Opera on desktop
 
-1. Open the [latest MaglaSync release](https://github.com/340867-ux/MaglaSync/releases/latest).
-2. Download `maglasync-free-chromium-v1.2.0.zip` and extract it.
+1. [Download `maglasync-free-chromium-v1.2.0.zip`](https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip).
+2. Extract the downloaded ZIP.
 3. Open the browser's extension page:
    - Chrome: `chrome://extensions`
    - Edge: `edge://extensions`
@@ -17,13 +17,13 @@ The public store listings are the intended one-click installers and automatic up
 
 ## Firefox desktop and Firefox for Android
 
-The release contains `maglasync-free-firefox-v1.2.0.zip`, but it is an unsigned release candidate. Ordinary Firefox users should wait for the Mozilla Add-ons listing because Firefox requires signing for persistent installation. Android support also needs a real-device acceptance test before it is advertised as supported.
+The [Firefox 1.2.0 package](https://sync.magla.ru/downloads/maglasync-free-firefox-v1.2.0.zip) is an unsigned release candidate. Ordinary Firefox users should wait for the Mozilla Add-ons listing because Firefox requires signing for persistent installation. Android support also needs a real-device acceptance test before it is advertised as supported.
 
 Developers can follow Mozilla's temporary-install and Android debugging instructions in the official Extension Workshop documentation. The package uses a non-persistent event page because Firefox Android does not support background service workers.
 
 ## Safari on Mac, iPhone, and iPad
 
-The release contains `maglasync-free-safari-source-v1.2.0.zip`. It is conversion source, not a signed App Store app. Safari installation for ordinary users requires an Apple Developer/App Store Connect release, bundle identifiers, signing, real-device testing, and review.
+The [Safari 1.2.0 source package](https://sync.magla.ru/downloads/maglasync-free-safari-source-v1.2.0.zip) is conversion source, not a signed App Store app. Safari installation for ordinary users requires an Apple Developer/App Store Connect release, bundle identifiers, signing, real-device testing, and review.
 
 ## First use
 
