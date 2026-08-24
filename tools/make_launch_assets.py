@@ -432,6 +432,7 @@ def main():
     screenshot_dashboard()
     screenshot_sync()
     demo_gif()
+    copyfile(ASSETS / "demo.gif", SITE / "demo.gif")
     promo_assets()
     print("PASS launch assets: store, Telegram, YouTube, TikTok, social previews, and demo GIF")
 
