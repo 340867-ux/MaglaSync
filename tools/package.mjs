@@ -1,4 +1,4 @@
-import { access, cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { access, cp, mkdir, mkdtemp, readFile, readdir, rm, utimes, writeFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { basename, dirname, resolve } from "node:path";
 import { tmpdir } from "node:os";
@@ -65,8 +65,18 @@ async function copyFiles(files, target) {
   }
 }
 
-function zipDirectory(source, output) {
-  const result = spawnSync("zip", ["-q", "-r", output, "."], { cwd: source, encoding: "utf8" });
+async function normalizePackageTimes(directory) {
+  const fixedTime = new Date("1980-01-01T00:00:00.000Z");
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = resolve(directory, entry.name);
+    if (entry.isDirectory()) await normalizePackageTimes(path);
+    else await utimes(path, fixedTime, fixedTime);
+  }
+}
+
+async function zipDirectory(source, output) {
+  await normalizePackageTimes(source);
+  const result = spawnSync("zip", ["-q", "-X", "-D", "-r", output, "."], { cwd: source, encoding: "utf8" });
   if (result.status !== 0) throw new Error(result.stderr || `zip failed for ${basename(output)}`);
 }
 
@@ -83,10 +93,13 @@ try {
   const chromiumDir = resolve(work, "chromium");
   await copyFiles(chromiumFiles, chromiumDir);
   const chromiumOutput = resolve(dist, `maglasync-free-chromium-v${chromiumManifest.version}.zip`);
+  const safariPreservedOutput = resolve(dist, `maglasync-free-chromium-v${chromiumManifest.version}.zip.keep`);
   const legacyOutput = resolve(dist, `maglasync-free-v${chromiumManifest.version}.zip`);
   await rm(chromiumOutput, { force: true });
+  await rm(safariPreservedOutput, { force: true });
   await rm(legacyOutput, { force: true });
-  zipDirectory(chromiumDir, chromiumOutput);
+  await zipDirectory(chromiumDir, chromiumOutput);
+  await cp(chromiumOutput, safariPreservedOutput);
   await cp(chromiumOutput, legacyOutput);
 
   const coreSource = stripExports(await readFile(resolve(root, "shared/core.js"), "utf8"));
@@ -112,15 +125,16 @@ try {
   }
   const firefoxOutput = resolve(dist, `maglasync-free-firefox-v${chromiumManifest.version}.zip`);
   await rm(firefoxOutput, { force: true });
-  zipDirectory(firefoxDir, firefoxOutput);
+  await zipDirectory(firefoxDir, firefoxOutput);
 
   const safariDir = resolve(work, "safari-source");
   await copyFiles([...chromiumFiles, ...safariExtras], safariDir);
   const safariOutput = resolve(dist, `maglasync-free-safari-source-v${chromiumManifest.version}.zip`);
   await rm(safariOutput, { force: true });
-  zipDirectory(safariDir, safariOutput);
+  await zipDirectory(safariDir, safariOutput);
 
   console.log(`Built ${chromiumOutput}`);
+  console.log(`Built ${safariPreservedOutput}`);
   console.log(`Built ${firefoxOutput}`);
   console.log(`Built ${safariOutput}`);
 } finally {

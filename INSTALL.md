@@ -44,6 +44,7 @@ Export a backup if needed, then remove MaglaSync from the browser's extension ma
 
 ## Troubleshooting
 
+- **Safari immediately extracted the ZIP:** this is normal when Safari's **Open “safe” files after downloading** option is enabled. For a manual browser installation, use the extracted folder. For a Chrome Web Store upload, download the [preserved archive](https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip.keep), rename it by removing only `.keep`, and upload the resulting `.zip` file.
 - If the purple panel does not appear, reload the AI chat after installing.
 - If context is not placed, make sure the message box is empty and the chat is connected.
 - If messages are not saved, enable **Save connected chats** and reconnect the chat if the project goal changed.

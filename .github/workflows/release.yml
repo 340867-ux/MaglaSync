@@ -38,6 +38,7 @@ jobs:
           cd dist
           sha256sum \
             maglasync-free-chromium-v*.zip \
+            maglasync-free-chromium-v*.zip.keep \
             maglasync-free-firefox-v*.zip \
             maglasync-free-safari-source-v*.zip \
             > SHA256SUMS.txt
@@ -51,11 +52,19 @@ jobs:
           VERSION: ${{ steps.version.outputs.value }}
         run: |
           if gh release view "v${VERSION}" >/dev/null 2>&1; then
-            echo "v${VERSION} already exists"
+            gh release upload "v${VERSION}" \
+              "dist/maglasync-free-chromium-v${VERSION}.zip" \
+              "dist/maglasync-free-chromium-v${VERSION}.zip.keep" \
+              "dist/maglasync-free-firefox-v${VERSION}.zip" \
+              "dist/maglasync-free-safari-source-v${VERSION}.zip" \
+              dist/SHA256SUMS.txt \
+              --clobber
+            echo "Updated reproducible packages and Safari-preserved publisher archive for v${VERSION}"
             exit 0
           fi
           gh release create "v${VERSION}" \
             "dist/maglasync-free-chromium-v${VERSION}.zip" \
+            "dist/maglasync-free-chromium-v${VERSION}.zip.keep" \
             "dist/maglasync-free-firefox-v${VERSION}.zip" \
             "dist/maglasync-free-safari-source-v${VERSION}.zip" \
             dist/SHA256SUMS.txt \

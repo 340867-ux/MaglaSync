@@ -11,6 +11,7 @@
 - Added fail-closed journal locking when integrity verification fails.
 - Added safe migration from earlier versions: keep the project passport, disconnect old chats, and remove records captured by the old automatic mode.
 - Expanded the defensive test suite from 8 to 17 tests.
+- Added a Safari-preserved `.zip.keep` copy of the Chromium publisher package and documented how to rename it back to `.zip` before Chrome Web Store upload.
 
 ## 1.1.0 — 2026-08-24
 

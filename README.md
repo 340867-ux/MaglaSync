@@ -79,6 +79,8 @@ Until the Chrome Web Store listing is approved, the GitHub release installs thro
 
 Full illustrated instructions: [INSTALL.md](INSTALL.md).
 
+> **Publishing from Safari?** Safari may automatically expand a downloaded ZIP. Download the [Safari-preserved publisher archive](https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip.keep), remove only the final `.keep` from its filename, and upload the resulting `.zip` to Chrome Web Store.
+
 > GitHub cannot provide one-click installation for ordinary Chrome users. Public one-click installation requires a Chrome Web Store listing. This repository and release are the inspectable GitHub edition.
 
 ## Privacy you can verify

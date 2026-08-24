@@ -2,6 +2,10 @@
 
 This file contains the exact public listing copy and privacy declarations for MaglaSync Free 1.2.0.
 
+## Package upload from Safari
+
+Safari can automatically extract downloaded ZIP files. If that happens, download `maglasync-free-chromium-v1.2.0.zip.keep` from `https://sync.magla.ru/downloads/`, remove only the final `.keep` from the filename, and upload the resulting `.zip`. The preserved file is byte-for-byte identical to the normal Chromium ZIP.
+
 ## Product details
 
 **Name:** MaglaSync Free
