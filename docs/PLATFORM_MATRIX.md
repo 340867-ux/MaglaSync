@@ -4,7 +4,7 @@ MaglaSync is one product with browser-specific distribution packages. Browser st
 
 | User device | Delivery | Current artifact | What still requires the publisher |
 | --- | --- | --- | --- |
-| Windows, macOS, Linux: Chrome, Brave, Opera | Chrome Web Store | Chromium ZIP | Google developer registration, upload, privacy form, review |
+| Windows, macOS, Linux: Chrome, Brave, Opera | Chrome Web Store | Submitted for Google review on 2026-08-24 (owner-reported) | Google approval and a live store listing URL |
 | Windows, macOS: Microsoft Edge | Microsoft Edge Add-ons | Same reviewed Chromium ZIP | Partner Center account, upload, privacy form, review |
 | Windows, macOS, Linux: Firefox | Mozilla Add-ons (AMO) | Firefox ZIP | AMO signing, listing, desktop acceptance test |
 | Android: Firefox | Mozilla Add-ons (AMO) | Same Firefox candidate | Real-device UX test and AMO mobile approval |

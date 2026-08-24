@@ -111,7 +111,7 @@ No paid edition is required to keep using one local project.
 
 | Package | Status |
 | --- | --- |
-| Chromium: Chrome 114+, Edge 114+ | Supported GitHub edition; store review pending |
+| Chromium: Chrome 114+, Edge 114+ | Supported GitHub edition; Chrome Web Store submission under review since 2026-08-24 (owner-reported) |
 | Brave and Opera desktop | Uses the Chromium package; not release-gated on every version |
 | Firefox desktop and Android | Event-page release candidate; Mozilla signing and real-device acceptance test pending |
 | Safari on macOS, iPhone, and iPad | Conversion source ready; Apple signing and App Store review pending |
@@ -146,6 +146,7 @@ Read [SECURITY.md](SECURITY.md) before high-stakes use.
 - Share the [Russian/CIS product page](https://sync.magla.ru/), [English page](https://sync.magla.ru/en/), or the prepared [launch kit](docs/LAUNCH_KIT.md).
 - Russian Telegram, YouTube, TikTok, VK, and Habr copy is ready in the [CIS promo pack](docs/PROMO_RU.md).
 - Chrome Web Store submission materials are ready in [`assets/store`](assets/store) with exact field copy in [the listing pack](docs/CHROME_WEB_STORE_LISTING.md).
+- Store publication state and evidence level are tracked in [the publishing status journal](docs/PUBLISHING_STATUS.md).
 
 ## License
 
