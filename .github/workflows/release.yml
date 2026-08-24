@@ -42,7 +42,9 @@ jobs:
             maglasync-free-safari-source-v*.zip \
             > SHA256SUMS.txt
       - id: version
-        run: echo "value=$(node -p \"JSON.parse(require('fs').readFileSync('manifest.json')).version\")" >> "$GITHUB_OUTPUT"
+        run: |
+          VERSION="$(python -c 'import json; print(json.load(open("manifest.json", encoding="utf-8"))["version"])')"
+          echo "value=${VERSION}" >> "$GITHUB_OUTPUT"
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
