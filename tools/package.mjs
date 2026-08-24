@@ -16,7 +16,28 @@ const manifest = JSON.parse(await readFile(resolve(root, "manifest.json"), "utf8
 if (manifest.manifest_version !== 3) throw new Error("Manifest V3 is required.");
 if (!manifest.permissions.every((permission) => ["storage"].includes(permission))) throw new Error("Unexpected extension permission.");
 if (manifest.content_security_policy) throw new Error("Custom CSP is not expected in the free edition.");
+
+const runtimeTextFiles = required.filter((file) => /\.(?:js|html|css|json)$/.test(file));
+const forbiddenRuntimePatterns = [
+  ["fetch", /\bfetch\s*\(/],
+  ["XMLHttpRequest", /\bXMLHttpRequest\b/],
+  ["WebSocket", /\bWebSocket\b/],
+  ["sendBeacon", /\bnavigator\.sendBeacon\b/],
+  ["EventSource", /\bEventSource\b/],
+  ["remote script", /<script[^>]+src=["']https?:\/\//i],
+  ["eval", /\beval\s*\(/],
+  ["Function constructor", /\bnew\s+Function\s*\(/]
+];
+
+for (const file of runtimeTextFiles) {
+  const source = await readFile(resolve(root, file), "utf8");
+  for (const [label, pattern] of forbiddenRuntimePatterns) {
+    if (pattern.test(source)) throw new Error(`Forbidden runtime primitive (${label}) in ${file}.`);
+  }
+}
+
 console.log(`PASS package checks · MaglaSync ${manifest.version} · ${required.length} required files`);
+console.log(`PASS offline boundary · ${runtimeTextFiles.length} runtime text files`);
 
 if (process.argv.includes("--check")) process.exit(0);
 await mkdir(resolve(root, "dist"), { recursive: true });
@@ -25,4 +46,3 @@ await rm(output, { force: true });
 const result = spawnSync("zip", ["-q", "-r", output, ...required], { cwd: root, encoding: "utf8" });
 if (result.status !== 0) throw new Error(result.stderr || "zip failed");
 console.log(`Built ${output}`);
-

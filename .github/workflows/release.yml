@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - manifest.json
+      - tools/package.mjs
+      - RELEASE_NOTES_v*.md
+      - .github/workflows/release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node --test
+      - run: node tools/package.mjs --check
+      - run: node tools/package.mjs
+      - name: Publish v1.0.0
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v1.0.0 >/dev/null 2>&1; then
+            echo "v1.0.0 already exists"
+            exit 0
+          fi
+          gh release create v1.0.0 \
+            dist/maglasync-free-v1.0.0.zip \
+            --title "MaglaSync Free v1.0.0" \
+            --notes-file RELEASE_NOTES_v1.0.0.md

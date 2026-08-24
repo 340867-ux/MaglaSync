@@ -7,6 +7,13 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/340867-ux/MaglaSync/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/v/release/340867-ux/MaglaSync"></a>
+  <a href="https://github.com/340867-ux/MaglaSync/actions/workflows/quality.yml"><img alt="Quality" src="https://github.com/340867-ux/MaglaSync/actions/workflows/quality.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-56d6b6"></a>
+  <a href="https://github.com/340867-ux/MaglaSync/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/340867-ux/MaglaSync?style=flat"></a>
+</p>
+
+<p align="center">
   <a href="https://340867-ux.github.io/maglasync/">Product page</a> ·
   <a href="https://github.com/340867-ux/maglasync/releases/latest">Download</a> ·
   <a href="INSTALL.md">2-minute install</a> ·
@@ -124,4 +131,3 @@ Read [SECURITY.md](SECURITY.md) before high-stakes use.
 ## License
 
 [MIT](LICENSE). Built as the first public MAGLA utility.
-
