@@ -1,4 +1,4 @@
-import { access, cp, mkdir, mkdtemp, readFile, readdir, rm, utimes, writeFile } from "node:fs/promises";
+import { access, chmod, cp, mkdir, mkdtemp, readFile, readdir, rm, utimes, writeFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { basename, dirname, resolve } from "node:path";
 import { tmpdir } from "node:os";
@@ -70,7 +70,10 @@ async function normalizePackageTimes(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = resolve(directory, entry.name);
     if (entry.isDirectory()) await normalizePackageTimes(path);
-    else await utimes(path, fixedTime, fixedTime);
+    else {
+      await chmod(path, 0o644);
+      await utimes(path, fixedTime, fixedTime);
+    }
   }
 }
 
