@@ -18,7 +18,7 @@ MaglaSync Free is a local browser extension for people who use ChatGPT, Claude, 
 
 Download `maglasync-free-v1.0.0.zip`, extract it, open `chrome://extensions`, enable Developer mode, select **Load unpacked**, and choose the extracted folder.
 
-See [INSTALL.md](https://github.com/340867-ux/maglasync/blob/main/INSTALL.md) for full instructions.
+See [INSTALL.md](https://github.com/340867-ux/MaglaSync/blob/main/INSTALL.md) for full instructions.
 
 ## Verification
 
@@ -27,4 +27,3 @@ Core tests and package checks run in GitHub Actions. The package contains Manife
 ## Current scope
 
 Chrome and Edge 114+. ChatGPT, Claude, and Gemini. AI websites may change their page structure; compatibility reports are welcome, but never include a private conversation in a public issue.
-

@@ -4,7 +4,7 @@ The current GitHub edition is a Chrome/Edge extension package. Installation take
 
 ## Chrome
 
-1. Open the [latest MaglaSync release](https://github.com/340867-ux/maglasync/releases/latest).
+1. Open the [latest MaglaSync release](https://github.com/340867-ux/MaglaSync/releases/latest).
 2. Download `maglasync-free-v1.0.0.zip`.
 3. Open the downloaded ZIP and extract the `maglasync-free-v1.0.0` folder.
 4. In Chrome, open `chrome://extensions`.
@@ -40,4 +40,3 @@ Export a backup if needed, then remove MaglaSync from the browser's extensions p
 - If context is not filled, ensure the chat is empty and **Auto-load context** is enabled.
 - If messages are not captured, enable **Capture messages** and reload the page.
 - AI sites frequently change their HTML. Report a compatibility issue without pasting private conversation text.
-

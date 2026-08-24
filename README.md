@@ -14,8 +14,8 @@
 </p>
 
 <p align="center">
-  <a href="https://340867-ux.github.io/maglasync/">Product page</a> ·
-  <a href="https://github.com/340867-ux/maglasync/releases/latest">Download</a> ·
+  <a href="https://340867-ux.github.io/MaglaSync/">Product page</a> ·
+  <a href="https://github.com/340867-ux/MaglaSync/releases/latest">Download</a> ·
   <a href="INSTALL.md">2-minute install</a> ·
   <a href="PRIVACY.md">Privacy</a>
 </p>
@@ -63,7 +63,7 @@ At the start of a project conversation, MaglaSync includes a small continuity ru
 
 Until the Chrome Web Store listing is approved, the GitHub release installs through Chrome's standard developer mode:
 
-1. Download `maglasync-free-v1.0.0.zip` from [Releases](https://github.com/340867-ux/maglasync/releases/latest).
+1. Download `maglasync-free-v1.0.0.zip` from [Releases](https://github.com/340867-ux/MaglaSync/releases/latest).
 2. Unzip it.
 3. Open `chrome://extensions` in Chrome or Edge.
 4. Turn on **Developer mode**.
