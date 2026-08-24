@@ -3,14 +3,16 @@ import {
   publicSnapshot, safeProject, verifyState
 } from "./shared/core.js";
 
+const extensionApi = globalThis.browser ?? globalThis.chrome;
+
 let writeQueue = Promise.resolve();
 
 async function readState() {
-  const stored = await chrome.storage.local.get(STORAGE_KEY);
+  const stored = await extensionApi.storage.local.get(STORAGE_KEY);
   const state = stored[STORAGE_KEY];
   if (!state || state.schema !== SCHEMA) {
     const fresh = defaultState();
-    await chrome.storage.local.set({ [STORAGE_KEY]: fresh });
+    await extensionApi.storage.local.set({ [STORAGE_KEY]: fresh });
     return fresh;
   }
   return state;
@@ -20,18 +22,18 @@ function mutate(mutator) {
   const operation = writeQueue.then(async () => {
     const current = await readState();
     const next = await mutator(current);
-    await chrome.storage.local.set({ [STORAGE_KEY]: next });
+    await extensionApi.storage.local.set({ [STORAGE_KEY]: next });
     return next;
   });
   writeQueue = operation.catch(() => undefined);
   return operation;
 }
 
-chrome.runtime.onInstalled.addListener(() => {
+extensionApi.runtime.onInstalled.addListener(() => {
   readState().catch(() => undefined);
 });
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+extensionApi.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sender)
     .then((result) => sendResponse({ ok: true, ...result }))
     .catch((error) => sendResponse({ ok: false, error: error.message || "MaglaSync error" }));
@@ -76,7 +78,7 @@ async function handleMessage(message, sender) {
       };
     }
     case "OPEN_DASHBOARD": {
-      await chrome.runtime.openOptionsPage();
+      await extensionApi.runtime.openOptionsPage();
       return {};
     }
     case "IMPORT_STATE": {

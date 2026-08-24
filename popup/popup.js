@@ -9,12 +9,12 @@ document.querySelector("#auto-load").addEventListener("change", saveSettings);
 document.querySelector("#capture-enabled").addEventListener("change", saveSettings);
 
 function openDashboard() {
-  chrome.runtime.openOptionsPage();
+  extensionApi.runtime.openOptionsPage();
   window.close();
 }
 
 async function saveSettings() {
-  const response = await chrome.runtime.sendMessage({
+  const response = await extensionApi.runtime.sendMessage({
     type: "SET_SETTINGS",
     settings: {
       autoLoad: document.querySelector("#auto-load").checked,
@@ -25,7 +25,7 @@ async function saveSettings() {
 }
 
 async function render() {
-  const response = await chrome.runtime.sendMessage({ type: "GET_STATE" });
+  const response = await extensionApi.runtime.sendMessage({ type: "GET_STATE" });
   if (!response?.ok) return;
   const { state, integrityErrors } = response;
   noProject.classList.toggle("hidden", Boolean(state.project));
@@ -41,4 +41,5 @@ async function render() {
 }
 
 render();
+const extensionApi = globalThis.browser ?? globalThis.chrome;
 

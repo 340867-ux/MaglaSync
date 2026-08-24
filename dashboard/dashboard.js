@@ -1,5 +1,7 @@
 import { buildContext, publicSnapshot } from "../shared/core.js";
 
+const extensionApi = globalThis.browser ?? globalThis.chrome;
+
 let currentState = null;
 const $ = (selector) => document.querySelector(selector);
 
@@ -13,7 +15,7 @@ $("#import").addEventListener("change", importBackup);
 $("#delete").addEventListener("click", deleteAll);
 
 async function call(message) {
-  const response = await chrome.runtime.sendMessage(message);
+  const response = await extensionApi.runtime.sendMessage(message);
   if (!response?.ok) throw new Error(response?.error || "MaglaSync could not complete that action.");
   return response;
 }
@@ -144,4 +146,3 @@ function toast(message, error = false) {
 }
 
 render();
-

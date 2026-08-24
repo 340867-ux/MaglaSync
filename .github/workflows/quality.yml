@@ -20,6 +20,8 @@ jobs:
       - run: node tools/package.mjs
       - uses: actions/upload-artifact@v4
         with:
-          name: maglasync-free-extension
-          path: dist/maglasync-free-v*.zip
-
+          name: maglasync-free-platform-packages
+          path: |
+            dist/maglasync-free-chromium-v*.zip
+            dist/maglasync-free-firefox-v*.zip
+            dist/maglasync-free-safari-source-v*.zip

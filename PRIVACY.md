@@ -15,7 +15,7 @@ MaglaSync Free is a browser extension that provides continuity between supported
 - structured project-state updates;
 - settings and integrity hashes.
 
-The Free edition stores this data in `chrome.storage.local` inside the user's browser profile. It contains no MaglaSync server endpoint, analytics client, advertising library, or AI API integration.
+The Free edition stores this data in the browser extension's local storage inside the user's browser profile. It contains no MaglaSync server endpoint, analytics client, advertising library, or AI API integration.
 
 ## Data transmission
 
@@ -41,4 +41,3 @@ Captured records contain the platform name, chat path identifier, role, time, an
 ## Changes
 
 Material privacy changes will be documented in the repository changelog and a new extension version.
-

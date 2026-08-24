@@ -1,4 +1,5 @@
 (() => {
+  const extensionApi = globalThis.browser ?? globalThis.chrome;
   const platform = detectPlatform();
   if (!platform || document.getElementById("maglasync-dock")) return;
 
@@ -33,7 +34,7 @@
   const observer = new MutationObserver(scheduleScan);
   observer.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
   window.addEventListener("popstate", handleNavigation);
-  chrome.storage.onChanged.addListener((changes, areaName) => {
+  extensionApi.storage.onChanged.addListener((changes, areaName) => {
     if (areaName === "local" && changes.maglaSyncState) refreshContext();
   });
   setInterval(handleNavigation, 1000);
@@ -66,13 +67,13 @@
         <button class="maglasync-button secondary" data-ms-settings>Settings</button>
       </div>`;
     node.querySelector("[data-ms-load]").addEventListener("click", () => loadContext(true));
-    node.querySelector("[data-ms-settings]").addEventListener("click", () => chrome.runtime.sendMessage({ type: "OPEN_DASHBOARD" }));
+    node.querySelector("[data-ms-settings]").addEventListener("click", () => extensionApi.runtime.sendMessage({ type: "OPEN_DASHBOARD" }));
     return node;
   }
 
   async function refreshContext() {
     try {
-      const response = await chrome.runtime.sendMessage({ type: "GET_CONTEXT", chatId: chatId(), platform });
+      const response = await extensionApi.runtime.sendMessage({ type: "GET_CONTEXT", chatId: chatId(), platform });
       if (!response?.ok) throw new Error(response?.error || "Unavailable");
       state = response;
       dock.querySelector("[data-ms-project]").textContent = response.project?.name || "No project yet";
@@ -109,7 +110,7 @@
       captured.push({ platform, chatId: chatId(), role, ordinal, text, capturedAt: new Date().toISOString() });
     }
     if (!captured.length) return;
-    const response = await chrome.runtime.sendMessage({ type: "CAPTURE_MESSAGES", messages: captured });
+    const response = await extensionApi.runtime.sendMessage({ type: "CAPTURE_MESSAGES", messages: captured });
     if (response?.ok) {
       dock.querySelector("[data-ms-status]").textContent = `${response.messageCount} messages · ${response.checkpointCount} updates saved locally`;
       dock.querySelector("[data-ms-dot]").classList.remove("warn");

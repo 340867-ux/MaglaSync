@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0 — 2026-08-24
+
+- Added reproducible Chromium, Firefox, and Safari-source packages.
+- Added a cross-browser extension API adapter.
+- Added Russian and English product pages for `sync.magla.ru`.
+- Added platform, monetization, and launch documentation.
+- Added Telegram, YouTube, and TikTok promotional artwork and scripts.
+
 ## 1.0.0 — 2026-08-24
 
 - First public MaglaSync Free release.
@@ -12,4 +20,3 @@
 - SHA-256 chained history verification.
 - JSON backup, verified restore, and local deletion.
 - Manifest V3 package with only the `storage` permission and three scoped chat-site matches.
-

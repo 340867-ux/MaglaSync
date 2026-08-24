@@ -9,6 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
 STORE = ASSETS / "store"
+PROMO = ASSETS / "promo"
 SITE = ROOT / "site"
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
@@ -100,7 +101,7 @@ def social_preview():
     for value in ("FREE", "LOCAL", "NO API KEY"):
         width = pill(draw, x, 438, value, "#35245a", WHITE, GREEN, 15, 38)
         x += width + 10
-    label(draw, (76, 548), "340867-ux.github.io/MaglaSync", 17, "#a7b2c6")
+    label(draw, (76, 548), "sync.magla.ru", 17, "#a7b2c6", True)
 
     rr(draw, (830, 88, 1194, 548), 28, PAPER)
     rr(draw, (830, 88, 1194, 164), 28, INK)
@@ -216,7 +217,7 @@ def screenshot_sync():
     label(draw, (102, 318), "Next: publish and collect real feedback.", 14, INK)
     label(draw, (82, 382), "AI", 10, "#047857", True)
     rr(draw, (82, 402, 512, 506), 14, PAPER, LINE)
-    label(draw, (102, 425), "Decision recorded. v1.0.0 is ready.", 14, INK)
+    label(draw, (102, 425), "Decision recorded. v1.1.0 is ready.", 14, INK)
     label(draw, (102, 454), "Verified: tests, release, and privacy boundary.", 12, MUTED)
     label(draw, (102, 482), "Next step: first public users.", 12, MUTED)
     rr(draw, (82, 560, 512, 626), 14, "#ecfdf5", "#a7f3d0")
@@ -238,7 +239,7 @@ def screenshot_sync():
     label(draw, (786, 340), "Goal", 11, MUTED, True)
     label(draw, (786, 363), "Ship a useful local continuity extension.", 13, INK)
     label(draw, (786, 404), "Latest decision", 11, MUTED, True)
-    label(draw, (786, 427), "Release v1.0.0 and collect real feedback.", 13, INK)
+    label(draw, (786, 427), "Release v1.1.0 and collect real feedback.", 13, INK)
     label(draw, (786, 468), "Verified", 11, MUTED, True)
     label(draw, (786, 491), "Tests, release, and privacy boundary passed.", 13, INK)
     rr(draw, (764, 560, 1194, 626), 14, "#eef2ff", "#c4b5fd")
@@ -262,7 +263,7 @@ def demo_frame(step):
     if step == 0:
         label(draw, (96, 178), "ChatGPT · project conversation", 14, MUTED, True)
         rr(draw, (96, 214, 904, 276), 14, "#eef2ff")
-        label(draw, (118, 245), "We approved the local-first release. Publish v1.0.0 next.", 16, INK, False, "lm")
+        label(draw, (118, 245), "We approved the cross-platform release. Publish v1.1.0 next.", 16, INK, False, "lm")
         rr(draw, (96, 296, 904, 376), 14, WHITE, LINE)
         label(draw, (118, 326), "Decision recorded. Tests and privacy boundary passed.", 15, INK)
         label(draw, (118, 354), "Next step: publish and collect real user feedback.", 13, MUTED)
@@ -289,7 +290,7 @@ def demo_frame(step):
         rr(draw, (96, 214, 904, 392), 14, WHITE, LINE)
         label(draw, (118, 241), "[MAGLASYNC CONTEXT]", 11, PURPLE, True)
         label(draw, (118, 276), "Goal: Ship a useful local continuity extension.", 14, INK)
-        label(draw, (118, 308), "Latest: v1.0.0 published; tests and privacy passed.", 14, INK)
+        label(draw, (118, 308), "Latest: v1.1.0 prepared; tests and privacy passed.", 14, INK)
         label(draw, (118, 340), "Next: collect feedback from real users.", 14, INK)
         label(draw, (118, 372), "[END MAGLASYNC CONTEXT]", 11, MUTED, True)
         rr(draw, (592, 412, 904, 450), 13, PURPLE_SOFT)
@@ -317,18 +318,122 @@ def demo_gif():
     temporary.replace(output)
 
 
+def wrap_lines(draw, value, target_width, text_font):
+    words = value.split()
+    lines = []
+    current = ""
+    for word in words:
+        candidate = f"{current} {word}".strip()
+        if current and draw.textlength(candidate, font=text_font) > target_width:
+            lines.append(current)
+            current = word
+        else:
+            current = candidate
+    if current:
+        lines.append(current)
+    return lines
+
+
+def wrapped(draw, xy, value, size, fill, max_width, bold=False, line_gap=1.18, anchor="la"):
+    text_font = font(size, bold)
+    lines = wrap_lines(draw, value, max_width, text_font)
+    x, y = xy
+    for index, line in enumerate(lines):
+        draw.text((x, y + index * int(size * line_gap)), line, font=text_font, fill=fill, anchor=anchor)
+    return len(lines) * int(size * line_gap)
+
+
+def ru_social_preview():
+    image = gradient((1280, 640))
+    draw = ImageDraw.Draw(image)
+    draw.ellipse((1000, -180, 1460, 280), fill="#48217e")
+    draw.ellipse((960, 450, 1380, 870), fill="#35165d")
+    logo(draw, 70, 66, 70)
+    label(draw, (160, 101), "MAGLASYNC", 25, WHITE, True, "lm")
+    label(draw, (70, 188), "Новый ИИ-чат", 48, WHITE, True)
+    label(draw, (70, 246), "уже знает", 48, WHITE, True)
+    label(draw, (70, 304), "ваш проект.", 48, WHITE, True)
+    label(draw, (72, 380), "Память проекта для ChatGPT, Claude и Gemini.", 19, "#ddd6fe")
+    x = 72
+    for value in ("БЕСПЛАТНО", "ЛОКАЛЬНО", "БЕЗ API-КЛЮЧА"):
+        width = pill(draw, x, 432, value, "#35245a", WHITE, GREEN, 14, 38)
+        x += width + 9
+    label(draw, (72, 548), "sync.magla.ru", 18, "#a7b2c6", True)
+    rr(draw, (824, 82, 1194, 550), 28, PAPER)
+    rr(draw, (824, 82, 1194, 158), 28, INK)
+    draw.rectangle((824, 132, 1194, 158), fill=INK)
+    logo(draw, 846, 101, 38)
+    label(draw, (896, 120), "MaglaSync", 17, WHITE, True, "lm")
+    label(draw, (896, 141), "FREE · ЛОКАЛЬНАЯ ПАМЯТЬ", 9, "#94a3b8", True, "lm")
+    rows = [
+        ("ChatGPT", "Проект сохранён", "ГОТОВО"),
+        ("Claude", "Контекст загружен", "ГОТОВО"),
+        ("Gemini", "Следующий шаг", "ГОТОВО"),
+    ]
+    for index, (name, detail, status) in enumerate(rows):
+        y = 184 + index * 94
+        rr(draw, (846, y, 1172, y + 74), 15, WHITE, LINE)
+        rr(draw, (864, y + 18, 900, y + 54), 10, PURPLE_SOFT)
+        label(draw, (882, y + 36), name[0], 15, PURPLE, True, "mm")
+        label(draw, (914, y + 25), name, 14, INK, True)
+        label(draw, (914, y + 47), detail, 10, MUTED)
+        label(draw, (1152, y + 37), status, 9, "#047857", True, "rm")
+    rr(draw, (846, 482, 1172, 522), 18, PURPLE)
+    label(draw, (1009, 502), "Данные остаются в браузере", 11, WHITE, True, "mm")
+    save_png(image, PROMO / "social-preview-ru.png")
+    save_png(image, SITE / "social-preview-ru.png")
+
+
+def promo_card(size, title, subtitle, badge, layout="horizontal"):
+    width, height = size
+    image = gradient(size)
+    draw = ImageDraw.Draw(image)
+    draw.ellipse((int(width * .7), -int(height * .2), int(width * 1.15), int(height * .45)), fill="#48217e")
+    margin = int(width * .07)
+    logo_size = 64 if width >= 1200 else 78
+    logo(draw, margin, margin, logo_size)
+    label(draw, (margin + logo_size + 22, margin + logo_size / 2), "MaglaSync", 28 if width >= 1200 else 34, WHITE, True, "lm")
+    title_size = 48 if layout == "horizontal" else 66
+    title_y = int(height * .30) if layout == "horizontal" else int(height * .25)
+    max_width = int(width * (.60 if layout == "horizontal" else .84))
+    wrapped(draw, (margin, title_y), title, title_size, WHITE, max_width, True, 1.18)
+    subtitle_y = int(height * (.69 if layout == "horizontal" else .58))
+    wrapped(draw, (margin, subtitle_y), subtitle, 21 if layout == "horizontal" else 30, "#ddd6fe", max_width, False, 1.35)
+    pill(draw, margin, int(height * .84), badge, "#35245a", WHITE, GREEN, 16 if layout == "horizontal" else 22, 44 if layout == "horizontal" else 58)
+    label(draw, (width - margin, height - margin), "sync.magla.ru", 17 if layout == "horizontal" else 24, "#a7b2c6", True, "ra")
+    if layout == "horizontal":
+        x = int(width * .70)
+        for index, (name, state) in enumerate((("ChatGPT", "сохранено"), ("Claude", "загружено"), ("Gemini", "готово"))):
+            y = int(height * .26) + index * int(height * .16)
+            rr(draw, (x, y, width - margin, y + int(height * .115)), 16, WHITE)
+            draw.ellipse((x + 20, y + 24, x + 32, y + 36), fill=GREEN)
+            label(draw, (x + 48, y + 30), name, 15, INK, True, "lm")
+            label(draw, (width - margin - 18, y + 30), state.upper(), 10, "#047857", True, "rm")
+    return image
+
+
+def promo_assets():
+    save_png(promo_card((1280, 720), "Не объясняйте проект каждому ИИ-чату заново", "MaglaSync переносит актуальный контекст между ChatGPT, Claude и Gemini.", "БЕСПЛАТНО · ЛОКАЛЬНО"), PROMO / "youtube-cover-ru.png")
+    save_png(promo_card((1280, 720), "Новый ИИ-чат уже знает ваш проект", "Без аккаунта, API-ключа и внешнего сервера.", "СКАЧАТЬ БЕСПЛАТНО"), PROMO / "telegram-card-ru.png")
+    save_png(promo_card((1080, 1080), "Новый ИИ-чат уже знает ваш проект", "Автоматическая память проекта. Отправку всегда нажимаете вы.", "MAGLASYNC FREE", "square"), PROMO / "telegram-square-ru.png")
+    save_png(promo_card((1080, 1920), "Перестаньте объяснять всё заново", "ChatGPT → Claude → Gemini. Один проект, один актуальный контекст.", "MAGLASYNC FREE", "vertical"), PROMO / "tiktok-cover-ru.png")
+
+
 def main():
     ASSETS.mkdir(exist_ok=True)
     STORE.mkdir(exist_ok=True)
+    PROMO.mkdir(exist_ok=True)
     SITE.mkdir(exist_ok=True)
     copyfile(ROOT / "icons" / "icon128.png", SITE / "icon128.png")
     social_preview()
+    ru_social_preview()
     save_png(promo((440, 280), compact=True), STORE / "promo-small.png")
     save_png(promo((1400, 560), compact=False), STORE / "promo-marquee.png")
     screenshot_dashboard()
     screenshot_sync()
     demo_gif()
-    print("PASS launch assets: social preview, demo GIF, and Chrome Web Store artwork")
+    promo_assets()
+    print("PASS launch assets: store, Telegram, YouTube, TikTok, social previews, and demo GIF")
 
 
 if __name__ == "__main__":

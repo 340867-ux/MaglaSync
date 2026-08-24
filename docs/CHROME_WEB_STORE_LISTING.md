@@ -1,6 +1,6 @@
 # Chrome Web Store submission pack
 
-This file contains the exact public listing copy and privacy declarations for MaglaSync Free 1.0.0.
+This file contains the exact public listing copy and privacy declarations for MaglaSync Free 1.1.0.
 
 ## Product details
 
@@ -34,7 +34,7 @@ This file contains the exact public listing copy and privacy declarations for Ma
 
 ## Required URLs
 
-- Homepage: `https://340867-ux.github.io/MaglaSync/`
+- Homepage: `https://sync.magla.ru/en/`
 - Support: `https://github.com/340867-ux/MaglaSync/issues`
 - Privacy policy: `https://github.com/340867-ux/MaglaSync/blob/main/PRIVACY.md`
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://340867-ux.github.io/MaglaSync/sitemap.xml
+Sitemap: https://sync.magla.ru/sitemap.xml

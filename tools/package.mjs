@@ -1,23 +1,32 @@
-import { access, mkdir, readFile, rm } from "node:fs/promises";
+import { access, cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
-import { resolve } from "node:path";
+import { basename, dirname, resolve } from "node:path";
+import { tmpdir } from "node:os";
 
 const root = resolve(import.meta.dirname, "..");
-const required = [
-  "manifest.json", "background.js", "shared/core.js",
+const common = [
+  "background.js", "shared/core.js",
   "content/content.js", "content/content.css",
   "popup/popup.html", "popup/popup.js", "popup/popup.css",
   "dashboard/dashboard.html", "dashboard/dashboard.js", "dashboard/dashboard.css",
   "icons/icon16.png", "icons/icon32.png", "icons/icon48.png", "icons/icon128.png"
 ];
+const chromiumFiles = ["manifest.json", ...common];
+const safariExtras = ["PRIVACY.md", "platform/safari/README.md"];
 
-for (const file of required) await access(resolve(root, file));
-const manifest = JSON.parse(await readFile(resolve(root, "manifest.json"), "utf8"));
-if (manifest.manifest_version !== 3) throw new Error("Manifest V3 is required.");
-if (!manifest.permissions.every((permission) => ["storage"].includes(permission))) throw new Error("Unexpected extension permission.");
-if (manifest.content_security_policy) throw new Error("Custom CSP is not expected in the free edition.");
+for (const file of [...chromiumFiles, "platform/firefox/manifest.json", ...safariExtras]) {
+  await access(resolve(root, file));
+}
 
-const runtimeTextFiles = required.filter((file) => /\.(?:js|html|css|json)$/.test(file));
+const chromiumManifest = JSON.parse(await readFile(resolve(root, "manifest.json"), "utf8"));
+const firefoxManifest = JSON.parse(await readFile(resolve(root, "platform/firefox/manifest.json"), "utf8"));
+if (chromiumManifest.manifest_version !== 3) throw new Error("Chromium Manifest V3 is required.");
+if (firefoxManifest.manifest_version !== 2) throw new Error("Firefox Android package must use its event-page manifest.");
+if (chromiumManifest.version !== firefoxManifest.version) throw new Error("Platform manifest versions differ.");
+if (!chromiumManifest.permissions.every((permission) => permission === "storage")) throw new Error("Unexpected Chromium extension permission.");
+if (chromiumManifest.content_security_policy) throw new Error("Custom CSP is not expected in the free edition.");
+if (!firefoxManifest.browser_specific_settings?.gecko_android?.strict_min_version) throw new Error("Firefox Android compatibility range is missing.");
+
 const forbiddenRuntimePatterns = [
   ["fetch", /\bfetch\s*\(/],
   ["XMLHttpRequest", /\bXMLHttpRequest\b/],
@@ -29,20 +38,91 @@ const forbiddenRuntimePatterns = [
   ["Function constructor", /\bnew\s+Function\s*\(/]
 ];
 
-for (const file of runtimeTextFiles) {
-  const source = await readFile(resolve(root, file), "utf8");
-  for (const [label, pattern] of forbiddenRuntimePatterns) {
-    if (pattern.test(source)) throw new Error(`Forbidden runtime primitive (${label}) in ${file}.`);
+async function verifyRuntime(files, base = root) {
+  const textFiles = files.filter((file) => /\.(?:js|html|css|json)$/.test(file));
+  for (const file of textFiles) {
+    const source = await readFile(resolve(base, file), "utf8");
+    for (const [label, pattern] of forbiddenRuntimePatterns) {
+      if (pattern.test(source)) throw new Error(`Forbidden runtime primitive (${label}) in ${file}.`);
+    }
+  }
+  return textFiles.length;
+}
+
+function stripImports(source) {
+  return source.replace(/^import\s*\{[\s\S]*?\}\s*from\s*["'][^"']+["'];\s*/m, "");
+}
+
+function stripExports(source) {
+  return source.replace(/^export\s+/gm, "");
+}
+
+async function copyFiles(files, target) {
+  for (const file of files) {
+    const destination = resolve(target, file);
+    await mkdir(dirname(destination), { recursive: true });
+    await cp(resolve(root, file), destination);
   }
 }
 
-console.log(`PASS package checks · MaglaSync ${manifest.version} · ${required.length} required files`);
-console.log(`PASS offline boundary · ${runtimeTextFiles.length} runtime text files`);
+function zipDirectory(source, output) {
+  const result = spawnSync("zip", ["-q", "-r", output, "."], { cwd: source, encoding: "utf8" });
+  if (result.status !== 0) throw new Error(result.stderr || `zip failed for ${basename(output)}`);
+}
+
+const checkedFiles = await verifyRuntime(chromiumFiles);
+console.log(`PASS package checks · MaglaSync ${chromiumManifest.version} · Chromium MV3 + Firefox event page`);
+console.log(`PASS offline boundary · ${checkedFiles} runtime text files`);
 
 if (process.argv.includes("--check")) process.exit(0);
-await mkdir(resolve(root, "dist"), { recursive: true });
-const output = resolve(root, `dist/maglasync-free-v${manifest.version}.zip`);
-await rm(output, { force: true });
-const result = spawnSync("zip", ["-q", "-r", output, ...required], { cwd: root, encoding: "utf8" });
-if (result.status !== 0) throw new Error(result.stderr || "zip failed");
-console.log(`Built ${output}`);
+
+const dist = resolve(root, "dist");
+await mkdir(dist, { recursive: true });
+const work = await mkdtemp(resolve(tmpdir(), "maglasync-package-"));
+try {
+  const chromiumDir = resolve(work, "chromium");
+  await copyFiles(chromiumFiles, chromiumDir);
+  const chromiumOutput = resolve(dist, `maglasync-free-chromium-v${chromiumManifest.version}.zip`);
+  const legacyOutput = resolve(dist, `maglasync-free-v${chromiumManifest.version}.zip`);
+  await rm(chromiumOutput, { force: true });
+  await rm(legacyOutput, { force: true });
+  zipDirectory(chromiumDir, chromiumOutput);
+  await cp(chromiumOutput, legacyOutput);
+
+  const coreSource = stripExports(await readFile(resolve(root, "shared/core.js"), "utf8"));
+  const backgroundSource = stripImports(await readFile(resolve(root, "background.js"), "utf8"));
+  const dashboardSource = stripImports(await readFile(resolve(root, "dashboard/dashboard.js"), "utf8"));
+  const firefoxDir = resolve(work, "firefox");
+  await copyFiles(common.filter((file) => !["background.js", "shared/core.js", "dashboard/dashboard.js"].includes(file)), firefoxDir);
+  await cp(resolve(root, "platform/firefox/manifest.json"), resolve(firefoxDir, "manifest.json"));
+  await writeFile(resolve(firefoxDir, "background.bundle.js"), `${coreSource}\n\n${backgroundSource}`);
+  await writeFile(resolve(firefoxDir, "dashboard/dashboard.bundle.js"), `${coreSource}\n\n${dashboardSource}`);
+  const dashboardHtmlPath = resolve(firefoxDir, "dashboard/dashboard.html");
+  const dashboardHtml = (await readFile(dashboardHtmlPath, "utf8"))
+    .replace('<script type="module" src="dashboard.js"></script>', '<script src="dashboard.bundle.js"></script>');
+  await writeFile(dashboardHtmlPath, dashboardHtml);
+  await verifyRuntime([
+    "manifest.json", "background.bundle.js", "content/content.js", "content/content.css",
+    "popup/popup.html", "popup/popup.js", "popup/popup.css",
+    "dashboard/dashboard.html", "dashboard/dashboard.bundle.js", "dashboard/dashboard.css"
+  ], firefoxDir);
+  for (const script of ["background.bundle.js", "dashboard/dashboard.bundle.js"]) {
+    const syntax = spawnSync(process.execPath, ["--check", resolve(firefoxDir, script)], { encoding: "utf8" });
+    if (syntax.status !== 0) throw new Error(syntax.stderr || `Firefox bundle syntax failed: ${script}`);
+  }
+  const firefoxOutput = resolve(dist, `maglasync-free-firefox-v${chromiumManifest.version}.zip`);
+  await rm(firefoxOutput, { force: true });
+  zipDirectory(firefoxDir, firefoxOutput);
+
+  const safariDir = resolve(work, "safari-source");
+  await copyFiles([...chromiumFiles, ...safariExtras], safariDir);
+  const safariOutput = resolve(dist, `maglasync-free-safari-source-v${chromiumManifest.version}.zip`);
+  await rm(safariOutput, { force: true });
+  zipDirectory(safariDir, safariOutput);
+
+  console.log(`Built ${chromiumOutput}`);
+  console.log(`Built ${firefoxOutput}`);
+  console.log(`Built ${safariOutput}`);
+} finally {
+  await rm(work, { recursive: true, force: true });
+}

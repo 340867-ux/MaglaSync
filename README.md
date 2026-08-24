@@ -14,7 +14,8 @@
 </p>
 
 <p align="center">
-  <a href="https://340867-ux.github.io/MaglaSync/">Product page</a> ·
+  <a href="https://sync.magla.ru/">Product page</a> ·
+  <a href="https://sync.magla.ru/en/">English</a> ·
   <a href="https://github.com/340867-ux/MaglaSync/releases/latest">Download</a> ·
   <a href="INSTALL.md">2-minute install</a> ·
   <a href="PRIVACY.md">Privacy</a>
@@ -69,7 +70,7 @@ At the start of a project conversation, MaglaSync includes a small continuity ru
 
 Until the Chrome Web Store listing is approved, the GitHub release installs through Chrome's standard developer mode:
 
-1. Download `maglasync-free-v1.0.0.zip` from [Releases](https://github.com/340867-ux/MaglaSync/releases/latest).
+1. Download `maglasync-free-chromium-v1.1.0.zip` from [Releases](https://github.com/340867-ux/MaglaSync/releases/latest).
 2. Unzip it.
 3. Open `chrome://extensions` in Chrome or Edge.
 4. Turn on **Developer mode**.
@@ -104,15 +105,17 @@ The local Free workflow stands on its own. A future paid MaglaSync Pro may add:
 
 No paid edition is required to keep using one local project.
 
-## Current compatibility
+## Platform packages
 
-| Browser | Status |
+| Package | Status |
 | --- | --- |
-| Google Chrome 114+ | Supported |
-| Microsoft Edge 114+ | Supported through Chromium extension mode |
-| Brave and other Chromium browsers | Expected to work; not release-gated yet |
-| Firefox | Not included in v1.0 |
-| Safari | Not included in v1.0 |
+| Chromium: Chrome 114+, Edge 114+ | Supported GitHub edition; store review pending |
+| Brave and Opera desktop | Uses the Chromium package; not release-gated on every version |
+| Firefox desktop and Android | Event-page release candidate; Mozilla signing and real-device acceptance test pending |
+| Safari on macOS, iPhone, and iPad | Conversion source ready; Apple signing and App Store review pending |
+| Chrome on Android | Chrome does not provide a mobile extension install channel |
+
+The browser store is the proper installer for an extension. We do not ship a misleading `.exe` or `.dmg` that merely tries to sideload the same package. See the honest [platform matrix](docs/PLATFORM_MATRIX.md) and [Free/Pro architecture](docs/ARCHITECTURE.md).
 
 AI sites change their page structure over time. If capture or composer loading stops on a supported site, open an issue with the site name and visible behaviour—never include a private conversation.
 
@@ -138,7 +141,8 @@ Read [SECURITY.md](SECURITY.md) before high-stakes use.
 
 - Report a problem using the private-data-safe [bug form](https://github.com/340867-ux/MaglaSync/issues/new?template=bug_report.yml).
 - Suggest a capability using the [feature form](https://github.com/340867-ux/MaglaSync/issues/new?template=feature_request.yml).
-- Share the [product page](https://340867-ux.github.io/MaglaSync/) or use the prepared [launch kit](docs/LAUNCH_KIT.md).
+- Share the [Russian/CIS product page](https://sync.magla.ru/), [English page](https://sync.magla.ru/en/), or the prepared [launch kit](docs/LAUNCH_KIT.md).
+- Russian Telegram, YouTube, TikTok, VK, and Habr copy is ready in the [CIS promo pack](docs/PROMO_RU.md).
 - Chrome Web Store submission materials are ready in [`assets/store`](assets/store) with exact field copy in [the listing pack](docs/CHROME_WEB_STORE_LISTING.md).
 
 ## License

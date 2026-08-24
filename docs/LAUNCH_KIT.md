@@ -2,7 +2,8 @@
 
 Canonical links:
 
-- Product: https://340867-ux.github.io/MaglaSync/
+- Product: https://sync.magla.ru/
+- Product (temporary): https://340867-ux.github.io/MaglaSync/
 - Source: https://github.com/340867-ux/MaglaSync
 - Release: https://github.com/340867-ux/MaglaSync/releases/latest
 
@@ -50,8 +51,10 @@ Canonical links:
 
 ## Short social post
 
-> New open-source release: MaglaSync Free carries one project's context between ChatGPT, Claude, and Gemini. Local storage, no account, no API key, and it never presses Send. Demo and download: https://340867-ux.github.io/MaglaSync/
+> New open-source release: MaglaSync Free carries one project's context between ChatGPT, Claude, and Gemini. Local storage, no account, no API key, and it never presses Send. Demo and download: https://sync.magla.ru/en/
 
 ## Russian post
 
-> Выпустили MaglaSync Free — бесплатное расширение, которое переносит состояние проекта между ChatGPT, Claude и Gemini. Оно локально сохраняет переписку, решения и следующие шаги, а затем подготавливает контекст в новом чате. Без аккаунта, API-ключа и внешнего сервера; отправку всегда подтверждает пользователь. Демо и скачивание: https://340867-ux.github.io/MaglaSync/
+> Выпустили MaglaSync Free — бесплатное расширение, которое переносит состояние проекта между ChatGPT, Claude и Gemini. Оно локально сохраняет переписку, решения и следующие шаги, а затем подготавливает контекст в новом чате. Без аккаунта, API-ключа и внешнего сервера; отправку всегда подтверждает пользователь. Демо и скачивание: https://sync.magla.ru/
+
+Full Russian/CIS campaign pack: [PROMO_RU.md](PROMO_RU.md).

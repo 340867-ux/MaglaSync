@@ -1,15 +1,19 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "MaglaSync Free",
   "version": "1.1.0",
   "description": "Carry project context automatically between ChatGPT, Claude, and Gemini chats.",
-  "minimum_chrome_version": "114",
-  "permissions": ["storage"],
+  "permissions": [
+    "storage",
+    "https://chatgpt.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*"
+  ],
   "background": {
-    "service_worker": "background.js",
-    "type": "module"
+    "scripts": ["background.bundle.js"],
+    "persistent": false
   },
-  "action": {
+  "browser_action": {
     "default_title": "MaglaSync",
     "default_popup": "popup/popup.html",
     "default_icon": {
@@ -37,5 +41,17 @@
       "run_at": "document_idle"
     }
   ],
-  "options_page": "dashboard/dashboard.html"
+  "options_ui": {
+    "page": "dashboard/dashboard.html",
+    "open_in_tab": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "maglasync@magla.ru",
+      "strict_min_version": "128.0"
+    },
+    "gecko_android": {
+      "strict_min_version": "128.0"
+    }
+  }
 }
