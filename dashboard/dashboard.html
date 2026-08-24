@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="MaglaSync local project journal">
+  <title>MaglaSync Project Journal</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="mark">M</span><span>MaglaSync</span><small>Free</small></a>
+    <div class="local"><i></i> Stored only in this browser</div>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">AUTOMATIC CONTINUITY FOR AI CHATS</p>
+      <h1>One project. Every supported chat.</h1>
+      <p>MaglaSync captures your project conversations locally and loads the current state into a new ChatGPT, Claude, or Gemini chat.</p>
+      <div class="platforms"><span>ChatGPT</span><span>Claude</span><span>Gemini</span></div>
+    </section>
+
+    <div class="layout">
+      <section class="card project-card">
+        <div class="card-head"><div><p class="eyebrow">FREE PROJECT</p><h2>Project passport</h2></div><span id="integrity" class="integrity">Checking…</span></div>
+        <form id="project-form">
+          <label for="name">Project name</label>
+          <input id="name" maxlength="80" required placeholder="e.g. Buy an apartment safely">
+          <label for="goal">The exact result you want</label>
+          <textarea id="goal" maxlength="1200" required rows="4" placeholder="Describe the finish line in plain language."></textarea>
+          <label for="rules">Rules and constraints <span>(one per line)</span></label>
+          <textarea id="rules" maxlength="2400" rows="6" placeholder="Never contact anyone without asking me&#10;Do not confuse an estimate with a confirmed price"></textarea>
+          <button class="primary" type="submit">Save project</button>
+        </form>
+      </section>
+
+      <section class="card sync-card">
+        <div class="card-head"><div><p class="eyebrow">SYNC STATUS</p><h2>Automatic flow</h2></div><span class="live"><i></i> Local</span></div>
+        <div class="flow">
+          <div><span>1</span><strong>Open an AI chat</strong><p>The extension recognises ChatGPT, Claude, or Gemini.</p></div>
+          <div><span>2</span><strong>Context is loaded</strong><p>An empty new chat is filled automatically. You review and send it.</p></div>
+          <div><span>3</span><strong>New facts are saved</strong><p>Messages and MaglaSync update blocks return to the local journal.</p></div>
+        </div>
+        <div class="switches">
+          <label class="toggle"><span><strong>Auto-load context</strong><small>Fill empty new chats</small></span><input id="auto-load" type="checkbox"><i></i></label>
+          <label class="toggle"><span><strong>Capture messages</strong><small>Save new messages locally</small></span><input id="capture-enabled" type="checkbox"><i></i></label>
+        </div>
+        <div class="counts"><div><strong id="message-count">0</strong><span>messages</span></div><div><strong id="checkpoint-count">0</strong><span>state updates</span></div><div><strong id="chat-count">0</strong><span>chats</span></div></div>
+      </section>
+    </div>
+
+    <section class="card latest-card">
+      <div class="card-head"><div><p class="eyebrow">LATEST STATE</p><h2>What the next chat will receive</h2></div><button id="copy-context" class="secondary">Copy context</button></div>
+      <div id="latest-state" class="empty">No structured update has been captured yet. Start a supported chat; MaglaSync will ask the AI to return project updates in a machine-readable block.</div>
+    </section>
+
+    <section class="card activity-card">
+      <div class="card-head"><div><p class="eyebrow">LOCAL JOURNAL</p><h2>Recent captured messages</h2></div><button id="refresh" class="secondary">Refresh</button></div>
+      <div id="activity" class="activity"><div class="empty">No messages captured yet.</div></div>
+    </section>
+
+    <section class="card data-card">
+      <div><p class="eyebrow">YOUR DATA</p><h2>Backup and restore</h2><p>Download a backup before clearing browser data or moving to another computer.</p></div>
+      <div class="data-actions">
+        <button id="export" class="secondary">Download backup</button>
+        <label class="secondary file-button">Restore backup<input id="import" type="file" accept="application/json,.json"></label>
+        <button id="delete" class="danger">Delete all local data</button>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
+

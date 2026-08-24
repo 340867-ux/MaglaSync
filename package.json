@@ -1,0 +1,14 @@
+{
+  "name": "maglasync",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Automatic local continuity between ChatGPT, Claude, and Gemini chats.",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --test && node tools/package.mjs --check",
+    "package": "node tools/package.mjs"
+  },
+  "license": "MIT"
+}
+

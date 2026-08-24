@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MaglaSync</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header><span class="mark">M</span><div><strong>MaglaSync</strong><small>Free · local continuity</small></div><span id="health" class="health">…</span></header>
+  <main>
+    <section id="no-project" class="hidden">
+      <p class="eyebrow">YOUR FIRST SYNC PROJECT</p>
+      <h1>Let every new AI chat know where you left off.</h1>
+      <p class="copy">Create one free local project. MaglaSync will capture supported chats and load the current context into new ones.</p>
+      <button id="start" class="primary">Create the free project</button>
+    </section>
+    <section id="project" class="hidden">
+      <p class="eyebrow">ACTIVE PROJECT</p>
+      <h1 id="project-name"></h1>
+      <p id="project-goal" class="copy"></p>
+      <div class="stats"><div><strong id="message-count">0</strong><span>messages</span></div><div><strong id="checkpoint-count">0</strong><span>updates</span></div></div>
+      <label class="toggle"><span><strong>Auto-load context</strong><small>Fill an empty new chat automatically</small></span><input id="auto-load" type="checkbox"><i></i></label>
+      <label class="toggle"><span><strong>Capture messages</strong><small>Save supported chats locally</small></span><input id="capture-enabled" type="checkbox"><i></i></label>
+      <button id="open-dashboard" class="primary">Open project journal</button>
+      <button id="edit" class="secondary">Edit project</button>
+    </section>
+    <p class="privacy">No account · no API key · no data sent by MaglaSync</p>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
+
