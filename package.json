@@ -4,6 +4,22 @@
   "private": true,
   "type": "module",
   "description": "Automatic local continuity between ChatGPT, Claude, and Gemini chats.",
+  "homepage": "https://340867-ux.github.io/MaglaSync/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/340867-ux/MaglaSync.git"
+  },
+  "bugs": "https://github.com/340867-ux/MaglaSync/issues",
+  "keywords": [
+    "ai-chat",
+    "browser-extension",
+    "chatgpt",
+    "claude",
+    "continuity",
+    "gemini",
+    "local-first",
+    "project-memory"
+  ],
   "scripts": {
     "test": "node --test",
     "check": "node --test && node tools/package.mjs --check",
@@ -11,4 +27,3 @@
   },
   "license": "MIT"
 }
-

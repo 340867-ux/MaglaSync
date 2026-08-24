@@ -1,0 +1,29 @@
+name: Feature request
+description: Suggest one concrete improvement and the problem it solves.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What becomes difficult without this capability?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe the result rather than prescribing an implementation.
+    validations:
+      required: true
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Best fit
+      options:
+        - Free local workflow
+        - Possible future Pro workflow
+        - Not sure
+    validations:
+      required: true

@@ -20,6 +20,10 @@
   <a href="PRIVACY.md">Privacy</a>
 </p>
 
+<p align="center">
+  <img src="assets/demo.gif" alt="MaglaSync captures project state locally and prepares it in a new AI chat" width="900">
+</p>
+
 ## Stop teaching every new chat the same project
 
 You spend days working with an AI chat. Then the conversation gets too long, you switch models, or you open a fresh chat—and the new AI knows nothing.
@@ -32,6 +36,8 @@ You spend days working with an AI chat. Then the conversation gets too long, you
 - You review the prepared context and press **Send** yourself.
 
 No copying a handoff document every time. No API key. No MaglaSync account. No external database.
+
+> If MaglaSync saves you from repeating project context, a GitHub star helps the next person discover it.
 
 ## What the Free edition does
 
@@ -127,6 +133,13 @@ The package check rejects unexpected extension permissions and verifies every re
 The integrity chain detects changes inside an existing saved history. It is not a digital signature and cannot prove that an AI statement is true. The context explicitly separates verified results from plans, but users should still point important claims to real evidence.
 
 Read [SECURITY.md](SECURITY.md) before high-stakes use.
+
+## Support and sharing
+
+- Report a problem using the private-data-safe [bug form](https://github.com/340867-ux/MaglaSync/issues/new?template=bug_report.yml).
+- Suggest a capability using the [feature form](https://github.com/340867-ux/MaglaSync/issues/new?template=feature_request.yml).
+- Share the [product page](https://340867-ux.github.io/MaglaSync/) or use the prepared [launch kit](docs/LAUNCH_KIT.md).
+- Chrome Web Store submission materials are ready in [`assets/store`](assets/store) with exact field copy in [the listing pack](docs/CHROME_WEB_STORE_LISTING.md).
 
 ## License
 
