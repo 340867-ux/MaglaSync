@@ -1,6 +1,6 @@
 # Firefox Add-ons submission pack
 
-Upload `maglasync-free-firefox-v1.1.0.zip` to Mozilla Add-ons (AMO). The file is an unsigned candidate until Mozilla accepts and signs it.
+Upload `maglasync-free-firefox-v1.2.0.zip` to Mozilla Add-ons (AMO). The file is an unsigned candidate until Mozilla accepts and signs it.
 
 ## Listing
 
@@ -14,7 +14,7 @@ Upload `maglasync-free-firefox-v1.1.0.zip` to Mozilla Add-ons (AMO). The file is
 
 **Description:**
 
-> MaglaSync Free saves visible project messages locally and prepares the current goal, rules, decisions, verified results, blockers, and next steps in an empty new ChatGPT, Claude, or Gemini chat. You review the context and press Send yourself.
+> Every chat starts disconnected. After you connect a project chat, MaglaSync Free saves a short recent buffer locally and prepares the current goal, rules, decisions, reported results, blockers, and next steps. You review and edit the context before placing it in the chat, and press Send yourself.
 >
 > The Free edition has one project, local backup and restore, history integrity checks, and no MaglaSync account, API key, analytics, advertising, backend, or remote runtime code.
 

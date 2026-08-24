@@ -12,22 +12,21 @@
     <section id="no-project" class="hidden">
       <p class="eyebrow">YOUR FIRST SYNC PROJECT</p>
       <h1>Let every new AI chat know where you left off.</h1>
-      <p class="copy">Create one free local project. MaglaSync will capture supported chats and load the current context into new ones.</p>
+      <p class="copy">Create one free local project. MaglaSync reads only the chats you connect yourself.</p>
       <button id="start" class="primary">Create the free project</button>
     </section>
     <section id="project" class="hidden">
       <p class="eyebrow">ACTIVE PROJECT</p>
       <h1 id="project-name"></h1>
       <p id="project-goal" class="copy"></p>
-      <div class="stats"><div><strong id="message-count">0</strong><span>messages</span></div><div><strong id="checkpoint-count">0</strong><span>updates</span></div></div>
-      <label class="toggle"><span><strong>Auto-load context</strong><small>Fill an empty new chat automatically</small></span><input id="auto-load" type="checkbox"><i></i></label>
-      <label class="toggle"><span><strong>Capture messages</strong><small>Save supported chats locally</small></span><input id="capture-enabled" type="checkbox"><i></i></label>
+      <div class="stats"><div><strong id="chat-count">0</strong><span>connected chats</span></div><div><strong id="checkpoint-count">0</strong><span>updates</span></div></div>
+      <label class="toggle"><span><strong>Save connected chats</strong><small>Keep a short recent buffer locally</small></span><input id="capture-enabled" type="checkbox"><i></i></label>
+      <label class="toggle"><span><strong>Keep extended history</strong><small>Optional · up to 400 messages</small></span><input id="save-full-history" type="checkbox"><i></i></label>
       <button id="open-dashboard" class="primary">Open project journal</button>
       <button id="edit" class="secondary">Edit project</button>
     </section>
-    <p class="privacy">No account · no API key · no data sent by MaglaSync</p>
+    <p class="privacy">Unconnected chats are not read · MaglaSync never presses Send</p>
   </main>
   <script type="module" src="popup.js"></script>
 </body>
 </html>
-

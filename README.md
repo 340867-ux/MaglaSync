@@ -1,9 +1,9 @@
 <div align="center">
-  <img src="assets/hero.svg" alt="MaglaSync — one project, every AI chat remembers" width="100%">
+  <img src="assets/hero.svg" alt="MaglaSync — one project shared only with the AI chats you choose" width="100%">
 </div>
 
 <p align="center">
-  <strong>A free browser extension that automatically carries project context between ChatGPT, Claude, and Gemini.</strong>
+  <strong>A free browser extension that carries project context between the ChatGPT, Claude, and Gemini chats you explicitly connect.</strong>
 </p>
 
 <p align="center">
@@ -29,12 +29,12 @@
 
 You spend days working with an AI chat. Then the conversation gets too long, you switch models, or you open a fresh chat—and the new AI knows nothing.
 
-**MaglaSync creates one local project memory shared by your supported AI chats.**
+**MaglaSync creates one local project memory shared only by the AI chats you choose.**
 
-- New messages are captured automatically.
-- Structured decisions, verified results, blockers, and next steps return to the journal automatically.
-- An empty new chat is filled with the current project context automatically.
-- You review the prepared context and press **Send** yourself.
+- Every chat starts disconnected and is not read until you click **Connect chat**.
+- Only connected chats can add recent messages and structured project updates to the journal.
+- You review and can edit the complete handoff before placing it in a chat box.
+- MaglaSync never presses **Send** for you.
 
 No copying a handoff document every time. No API key. No MaglaSync account. No external database.
 
@@ -44,33 +44,33 @@ No copying a handoff document every time. No API key. No MaglaSync account. No e
 
 | Included | Behaviour |
 | --- | --- |
-| One local project | Goal, rules, messages, and structured state |
-| ChatGPT | Automatic capture and context loading on `chatgpt.com` |
-| Claude | Automatic capture and context loading on `claude.ai` |
-| Gemini | Automatic capture and context loading on `gemini.google.com` |
-| Local journal | Messages remain in Chrome extension storage |
+| One local project | Goal, rules, recent messages, and structured state |
+| ChatGPT | User-connected project chats on `chatgpt.com` |
+| Claude | User-connected project chats on `claude.ai` |
+| Gemini | User-connected project chats on `gemini.google.com` |
+| Local journal | 24 recent messages by default; extended history up to 400 is opt-in |
 | Integrity checks | SHA-256 chain detects silent changes or partial history |
 | Backup and restore | Portable JSON file owned by the user |
-| Human control | MaglaSync fills the message box but never presses Send |
+| Human control | Review, edit, place in chat, and press Send yourself |
 
-## The automatic loop
+## The consent-first loop
 
 ```mermaid
 flowchart LR
-    A["Open AI chat"] --> B["Load project context"]
-    B --> C["User reviews and sends"]
+    A["Open AI chat"] --> B["Connect this chat"]
+    B --> C["Review and place context"]
     C --> D["AI conversation"]
-    D --> E["Capture messages and update"]
+    D --> E["Save connected-chat update"]
     E --> A
 ```
 
-At the start of a project conversation, MaglaSync includes a small continuity rule. When the AI reaches a material decision or result, it returns a `maglasync` update block. The extension reads that block into the project journal. If a model omits the block, recent messages are still retained for the next chat.
+At the start of a connected project conversation, MaglaSync includes a small continuity rule. When the AI reaches a material decision or result, it can return a `maglasync` update block. The extension reads that block into the project journal. AI-reported completion is labelled as reported, not independently verified by MaglaSync.
 
 ## Install the GitHub edition
 
 Until the Chrome Web Store listing is approved, the GitHub release installs through Chrome's standard developer mode:
 
-1. Download `maglasync-free-chromium-v1.1.0.zip` from [Releases](https://github.com/340867-ux/MaglaSync/releases/latest).
+1. Download `maglasync-free-chromium-v1.2.0.zip` from [Releases](https://github.com/340867-ux/MaglaSync/releases/latest).
 2. Unzip it.
 3. Open `chrome://extensions` in Chrome or Edge.
 4. Turn on **Developer mode**.
@@ -86,11 +86,11 @@ Full illustrated instructions: [INSTALL.md](INSTALL.md).
 The extension requests only:
 
 - `storage` — to keep the project locally;
-- access to `chatgpt.com`, `claude.ai`, and `gemini.google.com` — to read supported chat messages and fill the composer.
+- access to `chatgpt.com`, `claude.ai`, and `gemini.google.com` — to show the panel, read messages only after that exact chat is connected, and place reviewed context in the composer.
 
 It contains no analytics library, advertising code, backend URL, remote script, or AI API client. A source scan and the test suite enforce those boundaries.
 
-MaglaSync necessarily reads messages on the three supported sites when capture is enabled. That is its function. The Free edition stores those messages locally and does not send them to MaglaSync or MAGLA servers. See the complete [privacy disclosure](PRIVACY.md).
+Opening a supported site does not grant a conversation access to the project. Message capture is rejected until the user connects that exact chat. The Free edition stores connected-chat data locally and does not send it to MaglaSync or MAGLA servers. See the complete [privacy disclosure](PRIVACY.md).
 
 ## Free first, Pro only if people want it
 
@@ -133,7 +133,7 @@ The package check rejects unexpected extension permissions and verifies every re
 
 ## Security boundary
 
-The integrity chain detects changes inside an existing saved history. It is not a digital signature and cannot prove that an AI statement is true. The context explicitly separates verified results from plans, but users should still point important claims to real evidence.
+The integrity chain detects changes inside an existing saved history. It is not a digital signature and cannot prove that an AI statement is true. The context explicitly separates AI-reported results from plans, but users should still point important claims to real evidence.
 
 Read [SECURITY.md](SECURITY.md) before high-stakes use.
 

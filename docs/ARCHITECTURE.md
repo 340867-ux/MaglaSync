@@ -8,7 +8,7 @@ This split is deliberate:
 
 - Free remains useful without registration, a server, or a subscription.
 - Chat text stays in browser extension storage unless the user explicitly enables a future sync plan.
-- Browser extensions keep doing the page-level capture and composer loading. A cloud website alone cannot safely read another site's chat page.
+- Browser extensions keep doing user-approved page-level capture and reviewed composer placement. A cloud website alone cannot safely read another site's chat page.
 - Pro can monetize cross-device convenience instead of holding the core workflow hostage.
 - Server cost and security exposure begin only when a user asks for server-backed features.
 
@@ -17,7 +17,7 @@ This split is deliberate:
 | Capability | Free | Pro direction |
 | --- | --- | --- |
 | Projects | One local project | Multiple projects and workspaces |
-| Browser capture | ChatGPT, Claude, Gemini | More services and configurable adapters |
+| Browser capture | Explicitly connected ChatGPT, Claude, Gemini chats | More services and configurable adapters |
 | Storage | Browser profile | Local plus opt-in encrypted synchronization |
 | Devices | Manual encrypted-backup roadmap; current JSON backup | Automatic device synchronization |
 | Teams | No | Roles, shared projects, audit history |
@@ -40,7 +40,7 @@ flowchart TD
     B -. "Pro opt-in" .-> E["Encrypted sync service"]
 ```
 
-The extension reads only supported chat pages, prepares context, and never presses Send. The local journal remains the source of truth for Free. The future Pro service synchronizes encrypted state; it does not replace the extension.
+The extension shows its panel on supported chat pages but reads messages only after the user connects that exact conversation. It shows context in a separate editable preview before placing it in a composer and never presses Send. The local journal remains the source of truth for Free. The future Pro service synchronizes encrypted state; it does not replace the extension.
 
 ## Monetization sequence
 

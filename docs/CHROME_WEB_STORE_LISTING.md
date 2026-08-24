@@ -1,6 +1,6 @@
 # Chrome Web Store submission pack
 
-This file contains the exact public listing copy and privacy declarations for MaglaSync Free 1.1.0.
+This file contains the exact public listing copy and privacy declarations for MaglaSync Free 1.2.0.
 
 ## Product details
 
@@ -12,20 +12,21 @@ This file contains the exact public listing copy and privacy declarations for Ma
 
 **Summary:**
 
-> Carry project context automatically between ChatGPT, Claude, and Gemini. Free, local, and no API key.
+> Continue one project across the ChatGPT, Claude, and Gemini chats you choose. Free, local, and no API key.
 
 **Detailed description:**
 
 > MaglaSync keeps one long-running project continuous across ChatGPT, Claude, and Gemini.
 >
-> Start a new supported AI chat without explaining the entire project again. MaglaSync saves visible project messages locally, maintains a structured project journal, and fills an empty new chat with the latest goal, rules, decisions, verified results, blockers, and next steps. You review the prepared context and press Send yourself.
+> Start a new supported AI chat without explaining the entire project again. Every chat starts disconnected. Only after you click Connect chat can that conversation add recent messages and project updates to the local journal. You review and can edit the complete handoff before placing it in the chat box, and you press Send yourself.
 >
 > Free edition features:
 >
 > - one local project;
-> - automatic capture on supported AI chat sites;
-> - automatic context loading into an empty chat;
-> - structured decisions, verified results, blockers, and next steps;
+> - explicit per-chat connection and project isolation;
+> - review and editing before context is placed in a chat;
+> - structured decisions, reported completed results, blockers, and next steps;
+> - 24 recent messages by default, with longer history as an opt-in;
 > - local JSON backup and verified restore;
 > - history integrity checks;
 > - no MaglaSync account, AI API key, analytics, advertising, or backend.
@@ -48,13 +49,13 @@ This file contains the exact public listing copy and privacy declarations for Ma
 
 ## Single purpose
 
-MaglaSync provides local project continuity between supported AI chat websites by saving visible conversation state and preparing the current context in a new empty chat.
+MaglaSync provides local project continuity between supported AI chat websites by saving messages only from chats the user explicitly connects and preparing reviewed context for a chat box.
 
 ## Permission justifications
 
-**`storage`:** stores the user's project passport, captured messages, structured state, settings, backup verification data, and integrity hashes locally in the browser profile.
+**`storage`:** stores the user's project passport, explicit chat connections, connected-chat messages, structured state, settings, backup verification data, and integrity hashes locally in the browser profile.
 
-**Host access to `chatgpt.com`, `claude.ai`, and `gemini.google.com`:** required to read visible user and assistant messages on supported chat pages, display MaglaSync status, and fill—but never submit—the empty chat composer.
+**Host access to `chatgpt.com`, `claude.ai`, and `gemini.google.com`:** required to display MaglaSync status, read visible messages only after the user connects that exact chat, and place—but never submit—reviewed context in an empty composer.
 
 ## Remote code
 
@@ -62,9 +63,9 @@ MaglaSync Free executes no remote code. Runtime JavaScript and CSS are included 
 
 ## Data-use disclosure
 
-MaglaSync handles personal communications and website content because supported chat messages may contain both. This data is stored locally for the user-requested continuity function. It is not sold, used for advertising or credit decisions, or intentionally transmitted to MaglaSync, MAGLA, or another backend. When the user reviews and sends prepared context, that selected AI provider receives it under its own terms.
+MaglaSync handles personal communications and website content only for chats the user explicitly connects. This data is stored locally for the user-requested continuity function. It is not sold, used for advertising or credit decisions, or intentionally transmitted to MaglaSync, MAGLA, or another backend. When the user reviews and sends prepared context, that selected AI provider receives it under its own terms.
 
-Backups are user-initiated JSON downloads and are not encrypted. Users can disable capture, disable automatic loading, export a backup, restore a verified backup, delete all local data, or remove the extension.
+Backups are user-initiated JSON downloads and are not encrypted. Users can disconnect a chat and remove its records, disable connected-chat saving, keep only the default short buffer, export a backup, restore a verified backup, delete all local data, or remove the extension.
 
 ## Reviewer notes
 
@@ -72,5 +73,6 @@ Backups are user-initiated JSON downloads and are not encrypted. Users can disab
 2. Open its options page and create one project with a name and goal.
 3. Open a supported AI site and reload the tab.
 4. Confirm the MaglaSync status panel appears.
-5. Open an empty new chat and confirm context is filled but not submitted.
-6. Send messages manually and confirm they appear in the local project journal.
+5. Confirm the panel says the chat is not connected and no messages appear in the journal.
+6. Click Connect chat, then Review context. Edit the preview and choose Place in chat.
+7. Confirm the text is placed but not submitted. Press Send manually and confirm only this connected chat appears in the journal.

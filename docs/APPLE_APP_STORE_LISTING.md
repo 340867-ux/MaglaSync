@@ -1,6 +1,6 @@
 # Safari / App Store submission pack
 
-Start with `maglasync-free-safari-source-v1.1.0.zip`. Convert or package it as a Safari Web Extension under the publisher's Apple Developer and App Store Connect identity.
+Start with `maglasync-free-safari-source-v1.2.0.zip`. Convert or package it as a Safari Web Extension under the publisher's Apple Developer and App Store Connect identity.
 
 ## Listing
 
@@ -14,11 +14,11 @@ Start with `maglasync-free-safari-source-v1.1.0.zip`. Convert or package it as a
 
 **Description:**
 
-> MaglaSync Free keeps one project continuous across supported AI chat websites. It saves visible project messages in Safari extension storage and prepares an up-to-date context in an empty new chat. The context includes the project goal, rules, decisions, verified results, blockers, and next steps.
+> MaglaSync Free keeps one project continuous across supported AI chat websites. Every chat starts disconnected. After you explicitly connect a project chat, it keeps a short recent buffer in Safari extension storage and prepares an up-to-date context for review. The context includes the project goal, rules, decisions, reported results, blockers, and next steps.
 >
 > MaglaSync never presses Send. You review the prepared text and submit it yourself.
 >
-> Free has no MaglaSync account, API key, analytics, advertising, or MaglaSync backend. You can export a backup, restore it, disable capture, disable automatic loading, or delete all local data.
+> Free has no MaglaSync account, API key, analytics, advertising, or MaglaSync backend. You can disconnect chats and remove their records, export a backup, restore it, disable connected-chat saving, or delete all local data.
 
 **Support URL:** `https://github.com/340867-ux/MaglaSync/issues`
 

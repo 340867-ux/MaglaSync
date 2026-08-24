@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "MaglaSync Free",
-  "version": "1.1.0",
-  "description": "Carry project context automatically between ChatGPT, Claude, and Gemini chats.",
+  "version": "1.2.0",
+  "description": "Continue projects across AI chats you explicitly connect.",
   "permissions": [
     "storage",
     "https://chatgpt.com/*",

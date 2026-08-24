@@ -6,8 +6,9 @@ Use [GitHub Issues](https://github.com/340867-ux/MaglaSync/issues) for compatibi
 
 1. Confirm that MaglaSync Free is enabled at `chrome://extensions` or `edge://extensions`.
 2. Reload the affected ChatGPT, Claude, or Gemini tab.
-3. Confirm that **Capture messages** or **Auto-load context** is enabled for the active local project.
-4. Check whether the same behaviour occurs in a new empty chat.
+3. Confirm that the exact conversation shows **Connected** in the MaglaSync panel.
+4. Confirm that **Save connected chats** is enabled in the project journal.
+5. For context placement, make sure the message box is empty and choose **Review context**.
 
 ## Protect private conversations
 

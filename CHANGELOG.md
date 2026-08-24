@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.0 — 2026-08-24
+
+- Changed to explicit per-chat connection: unopened and unconnected conversations are not captured.
+- Added background enforcement that rejects messages from unconnected, wrong-platform, or stale-goal chats.
+- Removed automatic context loading; users now review, edit, and explicitly place context in the chat box.
+- Added a privacy-first 24-message recent buffer; keeping up to 400 messages is now an opt-in setting.
+- Added connected-chat management and local record removal on disconnect.
+- Added goal-version isolation so changed projects cannot silently reuse stale chat connections.
+- Added fail-closed journal locking when integrity verification fails.
+- Added safe migration from earlier versions: keep the project passport, disconnect old chats, and remove records captured by the old automatic mode.
+- Expanded the defensive test suite from 8 to 17 tests.
+
 ## 1.1.0 — 2026-08-24
 
 - Added reproducible Chromium, Firefox, and Safari-source packages.

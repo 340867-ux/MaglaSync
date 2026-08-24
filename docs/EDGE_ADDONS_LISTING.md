@@ -1,6 +1,6 @@
 # Microsoft Edge Add-ons submission pack
 
-Upload `maglasync-free-chromium-v1.1.0.zip` in Microsoft Partner Center.
+Upload `maglasync-free-chromium-v1.2.0.zip` in Microsoft Partner Center.
 
 ## Listing
 
@@ -10,7 +10,7 @@ Upload `maglasync-free-chromium-v1.1.0.zip` in Microsoft Partner Center.
 
 **Short description:**
 
-> Carry project context automatically between ChatGPT, Claude, and Gemini. Free, local, and no API key.
+> Continue one project across the ChatGPT, Claude, and Gemini chats you choose. Free, local, and no API key.
 
 **Website:** `https://sync.magla.ru/en/`
 

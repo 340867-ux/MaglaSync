@@ -96,7 +96,7 @@ def social_preview():
     label(draw, (74, 190), "One project.", 52, WHITE, True)
     label(draw, (74, 252), "Every AI chat", 52, WHITE, True)
     label(draw, (74, 314), "remembers.", 52, WHITE, True)
-    label(draw, (76, 390), "Automatic continuity between ChatGPT, Claude, and Gemini.", 20, "#ddd6fe")
+    label(draw, (76, 390), "Continuity only in the AI chats you connect.", 20, "#ddd6fe")
     x = 76
     for value in ("FREE", "LOCAL", "NO API KEY"):
         width = pill(draw, x, 438, value, "#35245a", WHITE, GREEN, 15, 38)
@@ -111,8 +111,8 @@ def social_preview():
     label(draw, (902, 147), "FREE · LOCAL CONTINUITY", 9, "#94a3b8", True, "lm")
     draw.ellipse((1157, 121, 1171, 135), fill=GREEN)
     rows = [
-        ("ChatGPT", "Project conversation", "CAPTURED"),
-        ("Claude", "New chat context", "LOADED"),
+        ("ChatGPT", "Project conversation", "CONNECTED"),
+        ("Claude", "Context preview", "REVIEWED"),
         ("Gemini", "Next project step", "READY"),
     ]
     for index, (name, detail, status) in enumerate(rows):
@@ -139,7 +139,7 @@ def promo(size, compact=False):
     title_size = 38 if compact else 58
     sub_size = 15 if compact else 21
     label(draw, (int(width * .08), int(height * .50)), "MaglaSync", title_size, WHITE, True)
-    label(draw, (int(width * .08), int(height * .70)), "Every AI chat remembers.", sub_size, "#ddd6fe", True)
+    label(draw, (int(width * .08), int(height * .70)), "Every connected chat remembers.", sub_size, "#ddd6fe", True)
     if not compact:
         x = int(width * .62)
         for i, name in enumerate(("ChatGPT", "Claude", "Gemini")):
@@ -147,7 +147,7 @@ def promo(size, compact=False):
             rr(draw, (x, y, width - 80, y + 76), 18, "#ffffff")
             draw.ellipse((x + 22, y + 28, x + 34, y + 40), fill=GREEN)
             label(draw, (x + 50, y + 35), name, 16, INK, True, "lm")
-            label(draw, (width - 104, y + 35), ("CAPTURED", "LOADED", "READY")[i], 10, "#047857", True, "rm")
+            label(draw, (width - 104, y + 35), ("CONNECTED", "REVIEWED", "READY")[i], 10, "#047857", True, "rm")
     return image
 
 
@@ -161,32 +161,32 @@ def screenshot_dashboard():
     draw.ellipse((1030, 30, 1042, 42), fill=GREEN)
     label(draw, (1052, 36), "Stored only in this browser", 12, MUTED, False, "lm")
 
-    label(draw, (58, 115), "AUTOMATIC CONTINUITY FOR AI CHATS", 12, PURPLE, True)
-    label(draw, (58, 150), "One project. Every supported chat.", 38, INK, True)
-    label(draw, (58, 204), "Your current project state, ready for the next ChatGPT, Claude, or Gemini conversation.", 16, MUTED)
+    label(draw, (58, 115), "PRIVATE CONTINUITY FOR AI CHATS", 12, PURPLE, True)
+    label(draw, (58, 150), "Only the chats you choose.", 38, INK, True)
+    label(draw, (58, 204), "Connect a project chat yourself, review the handoff, and press Send yourself.", 16, MUTED)
 
     rr(draw, (58, 258, 602, 706), 18, WHITE, LINE)
     label(draw, (86, 290), "FREE PROJECT", 11, PURPLE, True)
     label(draw, (86, 320), "Project passport", 23, INK, True)
-    pill(draw, 470, 286, "VERIFIED", "#ecfdf5", "#047857", GREEN, 12, 30)
+    pill(draw, 478, 286, "SAVED", "#ecfdf5", "#047857", GREEN, 12, 30)
     label(draw, (86, 372), "PROJECT NAME", 10, MUTED, True)
     rr(draw, (86, 390, 574, 436), 9, PAPER, LINE)
     label(draw, (102, 413), "Launch MaglaSync Free", 14, INK, False, "lm")
     label(draw, (86, 464), "EXACT RESULT", 10, MUTED, True)
     rr(draw, (86, 482, 574, 550), 9, PAPER, LINE)
-    label(draw, (102, 505), "Every new AI chat continues the same project", 13, INK)
+    label(draw, (102, 505), "Every connected AI chat continues the project", 13, INK)
     label(draw, (102, 528), "without manual handoff documents.", 13, INK)
     rr(draw, (86, 582, 574, 630), 10, PURPLE)
     label(draw, (330, 606), "SAVE PROJECT", 13, WHITE, True, "mm")
 
     rr(draw, (624, 258, 1222, 706), 18, WHITE, LINE)
     label(draw, (652, 290), "SYNC STATUS", 11, PURPLE, True)
-    label(draw, (652, 320), "Automatic flow", 23, INK, True)
+    label(draw, (652, 320), "Safe flow", 23, INK, True)
     pill(draw, 1095, 286, "LOCAL", "#ecfdf5", "#047857", GREEN, 12, 30)
     steps = [
-        ("1", "Open an AI chat", "ChatGPT, Claude, or Gemini is recognised."),
-        ("2", "Context is loaded", "The empty composer is filled for your review."),
-        ("3", "New facts are saved", "Messages and structured updates return locally."),
+        ("1", "Connect the project chat", "Nothing is read before your click."),
+        ("2", "Review the handoff", "Edit it before placing it in the chat."),
+        ("3", "Press Send yourself", "Only connected-chat updates are saved."),
     ]
     for i, (num, heading, detail) in enumerate(steps):
         y = 372 + i * 76
@@ -196,7 +196,7 @@ def screenshot_dashboard():
         label(draw, (708, y + 28), detail, 11, MUTED)
         if i < 2:
             draw.line((670, y + 39, 670, y + 70), fill="#ddd6fe", width=2)
-    for i, (count, name) in enumerate((("84", "MESSAGES"), ("11", "UPDATES"), ("5", "CHATS"))):
+    for i, (count, name) in enumerate((("24", "RECENT"), ("11", "UPDATES"), ("3", "CONNECTED"))):
         x = 652 + i * 180
         rr(draw, (x, 610, x + 166, 672), 11, PAPER, LINE)
         label(draw, (x + 83, 634), count, 22, INK, True, "mm")
@@ -208,7 +208,7 @@ def screenshot_sync():
     image = gradient((1280, 800), (15, 23, 42), (49, 19, 95))
     draw = ImageDraw.Draw(image)
     label(draw, (640, 68), "Continue in another AI chat without starting over", 34, WHITE, True, "mm")
-    label(draw, (640, 112), "MaglaSync captures the state locally and prepares the next conversation.", 15, "#ddd6fe", False, "mm")
+    label(draw, (640, 112), "Only connected chats enter the local project journal.", 15, "#ddd6fe", False, "mm")
 
     browser_chrome(draw, (48, 166, 550, 690), "chatgpt.com · project conversation", "#10a37f")
     label(draw, (82, 250), "YOU", 10, PURPLE, True)
@@ -217,16 +217,16 @@ def screenshot_sync():
     label(draw, (102, 318), "Next: publish and collect real feedback.", 14, INK)
     label(draw, (82, 382), "AI", 10, "#047857", True)
     rr(draw, (82, 402, 512, 506), 14, PAPER, LINE)
-    label(draw, (102, 425), "Decision recorded. v1.1.0 is ready.", 14, INK)
-    label(draw, (102, 454), "Verified: tests, release, and privacy boundary.", 12, MUTED)
+    label(draw, (102, 425), "Decision recorded. v1.2.0 is ready.", 14, INK)
+    label(draw, (102, 454), "Reported complete: tests and privacy checks.", 12, MUTED)
     label(draw, (102, 482), "Next step: first public users.", 12, MUTED)
     rr(draw, (82, 560, 512, 626), 14, "#ecfdf5", "#a7f3d0")
     draw.ellipse((104, 584, 118, 598), fill=GREEN)
-    label(draw, (132, 592), "Captured locally by MaglaSync", 13, "#047857", True, "lm")
+    label(draw, (132, 592), "Connected by you · saved locally", 13, "#047857", True, "lm")
 
     rr(draw, (570, 344, 710, 476), 30, PURPLE)
     logo(draw, 604, 366, 72)
-    label(draw, (640, 456), "SYNC", 11, WHITE, True, "mm")
+    label(draw, (640, 456), "REVIEW", 11, WHITE, True, "mm")
     draw.line((536, 410, 568, 410), fill="#c4b5fd", width=5)
     draw.polygon(((562, 400), (580, 410), (562, 420)), fill="#c4b5fd")
     draw.line((710, 410, 742, 410), fill="#c4b5fd", width=5)
@@ -239,12 +239,12 @@ def screenshot_sync():
     label(draw, (786, 340), "Goal", 11, MUTED, True)
     label(draw, (786, 363), "Ship a useful local continuity extension.", 13, INK)
     label(draw, (786, 404), "Latest decision", 11, MUTED, True)
-    label(draw, (786, 427), "Release v1.1.0 and collect real feedback.", 13, INK)
-    label(draw, (786, 468), "Verified", 11, MUTED, True)
-    label(draw, (786, 491), "Tests, release, and privacy boundary passed.", 13, INK)
+    label(draw, (786, 427), "Release v1.2.0 and collect real feedback.", 13, INK)
+    label(draw, (786, 468), "Reported complete", 11, MUTED, True)
+    label(draw, (786, 491), "Tests and privacy checks passed.", 13, INK)
     rr(draw, (764, 560, 1194, 626), 14, "#eef2ff", "#c4b5fd")
     draw.ellipse((786, 584, 800, 598), fill=PURPLE_2)
-    label(draw, (814, 592), "Context loaded — review, then press Send", 13, PURPLE, True, "lm")
+    label(draw, (814, 592), "Preview ready — you choose when to place it", 13, PURPLE, True, "lm")
     save_png(image, STORE / "screenshot-chat-sync.png")
 
 
@@ -252,9 +252,9 @@ def demo_frame(step):
     image = gradient((1000, 560), (15, 23, 42), (46, 16, 101))
     draw = ImageDraw.Draw(image)
     titles = (
-        ("1 · CAPTURE", "Finish a project step in ChatGPT"),
+        ("1 · CONNECT", "Connect only this project chat"),
         ("2 · JOURNAL", "MaglaSync saves the factual state locally"),
-        ("3 · CONTINUE", "Open Claude or Gemini with context ready"),
+        ("3 · REVIEW", "Check the handoff before it reaches Claude"),
     )
     label(draw, (64, 50), titles[step][0], 13, "#c4b5fd", True)
     label(draw, (64, 80), titles[step][1], 30, WHITE, True)
@@ -263,19 +263,19 @@ def demo_frame(step):
     if step == 0:
         label(draw, (96, 178), "ChatGPT · project conversation", 14, MUTED, True)
         rr(draw, (96, 214, 904, 276), 14, "#eef2ff")
-        label(draw, (118, 245), "We approved the cross-platform release. Publish v1.1.0 next.", 16, INK, False, "lm")
+        label(draw, (118, 245), "We approved the privacy-first release. Publish v1.2.0 next.", 16, INK, False, "lm")
         rr(draw, (96, 296, 904, 376), 14, WHITE, LINE)
         label(draw, (118, 326), "Decision recorded. Tests and privacy boundary passed.", 15, INK)
         label(draw, (118, 354), "Next step: publish and collect real user feedback.", 13, MUTED)
         rr(draw, (634, 398, 904, 446), 15, "#ecfdf5", "#a7f3d0")
         draw.ellipse((655, 417, 667, 429), fill=GREEN)
-        label(draw, (681, 423), "Captured locally", 13, "#047857", True, "lm")
+        label(draw, (681, 423), "Connected by you · local", 13, "#047857", True, "lm")
     elif step == 1:
         logo(draw, 96, 174, 58)
         label(draw, (170, 197), "MaglaSync local journal", 20, INK, True, "lm")
         cards = [
             ("DECISION", "Release the local-first Free edition."),
-            ("VERIFIED", "Tests, packaging, and privacy checks passed."),
+            ("REPORTED", "Tests, packaging, and privacy checks passed."),
             ("NEXT STEP", "Publish and collect feedback from real users."),
         ]
         for i, (heading, value) in enumerate(cards):
@@ -286,15 +286,15 @@ def demo_frame(step):
         draw.ellipse((805, 185, 817, 197), fill=GREEN)
         label(draw, (830, 191), "LOCAL ONLY", 10, "#047857", True, "lm")
     else:
-        label(draw, (96, 178), "Claude · new empty chat", 14, MUTED, True)
+        label(draw, (96, 178), "MaglaSync · context preview", 14, MUTED, True)
         rr(draw, (96, 214, 904, 392), 14, WHITE, LINE)
         label(draw, (118, 241), "[MAGLASYNC CONTEXT]", 11, PURPLE, True)
         label(draw, (118, 276), "Goal: Ship a useful local continuity extension.", 14, INK)
-        label(draw, (118, 308), "Latest: v1.1.0 prepared; tests and privacy passed.", 14, INK)
+        label(draw, (118, 308), "Latest: v1.2.0 prepared; tests and privacy passed.", 14, INK)
         label(draw, (118, 340), "Next: collect feedback from real users.", 14, INK)
         label(draw, (118, 372), "[END MAGLASYNC CONTEXT]", 11, MUTED, True)
         rr(draw, (592, 412, 904, 450), 13, PURPLE_SOFT)
-        label(draw, (748, 431), "Review, then press Send", 12, PURPLE, True, "mm")
+        label(draw, (748, 431), "Place in chat only when ready", 12, PURPLE, True, "mm")
     label(draw, (64, 520), "Free · local · no account · no API key", 13, "#cbd5e1")
     return image
 
@@ -366,8 +366,8 @@ def ru_social_preview():
     label(draw, (896, 120), "MaglaSync", 17, WHITE, True, "lm")
     label(draw, (896, 141), "FREE · ЛОКАЛЬНАЯ ПАМЯТЬ", 9, "#94a3b8", True, "lm")
     rows = [
-        ("ChatGPT", "Проект сохранён", "ГОТОВО"),
-        ("Claude", "Контекст загружен", "ГОТОВО"),
+        ("ChatGPT", "Чат подключён", "ГОТОВО"),
+        ("Claude", "Контекст готов", "ГОТОВО"),
         ("Gemini", "Следующий шаг", "ГОТОВО"),
     ]
     for index, (name, detail, status) in enumerate(rows):
@@ -403,7 +403,7 @@ def promo_card(size, title, subtitle, badge, layout="horizontal"):
     label(draw, (width - margin, height - margin), "sync.magla.ru", 17 if layout == "horizontal" else 24, "#a7b2c6", True, "ra")
     if layout == "horizontal":
         x = int(width * .70)
-        for index, (name, state) in enumerate((("ChatGPT", "сохранено"), ("Claude", "загружено"), ("Gemini", "готово"))):
+        for index, (name, state) in enumerate((("ChatGPT", "подключён"), ("Claude", "проверено"), ("Gemini", "готово"))):
             y = int(height * .26) + index * int(height * .16)
             rr(draw, (x, y, width - margin, y + int(height * .115)), 16, WHITE)
             draw.ellipse((x + 20, y + 24, x + 32, y + 36), fill=GREEN)
@@ -415,7 +415,7 @@ def promo_card(size, title, subtitle, badge, layout="horizontal"):
 def promo_assets():
     save_png(promo_card((1280, 720), "Не объясняйте проект каждому ИИ-чату заново", "MaglaSync переносит актуальный контекст между ChatGPT, Claude и Gemini.", "БЕСПЛАТНО · ЛОКАЛЬНО"), PROMO / "youtube-cover-ru.png")
     save_png(promo_card((1280, 720), "Новый ИИ-чат уже знает ваш проект", "Без аккаунта, API-ключа и внешнего сервера.", "СКАЧАТЬ БЕСПЛАТНО"), PROMO / "telegram-card-ru.png")
-    save_png(promo_card((1080, 1080), "Новый ИИ-чат уже знает ваш проект", "Автоматическая память проекта. Отправку всегда нажимаете вы.", "MAGLASYNC FREE", "square"), PROMO / "telegram-square-ru.png")
+    save_png(promo_card((1080, 1080), "Новый ИИ-чат уже знает ваш проект", "Только подключённые вами чаты. Отправку всегда нажимаете вы.", "MAGLASYNC FREE", "square"), PROMO / "telegram-square-ru.png")
     save_png(promo_card((1080, 1920), "Перестаньте объяснять всё заново", "ChatGPT → Claude → Gemini. Один проект, один актуальный контекст.", "MAGLASYNC FREE", "vertical"), PROMO / "tiktok-cover-ru.png")
 
 

@@ -28,8 +28,8 @@ A future Android companion can manage encrypted projects and backups, but it can
 An artifact is called **supported** only after its critical path is tested on a real target:
 
 1. create a project;
-2. capture visible messages;
-3. load context into an empty chat without submitting;
+2. require explicit connection before reading visible messages;
+3. preview context and place it into an empty chat only after a second user action, without submitting;
 4. export, verify, restore, and delete data;
 5. survive browser restart and extension update.
 

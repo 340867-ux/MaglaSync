@@ -50,16 +50,16 @@
     <div class="container">
       <div class="section-title"><p class="eyebrow">ПРОСТОЙ ПРИНЦИП</p><h2>Новый чат — не новый старт.</h2><p>Больше не нужно искать старую переписку и вручную пересказывать всё важное.</p></div>
       <div class="steps">
-        <article class="step"><span class="number">1</span><h3>Работайте как обычно</h3><p>Обсуждайте проект в ChatGPT, Claude или Gemini. Никаких специальных команд учить не нужно.</p></article>
-        <article class="step"><span class="number">2</span><h3>MaglaSync запомнит главное</h3><p>Цель, важные решения, проверенные факты и следующие шаги останутся вместе с проектом.</p></article>
-        <article class="step"><span class="number">3</span><h3>Продолжайте в новом чате</h3><p>MaglaSync подготовит понятный контекст. Вы проверите его и сами решите, когда отправить.</p></article>
+        <article class="step"><span class="number">1</span><h3>Подключите только нужный чат</h3><p>Пока вы сами не нажмёте «Подключить», MaglaSync не читает этот разговор.</p></article>
+        <article class="step"><span class="number">2</span><h3>Работайте как обычно</h3><p>Цель, важные решения и следующие шаги останутся вместе с выбранным проектом.</p></article>
+        <article class="step"><span class="number">3</span><h3>Продолжайте в новом чате</h3><p>Сначала вы увидите и сможете изменить контекст. Потом сами поместите его в чат и отправите.</p></article>
       </div>
     </div>
   </section>
 
   <section id="demo" class="section">
     <div class="container demo-grid">
-      <div class="demo-copy"><p class="eyebrow">ПОСМОТРИТЕ САМИ</p><h2>Из ChatGPT в Claude или Gemini — вместе с проектом.</h2><p>MaglaSync подготавливает краткую передачу дел прямо в поле нового чата. Вы можете прочитать её, изменить и только потом отправить.</p><div class="support left"><span>ChatGPT</span><span>Claude</span><span>Gemini</span></div></div>
+      <div class="demo-copy"><p class="eyebrow">ПОСМОТРИТЕ САМИ</p><h2>Из ChatGPT в Claude или Gemini — вместе с проектом.</h2><p>MaglaSync сначала показывает краткую передачу дел отдельно. Вы читаете и изменяете её — и только потом помещаете в новый чат.</p><div class="support left"><span>ChatGPT</span><span>Claude</span><span>Gemini</span></div></div>
       <div class="demo-frame"><img src="demo.gif" alt="MaglaSync сохраняет состояние проекта и подготавливает его в новом ИИ-чате" loading="lazy"></div>
     </div>
   </section>
@@ -78,8 +78,8 @@
 
   <section id="privacy" class="section">
     <div class="container privacy-grid">
-      <div class="privacy-copy"><p class="eyebrow">СПОКОЙНО И ПОД ВАШИМ КОНТРОЛЕМ</p><h2>Ваш проект остаётся у вас.</h2><p>В бесплатной версии журнал хранится в вашем браузере. Для MaglaSync не нужны регистрация, пароль или API‑ключ. Расширение не отправляет сообщения вместо вас.</p><a class="text-link" href="https://github.com/340867-ux/MaglaSync/blob/main/PRIVACY.md">Как именно устроена приватность →</a></div>
-      <div class="checks"><div class="check"><strong>Хранится локально</strong><span>Отдельного облака MaglaSync в Free нет.</span></div><div class="check"><strong>Вы видите текст заранее</strong><span>Сначала проверяете — потом отправляете сами.</span></div><div class="check"><strong>Можно отключить</strong><span>Сохранение сообщений и подготовку контекста можно выключить.</span></div><div class="check"><strong>Можно забрать данные</strong><span>Скачайте резервную копию или удалите всё в любой момент.</span></div></div>
+      <div class="privacy-copy"><p class="eyebrow">СПОКОЙНО И ПОД ВАШИМ КОНТРОЛЕМ</p><h2>Ваш проект остаётся у вас.</h2><p>В бесплатной версии журнал хранится в вашем браузере. MaglaSync читает только те разговоры, которые вы подключили сами, и никогда не отправляет сообщения вместо вас.</p><a class="text-link" href="https://github.com/340867-ux/MaglaSync/blob/main/PRIVACY.md">Как именно устроена приватность →</a></div>
+      <div class="checks"><div class="check"><strong>Чужие чаты не читаются</strong><span>Каждый разговор подключаете вы сами.</span></div><div class="check"><strong>Хранится локально</strong><span>Отдельного облака MaglaSync в Free нет.</span></div><div class="check"><strong>Вы видите текст заранее</strong><span>Сначала проверяете — потом отправляете сами.</span></div><div class="check"><strong>Можно удалить</strong><span>Отключите чат и удалите его локальные записи.</span></div></div>
     </div>
   </section>
 
@@ -92,7 +92,9 @@
 
   <section class="section faq-section">
     <div class="container faq"><div class="section-title"><p class="eyebrow">КОРОТКО О ГЛАВНОМ</p><h2>Вопросы перед установкой</h2></div>
-      <details><summary>MaglaSync сам пишет или отправляет сообщения?</summary><p>Нет. Он только подготавливает контекст в пустом поле. Вы видите текст и сами нажимаете кнопку отправки.</p></details>
+      <details><summary>MaglaSync читает все мои чаты?</summary><p>Нет. Каждый разговор изначально отключён. MaglaSync начинает сохранять сообщения только после того, как вы сами подключили именно этот чат к проекту.</p></details>
+      <details><summary>Он копирует всю переписку?</summary><p>Нет. По умолчанию MaglaSync хранит только короткий буфер из 24 последних сообщений подключённых чатов и отдельные важные обновления проекта. Расширенный локальный журнал до 400 сообщений можно включить отдельно.</p></details>
+      <details><summary>MaglaSync сам пишет или отправляет сообщения?</summary><p>Нет. Сначала он показывает контекст для проверки. Вы сами помещаете текст в пустое поле и сами нажимаете кнопку отправки.</p></details>
       <details><summary>Нужен аккаунт или API‑ключ?</summary><p>Нет. Для бесплатной версии не нужна регистрация в MaglaSync и не нужен ключ от ИИ‑сервиса.</p></details>
       <details><summary>Где хранится мой проект?</summary><p>В локальном хранилище установленного расширения. Вы можете скачать резервную копию или удалить все данные.</p></details>
       <details><summary>С какими чатами работает первая версия?</summary><p>С веб‑версиями ChatGPT, Claude и Gemini в Chrome или Microsoft Edge на компьютере. Другие браузеры и мобильные версии появятся после проверки основной версии пользователями.</p></details>

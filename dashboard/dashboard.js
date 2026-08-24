@@ -6,8 +6,8 @@ let currentState = null;
 const $ = (selector) => document.querySelector(selector);
 
 $("#project-form").addEventListener("submit", saveProject);
-$("#auto-load").addEventListener("change", saveSettings);
 $("#capture-enabled").addEventListener("change", saveSettings);
+$("#save-full-history").addEventListener("change", saveSettings);
 $("#copy-context").addEventListener("click", copyContext);
 $("#refresh").addEventListener("click", render);
 $("#export").addEventListener("click", exportBackup);
@@ -31,13 +31,17 @@ async function render() {
       $("#goal").value = state.project.goal;
       $("#rules").value = state.project.rules || "";
     }
-    $("#auto-load").checked = state.settings.autoLoad;
     $("#capture-enabled").checked = state.settings.captureEnabled;
-    $("#message-count").textContent = state.messages.length;
-    $("#checkpoint-count").textContent = state.checkpoints.length;
-    $("#chat-count").textContent = new Set(state.messages.map((message) => message.chatId)).size;
-    renderLatest(state.checkpoints.at(-1)?.update);
-    renderActivity(state.messages.slice(-30).reverse());
+    $("#save-full-history").checked = state.settings.saveFullHistory;
+    const active = activeChatIds(state);
+    const messages = state.messages.filter((message) => active.has(message.chatId));
+    const checkpoints = state.checkpoints.filter((checkpoint) => active.has(checkpoint.chatId));
+    $("#message-count").textContent = messages.length;
+    $("#checkpoint-count").textContent = checkpoints.length;
+    $("#chat-count").textContent = active.size;
+    renderConnections(state);
+    renderLatest(checkpoints.at(-1)?.update);
+    renderActivity(messages.slice(-30).reverse());
   } catch (error) {
     toast(error.message, true);
   }
@@ -47,20 +51,30 @@ async function saveProject(event) {
   event.preventDefault();
   if (!event.currentTarget.reportValidity()) return;
   try {
+    const previousGoalVersion = currentState?.project?.goalVersion || 0;
     const { state } = await call({
       type: "SAVE_PROJECT",
       project: { name: $("#name").value, goal: $("#goal").value, rules: $("#rules").value }
     });
     currentState = state;
-    toast("Project saved. Open a supported AI chat to begin syncing.");
+    toast(state.project.goalVersion > previousGoalVersion && previousGoalVersion
+      ? "Project goal changed. Reconnect each project chat before continuing."
+      : "Project saved. Open a supported AI chat and connect it yourself.");
     render();
   } catch (error) { toast(error.message, true); }
 }
 
 async function saveSettings() {
   try {
-    await call({ type: "SET_SETTINGS", settings: { autoLoad: $("#auto-load").checked, captureEnabled: $("#capture-enabled").checked } });
-    toast("Sync settings saved");
+    await call({
+      type: "SET_SETTINGS",
+      settings: {
+        captureEnabled: $("#capture-enabled").checked,
+        saveFullHistory: $("#save-full-history").checked
+      }
+    });
+    toast($("#save-full-history").checked ? "Extended history enabled for connected chats" : "Only the short recent buffer will be kept");
+    render();
   } catch (error) { toast(error.message, true); }
 }
 
@@ -68,15 +82,60 @@ function renderLatest(update) {
   const root = $("#latest-state");
   if (!update) {
     root.className = "empty";
-    root.textContent = "No structured update has been captured yet. Start a supported chat; MaglaSync will ask the AI to return project updates in a machine-readable block.";
+    root.textContent = "No project update has been saved yet. Connect a project chat and continue working normally.";
     return;
   }
   root.className = "state-grid";
   root.replaceChildren();
   if (update.summary) root.append(block("Current state", [update.summary], true));
-  for (const [title, items] of [["Decisions",update.decisions],["Verified",update.verified],["Blockers",update.blockers],["Next steps",update.nextSteps],["Constraints",update.constraints]]) {
+  for (const [title, items] of [["Decisions",update.decisions],["Reported complete",update.verified],["Blockers",update.blockers],["Next steps",update.nextSteps],["Constraints",update.constraints]]) {
     if (items?.length) root.append(block(title, items));
   }
+}
+
+function activeChatIds(state) {
+  const goalVersion = state.project?.goalVersion || 1;
+  return new Set((state.chatBindings || [])
+    .filter((binding) => binding.projectId === state.project?.id && binding.goalVersion === goalVersion)
+    .map((binding) => binding.chatId));
+}
+
+function renderConnections(state) {
+  const root = $("#connections");
+  root.replaceChildren();
+  if (!state.chatBindings?.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "No chat is connected. Open a supported AI chat and click Connect chat.";
+    root.append(empty);
+    return;
+  }
+  for (const binding of state.chatBindings) {
+    const row = document.createElement("article");
+    row.className = "connection";
+    const info = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = binding.platform === "chatgpt" ? "ChatGPT" : binding.platform === "claude" ? "Claude" : "Gemini";
+    const detail = document.createElement("span");
+    const stale = binding.goalVersion !== (state.project?.goalVersion || 1);
+    detail.textContent = stale ? "Project changed · reconnect this chat before use" : `Connected ${new Date(binding.connectedAt).toLocaleDateString()}`;
+    info.append(title, detail);
+    const remove = document.createElement("button");
+    remove.className = "danger compact";
+    remove.textContent = "Disconnect";
+    remove.addEventListener("click", () => removeConnection(binding.chatId));
+    row.append(info, remove);
+    root.append(row);
+  }
+}
+
+async function removeConnection(chatId) {
+  if (!confirm("Disconnect this chat and remove its locally saved MaglaSync records?")) return;
+  try {
+    await call({ type: "DETACH_CHAT", chatId });
+    toast("Chat disconnected and its local records removed");
+    render();
+  } catch (error) { toast(error.message, true); }
 }
 
 function block(title, items, summary = false) {

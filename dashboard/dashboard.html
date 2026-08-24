@@ -14,9 +14,9 @@
   </header>
   <main>
     <section class="hero">
-      <p class="eyebrow">AUTOMATIC CONTINUITY FOR AI CHATS</p>
-      <h1>One project. Every supported chat.</h1>
-      <p>MaglaSync captures your project conversations locally and loads the current state into a new ChatGPT, Claude, or Gemini chat.</p>
+      <p class="eyebrow">PRIVATE CONTINUITY FOR AI CHATS</p>
+      <h1>Only the chats you choose.</h1>
+      <p>Connect a project chat yourself, review the prepared context, and continue in ChatGPT, Claude, or Gemini without mixing in unrelated conversations.</p>
       <div class="platforms"><span>ChatGPT</span><span>Claude</span><span>Gemini</span></div>
     </section>
 
@@ -35,27 +35,32 @@
       </section>
 
       <section class="card sync-card">
-        <div class="card-head"><div><p class="eyebrow">SYNC STATUS</p><h2>Automatic flow</h2></div><span class="live"><i></i> Local</span></div>
+        <div class="card-head"><div><p class="eyebrow">SYNC STATUS</p><h2>Safe flow</h2></div><span class="live"><i></i> Local</span></div>
         <div class="flow">
-          <div><span>1</span><strong>Open an AI chat</strong><p>The extension recognises ChatGPT, Claude, or Gemini.</p></div>
-          <div><span>2</span><strong>Context is loaded</strong><p>An empty new chat is filled automatically. You review and send it.</p></div>
-          <div><span>3</span><strong>New facts are saved</strong><p>Messages and MaglaSync update blocks return to the local journal.</p></div>
+          <div><span>1</span><strong>Connect the project chat</strong><p>Until you click Connect, MaglaSync does not read that conversation.</p></div>
+          <div><span>2</span><strong>Review the handoff</strong><p>Edit the prepared context before placing it in the message box.</p></div>
+          <div><span>3</span><strong>Press Send yourself</strong><p>Only connected-chat updates return to the local journal.</p></div>
         </div>
         <div class="switches">
-          <label class="toggle"><span><strong>Auto-load context</strong><small>Fill empty new chats</small></span><input id="auto-load" type="checkbox"><i></i></label>
-          <label class="toggle"><span><strong>Capture messages</strong><small>Save new messages locally</small></span><input id="capture-enabled" type="checkbox"><i></i></label>
+          <label class="toggle"><span><strong>Save connected chats</strong><small>Keep a short recent buffer locally</small></span><input id="capture-enabled" type="checkbox"><i></i></label>
+          <label class="toggle"><span><strong>Keep extended history</strong><small>Optional · up to 400 messages</small></span><input id="save-full-history" type="checkbox"><i></i></label>
         </div>
-        <div class="counts"><div><strong id="message-count">0</strong><span>messages</span></div><div><strong id="checkpoint-count">0</strong><span>state updates</span></div><div><strong id="chat-count">0</strong><span>chats</span></div></div>
+        <div class="counts"><div><strong id="message-count">0</strong><span>recent messages</span></div><div><strong id="checkpoint-count">0</strong><span>project updates</span></div><div><strong id="chat-count">0</strong><span>connected chats</span></div></div>
       </section>
     </div>
 
+    <section class="card connections-card">
+      <div class="card-head"><div><p class="eyebrow">CONNECTED CHATS</p><h2>Conversations allowed into this project</h2></div></div>
+      <div id="connections" class="connections"><div class="empty">No chat is connected. Open a supported AI chat and click Connect chat.</div></div>
+    </section>
+
     <section class="card latest-card">
       <div class="card-head"><div><p class="eyebrow">LATEST STATE</p><h2>What the next chat will receive</h2></div><button id="copy-context" class="secondary">Copy context</button></div>
-      <div id="latest-state" class="empty">No structured update has been captured yet. Start a supported chat; MaglaSync will ask the AI to return project updates in a machine-readable block.</div>
+      <div id="latest-state" class="empty">No project update has been saved yet. Connect a project chat and continue working normally.</div>
     </section>
 
     <section class="card activity-card">
-      <div class="card-head"><div><p class="eyebrow">LOCAL JOURNAL</p><h2>Recent captured messages</h2></div><button id="refresh" class="secondary">Refresh</button></div>
+      <div class="card-head"><div><p class="eyebrow">LOCAL JOURNAL</p><h2>Recent messages from connected chats</h2></div><button id="refresh" class="secondary">Refresh</button></div>
       <div id="activity" class="activity"><div class="empty">No messages captured yet.</div></div>
     </section>
 
@@ -72,4 +77,3 @@
   <script type="module" src="dashboard.js"></script>
 </body>
 </html>
-

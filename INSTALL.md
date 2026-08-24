@@ -5,7 +5,7 @@ The public store listings are the intended one-click installers and automatic up
 ## Chrome, Microsoft Edge, Brave, or Opera on desktop
 
 1. Open the [latest MaglaSync release](https://github.com/340867-ux/MaglaSync/releases/latest).
-2. Download `maglasync-free-chromium-v1.1.0.zip` and extract it.
+2. Download `maglasync-free-chromium-v1.2.0.zip` and extract it.
 3. Open the browser's extension page:
    - Chrome: `chrome://extensions`
    - Edge: `edge://extensions`
@@ -17,21 +17,22 @@ The public store listings are the intended one-click installers and automatic up
 
 ## Firefox desktop and Firefox for Android
 
-The release contains `maglasync-free-firefox-v1.1.0.zip`, but it is an unsigned release candidate. Ordinary Firefox users should wait for the Mozilla Add-ons listing because Firefox requires signing for persistent installation. Android support also needs a real-device acceptance test before it is advertised as supported.
+The release contains `maglasync-free-firefox-v1.2.0.zip`, but it is an unsigned release candidate. Ordinary Firefox users should wait for the Mozilla Add-ons listing because Firefox requires signing for persistent installation. Android support also needs a real-device acceptance test before it is advertised as supported.
 
 Developers can follow Mozilla's temporary-install and Android debugging instructions in the official Extension Workshop documentation. The package uses a non-persistent event page because Firefox Android does not support background service workers.
 
 ## Safari on Mac, iPhone, and iPad
 
-The release contains `maglasync-free-safari-source-v1.1.0.zip`. It is conversion source, not a signed App Store app. Safari installation for ordinary users requires an Apple Developer/App Store Connect release, bundle identifiers, signing, real-device testing, and review.
+The release contains `maglasync-free-safari-source-v1.2.0.zip`. It is conversion source, not a signed App Store app. Safari installation for ordinary users requires an Apple Developer/App Store Connect release, bundle identifiers, signing, real-device testing, and review.
 
 ## First use
 
 1. Enter the project name, exact goal, and rules in the project journal.
 2. Open ChatGPT, Claude, or Gemini and reload the tab.
 3. MaglaSync appears in the lower-right corner.
-4. In an empty chat, it fills the composer with current context. Review it and press Send.
-5. Continue normally. New visible messages are saved locally when capture is enabled.
+4. Click **Connect chat**. Until that click, MaglaSync does not read the conversation.
+5. Choose **Review context**, edit the handoff if needed, and choose **Place in chat**.
+6. Read it once more and press Send yourself. Only the connected chat can now update the local journal.
 
 ## Update
 
@@ -44,8 +45,8 @@ Export a backup if needed, then remove MaglaSync from the browser's extension ma
 ## Troubleshooting
 
 - If the purple panel does not appear, reload the AI chat after installing.
-- If context is not filled, make sure the chat is empty and **Auto-load context** is enabled.
-- If messages are not captured, enable **Capture messages** and reload the page.
+- If context is not placed, make sure the message box is empty and the chat is connected.
+- If messages are not saved, enable **Save connected chats** and reconnect the chat if the project goal changed.
 - AI sites frequently change their page structure. Report a compatibility issue without pasting private conversation text.
 
 See [PLATFORM_MATRIX.md](docs/PLATFORM_MATRIX.md) for the release status of every browser and device.

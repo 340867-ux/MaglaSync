@@ -1,9 +1,9 @@
 {
   "name": "maglasync",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
-  "description": "Automatic local continuity between ChatGPT, Claude, and Gemini chats.",
+  "description": "Private local continuity between explicitly connected ChatGPT, Claude, and Gemini chats.",
   "homepage": "https://sync.magla.ru/",
   "repository": {
     "type": "git",
