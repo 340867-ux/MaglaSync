@@ -4,6 +4,7 @@ import { basename, dirname, resolve } from "node:path";
 import { tmpdir } from "node:os";
 
 const root = resolve(import.meta.dirname, "..");
+const firefoxOnly = process.argv.includes("--firefox-only");
 const common = [
   "background.js", "shared/core.js",
   "content/content.js", "content/content.css",
@@ -13,6 +14,10 @@ const common = [
 ];
 const chromiumFiles = ["manifest.json", ...common];
 const safariExtras = ["PRIVACY.md", "platform/safari/README.md"];
+const firefoxSourceFiles = [
+  "package.json", "manifest.json", "platform/firefox/manifest.json",
+  "platform/firefox/SOURCE_SUBMISSION.md", "tools/package.mjs", ...common
+];
 const storeKitFiles = [
   "docs/CHROME_WEB_STORE_SUBMISSION_RU.md",
   "assets/store/screenshot-chat-sync.png", "assets/store/screenshot-dashboard.png",
@@ -20,7 +25,10 @@ const storeKitFiles = [
   "icons/icon128.png", "PRIVACY.md"
 ];
 
-for (const file of [...chromiumFiles, "platform/firefox/manifest.json", ...safariExtras, ...storeKitFiles]) {
+const requiredFiles = firefoxOnly
+  ? firefoxSourceFiles
+  : [...chromiumFiles, "platform/firefox/manifest.json", "platform/firefox/SOURCE_SUBMISSION.md", ...safariExtras, ...storeKitFiles];
+for (const file of requiredFiles) {
   await access(resolve(root, file));
 }
 
@@ -31,7 +39,16 @@ if (firefoxManifest.manifest_version !== 2) throw new Error("Firefox Android pac
 if (chromiumManifest.version !== firefoxManifest.version) throw new Error("Platform manifest versions differ.");
 if (!chromiumManifest.permissions.every((permission) => permission === "storage")) throw new Error("Unexpected Chromium extension permission.");
 if (chromiumManifest.content_security_policy) throw new Error("Custom CSP is not expected in the free edition.");
-if (!firefoxManifest.browser_specific_settings?.gecko_android?.strict_min_version) throw new Error("Firefox Android compatibility range is missing.");
+if (firefoxManifest.browser_specific_settings?.gecko?.strict_min_version !== "140.0") {
+  throw new Error("Firefox desktop must start at the built-in consent floor (140.0).");
+}
+if (firefoxManifest.browser_specific_settings?.gecko_android?.strict_min_version !== "142.0") {
+  throw new Error("Firefox Android must start at the built-in consent floor (142.0).");
+}
+const firefoxDataDeclaration = firefoxManifest.browser_specific_settings?.gecko?.data_collection_permissions;
+if (JSON.stringify(firefoxDataDeclaration) !== JSON.stringify({ required: ["none"] })) {
+  throw new Error("Firefox must declare the exact no-data-collection permission.");
+}
 
 const forbiddenRuntimePatterns = [
   ["fetch", /\bfetch\s*\(/],
@@ -100,16 +117,18 @@ await mkdir(dist, { recursive: true });
 const work = await mkdtemp(resolve(tmpdir(), "maglasync-package-"));
 try {
   const chromiumDir = resolve(work, "chromium");
-  await copyFiles(chromiumFiles, chromiumDir);
   const chromiumOutput = resolve(dist, `maglasync-free-chromium-v${chromiumManifest.version}.zip`);
   const safariPreservedOutput = resolve(dist, `maglasync-free-chromium-v${chromiumManifest.version}.zip.keep`);
   const legacyOutput = resolve(dist, `maglasync-free-v${chromiumManifest.version}.zip`);
-  await rm(chromiumOutput, { force: true });
-  await rm(safariPreservedOutput, { force: true });
-  await rm(legacyOutput, { force: true });
-  await zipDirectory(chromiumDir, chromiumOutput);
-  await cp(chromiumOutput, safariPreservedOutput);
-  await cp(chromiumOutput, legacyOutput);
+  if (!firefoxOnly) {
+    await copyFiles(chromiumFiles, chromiumDir);
+    await rm(chromiumOutput, { force: true });
+    await rm(safariPreservedOutput, { force: true });
+    await rm(legacyOutput, { force: true });
+    await zipDirectory(chromiumDir, chromiumOutput);
+    await cp(chromiumOutput, safariPreservedOutput);
+    await cp(chromiumOutput, legacyOutput);
+  }
 
   const coreSource = stripExports(await readFile(resolve(root, "shared/core.js"), "utf8"));
   const backgroundSource = stripImports(await readFile(resolve(root, "background.js"), "utf8"));
@@ -136,32 +155,49 @@ try {
   await rm(firefoxOutput, { force: true });
   await zipDirectory(firefoxDir, firefoxOutput);
 
-  const safariDir = resolve(work, "safari-source");
-  await copyFiles([...chromiumFiles, ...safariExtras], safariDir);
+  const firefoxSourceDir = resolve(work, "firefox-source");
+  await copyFiles(firefoxSourceFiles, firefoxSourceDir);
+  await cp(
+    resolve(root, "platform/firefox/SOURCE_SUBMISSION.md"),
+    resolve(firefoxSourceDir, "README.md")
+  );
+  const firefoxSourceOutput = resolve(dist, `maglasync-free-firefox-source-v${chromiumManifest.version}.zip`);
+  await rm(firefoxSourceOutput, { force: true });
+  await zipDirectory(firefoxSourceDir, firefoxSourceOutput);
+
   const safariOutput = resolve(dist, `maglasync-free-safari-source-v${chromiumManifest.version}.zip`);
-  await rm(safariOutput, { force: true });
-  await zipDirectory(safariDir, safariOutput);
-
-  const storeKitDir = resolve(work, "chrome-store-kit");
-  await mkdir(resolve(storeKitDir, "03-store-assets"), { recursive: true });
-  await cp(chromiumOutput, resolve(storeKitDir, "01-upload-to-chrome-web-store.zip"));
-  await cp(resolve(root, "docs/CHROME_WEB_STORE_SUBMISSION_RU.md"), resolve(storeKitDir, "02-field-by-field-ru.md"));
-  for (const file of [
-    "screenshot-chat-sync.png", "screenshot-dashboard.png", "promo-small.png", "promo-marquee.png"
-  ]) {
-    await cp(resolve(root, "assets/store", file), resolve(storeKitDir, "03-store-assets", file));
-  }
-  await cp(resolve(root, "icons/icon128.png"), resolve(storeKitDir, "03-store-assets/icon128.png"));
-  await cp(resolve(root, "PRIVACY.md"), resolve(storeKitDir, "04-privacy-policy.md"));
   const storeKitOutput = resolve(dist, `maglasync-chrome-store-submission-kit-v${chromiumManifest.version}.zip`);
-  await rm(storeKitOutput, { force: true });
-  await zipDirectory(storeKitDir, storeKitOutput);
+  if (!firefoxOnly) {
+    const safariDir = resolve(work, "safari-source");
+    await copyFiles([...chromiumFiles, ...safariExtras], safariDir);
+    await rm(safariOutput, { force: true });
+    await zipDirectory(safariDir, safariOutput);
 
-  console.log(`Built ${chromiumOutput}`);
-  console.log(`Built ${safariPreservedOutput}`);
+    const storeKitDir = resolve(work, "chrome-store-kit");
+    await mkdir(resolve(storeKitDir, "03-store-assets"), { recursive: true });
+    await cp(chromiumOutput, resolve(storeKitDir, "01-upload-to-chrome-web-store.zip"));
+    await cp(resolve(root, "docs/CHROME_WEB_STORE_SUBMISSION_RU.md"), resolve(storeKitDir, "02-field-by-field-ru.md"));
+    for (const file of [
+      "screenshot-chat-sync.png", "screenshot-dashboard.png", "promo-small.png", "promo-marquee.png"
+    ]) {
+      await cp(resolve(root, "assets/store", file), resolve(storeKitDir, "03-store-assets", file));
+    }
+    await cp(resolve(root, "icons/icon128.png"), resolve(storeKitDir, "03-store-assets/icon128.png"));
+    await cp(resolve(root, "PRIVACY.md"), resolve(storeKitDir, "04-privacy-policy.md"));
+    await rm(storeKitOutput, { force: true });
+    await zipDirectory(storeKitDir, storeKitOutput);
+  }
+
+  if (!firefoxOnly) {
+    console.log(`Built ${chromiumOutput}`);
+    console.log(`Built ${safariPreservedOutput}`);
+  }
   console.log(`Built ${firefoxOutput}`);
-  console.log(`Built ${safariOutput}`);
-  console.log(`Built ${storeKitOutput}`);
+  console.log(`Built ${firefoxSourceOutput}`);
+  if (!firefoxOnly) {
+    console.log(`Built ${safariOutput}`);
+    console.log(`Built ${storeKitOutput}`);
+  }
 } finally {
   await rm(work, { recursive: true, force: true });
 }

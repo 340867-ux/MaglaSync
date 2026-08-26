@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.1 — 2026-08-26
+
+- Added Firefox's mandatory built-in no-data-collection declaration.
+- Raised Firefox compatibility floors to 140 desktop and 142 Android for the built-in consent system.
+- Added a deterministic Mozilla reviewer-source package and exact rebuild instructions.
+- Added a pinned `web-ext` 10.6.0 warnings-as-errors release gate.
+- Updated Safari publishing to Apple's browser-based Web Extension Packager and TestFlight route.
+
 ## 1.2.0 — 2026-08-24
 
 - Changed to explicit per-chat connection: unopened and unconnected conversations are not captured.

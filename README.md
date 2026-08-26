@@ -111,10 +111,10 @@ No paid edition is required to keep using one local project.
 
 | Package | Status |
 | --- | --- |
-| Chromium: Chrome 114+, Edge 114+ | Supported GitHub edition; Chrome Web Store submission under review since 2026-08-24 (owner-reported) |
+| Chromium: Chrome 114+, Edge 114+ | Supported GitHub edition; Chrome Web Store published (owner-reported on 2026-08-26) |
 | Brave and Opera desktop | Uses the Chromium package; not release-gated on every version |
-| Firefox desktop and Android | Event-page release candidate; Mozilla signing and real-device acceptance test pending |
-| Safari on macOS, iPhone, and iPad | Conversion source ready; Apple signing and App Store review pending |
+| Firefox desktop and Android | v1.2.1 AMO candidate and reviewer source ready; Mozilla signing and real-device acceptance tests pending |
+| Safari on macOS, iPhone, and iPad | v1.2.1 Web Packager source ready; TestFlight, real-device testing, and App Review pending |
 | Chrome on Android | Chrome does not provide a mobile extension install channel |
 
 The browser store is the proper installer for an extension. We do not ship a misleading `.exe` or `.dmg` that merely tries to sideload the same package. See the honest [platform matrix](docs/PLATFORM_MATRIX.md) and [Free/Pro architecture](docs/ARCHITECTURE.md).

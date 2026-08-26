@@ -1,6 +1,6 @@
 {
   "name": "maglasync",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "type": "module",
   "description": "Private local continuity between explicitly connected ChatGPT, Claude, and Gemini chats.",
@@ -24,6 +24,8 @@
     "test": "node --test",
     "check": "node --test && node tools/package.mjs --check",
     "package": "node tools/package.mjs",
+    "package:firefox": "node tools/package.mjs --firefox-only",
+    "lint:firefox": "node tools/firefox-lint.mjs",
     "assets": "python3 tools/make_launch_assets.py",
     "promo-video": "python3 tools/make_promo_videos.py"
   },

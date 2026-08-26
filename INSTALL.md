@@ -17,13 +17,13 @@ The public store listings are the intended one-click installers and automatic up
 
 ## Firefox desktop and Firefox for Android
 
-The [Firefox 1.2.0 package](https://sync.magla.ru/downloads/maglasync-free-firefox-v1.2.0.zip) is an unsigned release candidate. Ordinary Firefox users should wait for the Mozilla Add-ons listing because Firefox requires signing for persistent installation. Android support also needs a real-device acceptance test before it is advertised as supported.
+The [Firefox 1.2.1 package](https://github.com/340867-ux/MaglaSync/releases/download/v1.2.1/maglasync-free-firefox-v1.2.1.zip) is an unsigned AMO candidate. Ordinary Firefox users should wait for the Mozilla Add-ons listing because Firefox requires signing for persistent installation. Android support also needs a real-device acceptance test before it is advertised as supported.
 
 Developers can follow Mozilla's temporary-install and Android debugging instructions in the official Extension Workshop documentation. The package uses a non-persistent event page because Firefox Android does not support background service workers.
 
 ## Safari on Mac, iPhone, and iPad
 
-The [Safari 1.2.0 source package](https://sync.magla.ru/downloads/maglasync-free-safari-source-v1.2.0.zip) is conversion source, not a signed App Store app. Safari installation for ordinary users requires an Apple Developer/App Store Connect release, bundle identifiers, signing, real-device testing, and review.
+The [Safari 1.2.1 source package](https://github.com/340867-ux/MaglaSync/releases/download/v1.2.1/maglasync-free-safari-source-v1.2.1.zip) is Web Packager source, not a signed App Store app. App Store Connect can package it without a Mac or Xcode, but ordinary-user installation still requires an Apple Developer identity, TestFlight and real-device testing, and App Review.
 
 ## First use
 
