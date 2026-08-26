@@ -4,18 +4,18 @@ MaglaSync is one product with browser-specific distribution packages. Browser st
 
 | User device | Delivery | Current artifact | What still requires the publisher |
 | --- | --- | --- | --- |
-| Windows, macOS, Linux: Chrome, Brave, Opera | Chrome Web Store | Submitted for Google review on 2026-08-24 (owner-reported) | Google approval and a live store listing URL |
+| Windows, macOS, Linux: Chrome, Brave, Opera | Chrome Web Store | Published (owner-reported on 2026-08-26) | Record and verify the final public listing URL |
 | Windows, macOS: Microsoft Edge | Microsoft Edge Add-ons | Same reviewed Chromium ZIP | Partner Center account, upload, privacy form, review |
-| Windows, macOS, Linux: Firefox | Mozilla Add-ons (AMO) | Firefox ZIP | AMO signing, listing, desktop acceptance test |
-| Android: Firefox | Mozilla Add-ons (AMO) | Same Firefox candidate | Real-device UX test and AMO mobile approval |
-| macOS, iPhone, iPad: Safari | App Store | Safari WebExtension source ZIP | Apple identity, bundle IDs, signing, real-device test, review |
+| Windows, macOS, Linux: Firefox | Mozilla Add-ons (AMO) | v1.2.1 Firefox ZIP plus reproducible reviewer-source ZIP | AMO upload, signing, listing, desktop acceptance test |
+| Android: Firefox | Mozilla Add-ons (AMO) | Same v1.2.1 event-page candidate | Real-device UX test and AMO mobile approval |
+| macOS, iPhone, iPad: Safari | App Store | v1.2.1 Safari WebExtension source ZIP | Web Packager upload, TestFlight, real-device test, review |
 | Android: Chrome | No mobile extension channel | None | Chrome Help states extensions are computer-only |
 
 ## Why there is no `.exe` or `.dmg`
 
 For Chrome and Edge, a standalone desktop installer would either still ask the browser to install the extension or rely on enterprise policy. It would not give ordinary users a trustworthy one-click install or automatic updates. The store button is the correct installer.
 
-Safari is different: Apple wraps the web extension in a signed app container. That container must be built and signed under the publisher's Apple identity.
+Safari is different: Apple wraps the web extension in a signed app container. App Store Connect can now package the source ZIP without a Mac or Xcode, but the result still requires the publisher's Apple identity, TestFlight testing, and App Review.
 
 ## Android scope
 

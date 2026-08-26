@@ -1,14 +1,14 @@
 # Publishing status
 
-Last updated: 2026-08-24
+Last updated: 2026-08-26
 
 | Channel | Status | Evidence level | Next proof |
 | --- | --- | --- | --- |
 | GitHub Release | Published: MaglaSync Free v1.2.0 | Public release and downloadable assets verified | Keep release packages and checksums current |
 | GitHub Pages product site | Published | Public product, privacy, and submission-kit URLs verified | Connect the final `sync.magla.ru` DNS when ready |
-| Chrome Web Store | Submitted for review on 2026-08-24 | Owner-reported; dashboard is not visible to repository automation | Google approval email or a live public store listing URL |
+| Chrome Web Store | Published (owner-reported on 2026-08-26) | Owner report; public listing URL still needs to be recorded | Verify and add the final public store URL |
 | Microsoft Edge Add-ons | Not submitted | Partner Center browser access remains blocked | Publisher login, upload, and Microsoft review |
-| Firefox AMO | Candidate package ready; not submitted | Local package and checks passed | AMO signing and acceptance testing |
-| Safari / App Store | Conversion source ready; not submitted | Source package only | Apple signing, real-device testing, and App Store review |
+| Firefox AMO | v1.2.1 submission and reviewer-source packages prepared; not submitted | Deterministic package checks plus pinned AMO lint gate | CI green, AMO upload/signing, desktop test, then Android real-device test |
+| Safari / App Store | v1.2.1 Web Packager source prepared; not submitted | Source package and current Apple route documented | App Store Connect upload, TestFlight, real-device tests, App Review |
 
-`Submitted for review` does not mean approved or publicly installable. The Chrome channel becomes published only after Google approval is evidenced by an approval notice or a live Chrome Web Store listing.
+Store status is recorded conservatively: owner reports are labelled as such until a public listing or store receipt is captured in the repository.

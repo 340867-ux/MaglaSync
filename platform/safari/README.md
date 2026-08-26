@@ -7,11 +7,11 @@ It is not a signed `.app` or `.ipa`. Apple requires the publisher's Apple Develo
 ## Release route
 
 1. Sign in to the publisher's Apple Developer and App Store Connect accounts.
-2. Convert this WebExtension with Xcode's Safari Web Extension Converter or Apple's Safari Web Extension Packager.
+2. Prefer Apple's Safari Web Extension Packager: upload this ZIP in App Store Connect, without requiring a Mac or Xcode. The Xcode converter remains an alternative when native project control is needed.
 3. Use the product name `MaglaSync Free` and the publisher-controlled bundle identifier.
-4. Enable macOS, iOS, and iPadOS targets.
-5. Test capture, context loading, backup, restore, and deletion on real Safari devices.
-6. Submit the signed build and the privacy disclosure from `PRIVACY.md` to App Store Connect.
+4. Enable macOS, iOS, and iPadOS targets offered by the selected packaging route.
+5. Distribute a TestFlight build and test capture, context loading, backup, restore, and deletion on real Safari devices.
+6. Submit the tested build and the privacy disclosure from `PRIVACY.md` for App Review.
 
 Official references:
 

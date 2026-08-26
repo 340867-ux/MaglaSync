@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MaglaSync Free",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Continue projects across AI chats you explicitly connect.",
   "minimum_chrome_version": "114",
   "permissions": ["storage"],

@@ -1,6 +1,6 @@
 # Safari / App Store submission pack
 
-Start with `maglasync-free-safari-source-v1.2.0.zip`. Convert or package it as a Safari Web Extension under the publisher's Apple Developer and App Store Connect identity.
+Start with `maglasync-free-safari-source-v1.2.1.zip`. Upload it to Apple's Safari Web Extension Packager in App Store Connect under the publisher's Apple Developer identity. Apple now supports this conversion route from a web browser, without requiring a Mac or Xcode. Xcode's converter remains available as the advanced alternative.
 
 ## Listing
 
@@ -28,9 +28,9 @@ Start with `maglasync-free-safari-source-v1.2.0.zip`. Convert or package it as a
 
 ## Release requirements
 
-- Publisher-controlled bundle identifier and Apple signing.
+- Active Apple Developer/App Store Connect identity and a publisher-controlled bundle identifier.
 - macOS, iPhone, and iPad targets where supported by the selected packaging route.
-- Real-device tests for all critical paths.
+- TestFlight and real-device tests for all critical paths.
 - App privacy answers consistent with `PRIVACY.md`.
 - Apple review approval.
 
