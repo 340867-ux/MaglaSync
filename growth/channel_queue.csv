@@ -2,13 +2,24 @@ channel,type,cost,status,submission_route,priority,notes
 The Rundown Supertools,AI directory/editorial,0,sent_2026-08-30,email:support@therundown.ai,A,Official page explicitly invites tool recommendations by email
 SubmitAI Tools,AI directory,0,sent_2026-08-30,email:contact@submitaitools.org,A,Official site offers free submissions
 Toolvern,AI directory,0,sent_2026-08-30,email:support@toolvern.com,A,Official site says email uses same free queue
+AI41,AI directory,0,sent_2026-08-30,email:info@ai41.org,A,Official page says creator submissions are free and accepted by email
+SESY Free,free/open-source directory,0,sent_2026-08-30,email:info@sesy.ai,A,Explicitly free no-pay-to-rank directory for genuinely free/open-source tools
 AIFindr,open-source AI directory,0,queued_form,https://aifindr.org/submit,A,Free form or GitHub PR; open-source fit
 ToolScout,AI directory,0,queued_account_form,https://toolscout.ai/submit,A,Free human-reviewed listing; sign-in required
-AISO Tools,AI directory,0,queued_form,https://aisotools.com/submit,A,Free permanent listing; do not buy queue skip
-TiloBox,free/open-source software directory,0,queued_form,https://www.tilobox.com/,A,Strong free/open-source fit
+AISO Tools,AI directory,0,queued_form,https://aisotools.com/submit,A,Free permanent listing with dofollow backlink; do not buy queue skip
 AI Tool Directory,AI directory,0,queued_form,https://ai-tool.ai/submit-tool,A,Free basic listing and relevant audience
-MyFreeAISource,free/open-source AI directory,0,queued_form,https://myfreeaisource.com/submit-ai-tool/,A,Explicitly prioritizes useful free/open-source tools
+ListAI,AI directory,0,queued_form,https://listai.cc/submit,A,Free no-account submission with human review
+AI Tools Daily Hub,AI directory,0,queued_form,https://aitoolsdailyhub.com/submit-a-tool/,A,Free listing; human-reviewed
+IndexOf.AI,AI directory,0,queued_form,https://indexof.ai/,A,Free listing available; no card required
+AI Valley,AI directory,0,queued_form,https://aivalley.ai/submit-tool/,A,Free short form and established AI-tool audience
+Extension Bazaar,browser extension directory,0,queued_form,https://extensionbazaar.com/submit-extension/,A,Free curated Chrome-extension listing linking directly to Chrome Web Store
+Web Store Extensions,browser extension directory,0,queued_account_form,https://webstoreextensions.com/,A,Free moderated directory for Chrome Firefox and Edge
 ExtensionLaunch,browser extension directory,0,queued_account_form,https://extensionlaunch.com/,A,Chrome-specific discovery; listing is free
+TiloBox,free/open-source software directory,0,queued_form,https://www.tilobox.com/,A,Strong free/open-source fit
+MyFreeAISource,free/open-source AI directory,0,queued_form,https://myfreeaisource.com/submit-ai-tool/,A,Explicitly prioritizes useful free/open-source tools
+Launching Next,startup directory,0,queued_form,https://www.launchingnext.com/submit/,A,Free submission; choose zero marketing budget and skip paid fast-track
+Future Tools,AI directory/editorial,0,queued_form,https://www.futuretools.io/submit-a-tool,A,Large AI discovery audience; free human-reviewed submission
+Resource.fyi,developer resource directory,0,queued_account_form,https://resource.fyi/account/submit/,B,Free developer-resource submission after Google or GitHub sign-in
 Product Hunt,launch community,0,queued_account_launch,https://www.producthunt.com/,A,Free launch; needs prepared launch timing and owner account
 Hacker News,developer community,0,queued_manual_post,https://news.ycombinator.com/,A,Show HN should be a genuine technical launch not repeated promotion
 AlternativeTo,software discovery,0,queued_account_form,https://alternativeto.net/,B,Free listing; useful for alternative/comparison discovery
