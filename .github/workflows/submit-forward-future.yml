@@ -1,0 +1,57 @@
+name: Submit MaglaSync to Forward Future once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - growth/submissions/forward-future-v1.json
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify one-time submission marker
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p = json.loads(Path('growth/submissions/forward-future-v1.json').read_text())
+          assert p['submission_id'] == 'forward-future-maglasync-free-2026-08-30-v1'
+          assert p['pricing'] == 'Free'
+          assert p['websiteUrl'] == 'https://sync.magla.ru/en/'
+          print('FORWARD_FUTURE_MARKER_OK=1')
+          PY
+
+      - name: Install isolated Playwright
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/maglasync-forward-future
+          cd /tmp/maglasync-forward-future
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+          ln -s /tmp/maglasync-forward-future/node_modules "$GITHUB_WORKSPACE/node_modules"
+
+      - name: Submit one free listing with fail-closed preflight
+        run: node tools/submit-forward-future.mjs
+
+      - name: Upload submission evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forward-future-submission-evidence
+          path: reports/growth/forward-future-v1/
+          if-no-files-found: warn
+          retention-days: 14
