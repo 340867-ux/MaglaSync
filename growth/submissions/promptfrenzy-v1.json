@@ -1,6 +1,8 @@
 {
   "submission": "promptfrenzy-v1",
   "requested_at": "2026-08-30",
+  "attempt": 3,
+  "retry_reason": "preflight repaired to avoid runner DNS dependency before POST",
   "directory": "https://www.promptfrenzy.com/directory",
   "badge_url": "https://sync.magla.ru/en/press/",
   "cost": 0,
