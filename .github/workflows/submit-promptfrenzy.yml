@@ -1,0 +1,115 @@
+name: Submit PromptFrenzy directory
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - growth/submissions/promptfrenzy-v1.json
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for the public verification link
+        run: |
+          set -euo pipefail
+          READY=0
+          for attempt in $(seq 1 36); do
+            PAGE="$(curl --silent --show-error --fail --location \
+              -H 'Cache-Control: no-cache' \
+              "https://sync.magla.ru/en/press/?promptfrenzy-check=${GITHUB_SHA}-${attempt}" || true)"
+            if printf '%s' "$PAGE" | grep -Fq 'data-submission="promptfrenzy-20260830"' \
+              && printf '%s' "$PAGE" | grep -Fq 'href="https://www.promptfrenzy.com/directory"'; then
+              READY=1
+              break
+            fi
+            sleep 10
+          done
+          if [ "$READY" != "1" ]; then
+            echo 'PromptFrenzy verification link was not visible on the public MaglaSync press page.' >&2
+            exit 1
+          fi
+
+      - name: Skip if MaglaSync is already in the public directory feed
+        run: |
+          set -euo pipefail
+          FEED="$(curl --silent --show-error --fail --location https://www.promptfrenzy.com/.well-known/ai-tools.json || true)"
+          if printf '%s' "$FEED" | grep -Fqi 'sync.magla.ru'; then
+            echo 'PROMPTFRENZY_ALREADY_LISTED=1' >> "$GITHUB_ENV"
+            echo 'MaglaSync is already present in the PromptFrenzy public feed.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'PROMPTFRENZY_ALREADY_LISTED=0' >> "$GITHUB_ENV"
+          fi
+
+      - name: Build public submission payload
+        if: env.PROMPTFRENZY_ALREADY_LISTED != '1'
+        run: |
+          cat > /tmp/promptfrenzy-payload.json <<'JSON'
+          {
+            "name": "MaglaSync Free",
+            "url": "https://sync.magla.ru/en/",
+            "description": "Local project memory across ChatGPT, Claude, and Gemini with explicit chat connection and user-reviewed handoffs.",
+            "category": "productivity",
+            "pricing": "free",
+            "badge_url": "https://sync.magla.ru/en/press/",
+            "tags": ["ai-memory", "project-memory", "local-first", "browser-extension", "context"],
+            "pricing_detail": "Free one-project local edition; no MaglaSync account or AI API key required.",
+            "key_features": [
+              "Stores one project journal locally in browser extension storage",
+              "Requires explicit per-chat connection before a conversation joins project memory",
+              "Prepares a user-reviewable handoff for fresh ChatGPT, Claude, or Gemini chats",
+              "Leaves the final Send action to the user"
+            ],
+            "works_with": ["chatgpt", "claude", "gemini"],
+            "platforms": ["browser-extension", "windows", "macos", "linux"],
+            "logo": "https://sync.magla.ru/icon128.png",
+            "submitted_by": "340867-ux"
+          }
+          JSON
+          python3 -m json.tool /tmp/promptfrenzy-payload.json >/dev/null
+
+      - name: Submit MaglaSync to PromptFrenzy
+        if: env.PROMPTFRENZY_ALREADY_LISTED != '1'
+        run: |
+          set -euo pipefail
+          HTTP_CODE="$(curl --silent --show-error --location \
+            --output /tmp/promptfrenzy-response.json \
+            --write-out '%{http_code}' \
+            --request POST \
+            --header 'Content-Type: application/json' \
+            --data-binary @/tmp/promptfrenzy-payload.json \
+            https://www.promptfrenzy.com/api/directory/submit)"
+
+          cat /tmp/promptfrenzy-response.json
+          if [ "$HTTP_CODE" != "200" ] && [ "$HTTP_CODE" != "201" ]; then
+            echo "PromptFrenzy returned HTTP $HTTP_CODE" >&2
+            exit 1
+          fi
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path('/tmp/promptfrenzy-response.json').read_text())
+          pr_url = data.get('pr_url', '')
+          verification = data.get('verification', {})
+          status = verification.get('status') if isinstance(verification, dict) else verification
+
+          if pr_url and not pr_url.startswith('https://github.com/Prompt-Frenzy/ai-directory/pull/'):
+              raise SystemExit(f'Unexpected PromptFrenzy PR URL: {pr_url}')
+
+          summary = Path(__import__('os').environ['GITHUB_STEP_SUMMARY'])
+          with summary.open('a') as fh:
+              fh.write('## PromptFrenzy submission\n\n')
+              fh.write(f'- Verification: `{status or "not returned"}`\n')
+              fh.write(f'- Pull request: {pr_url or "not returned"}\n')
+              fh.write('- Cost: `$0`\n')
+              fh.write('- Submitted fields: public MaglaSync product metadata only\n')
+          PY
