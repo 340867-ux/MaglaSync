@@ -1,0 +1,99 @@
+name: CMS/LMS directory compliance
+
+on:
+  pull_request:
+    paths:
+      - 'integrations/**'
+      - '.github/workflows/integration-directory-compliance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'integrations/**'
+      - '.github/workflows/integration-directory-compliance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wordpress:
+    name: WordPress Plugin Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: WordPress/plugin-check-action@v1.1.9
+        with:
+          build-dir: integrations/wordpress/maglasync-context
+
+  drupal:
+    name: Drupal Coder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer
+      - name: Install Drupal Coder
+        run: |
+          mkdir -p /tmp/drupal-coder
+          cd /tmp/drupal-coder
+          composer config --global --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+          composer require --dev --no-interaction --prefer-dist drupal/coder:^9.0
+      - name: Run Drupal and DrupalPractice standards
+        run: |
+          /tmp/drupal-coder/vendor/bin/phpcs \
+            --standard=Drupal,DrupalPractice \
+            --extensions=php,yml,md \
+            integrations/drupal/maglasync_context
+
+  moodle:
+    name: Moodle Plugin CI
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pgsql, mbstring, intl, soap
+          ini-values: max_input_vars=5000
+          coverage: none
+          tools: composer
+      - name: Initialise Moodle Plugin CI
+        run: |
+          composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
+          echo "$(pwd)/ci/bin" >> "$GITHUB_PATH"
+          echo "$(pwd)/ci/vendor/bin" >> "$GITHUB_PATH"
+          sudo locale-gen en_AU.UTF-8
+      - name: Install Moodle test environment
+        env:
+          DB: pgsql
+          MOODLE_BRANCH: MOODLE_502_STABLE
+        run: |
+          moodle-plugin-ci install \
+            --plugin "$GITHUB_WORKSPACE/integrations/moodle/local/maglasync_context" \
+            --db-host=127.0.0.1 \
+            --db-user=postgres \
+            --db-name=moodle
+      - name: Moodle PHP lint
+        run: moodle-plugin-ci phplint
+      - name: Moodle Code Checker
+        run: moodle-plugin-ci phpcs --max-warnings 0
+      - name: Moodle PHPDoc Checker
+        run: moodle-plugin-ci phpdoc --max-warnings 0
+      - name: Moodle plugin validation
+        run: moodle-plugin-ci validate
