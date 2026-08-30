@@ -5,12 +5,15 @@ import { tmpdir } from "node:os";
 
 const root = resolve(import.meta.dirname, "..");
 const firefoxOnly = process.argv.includes("--firefox-only");
+const localeCodes = ["en", "ru", "es", "pt_BR", "de", "fr", "id", "ja", "ko", "hi", "zh_CN", "zh_TW", "ar"];
+const localeFiles = localeCodes.map((locale) => `_locales/${locale}/messages.json`);
 const common = [
   "background.js", "shared/core.js",
   "content/content.js", "content/content.css",
   "popup/popup.html", "popup/popup.js", "popup/popup.css",
   "dashboard/dashboard.html", "dashboard/dashboard.js", "dashboard/dashboard.css",
-  "icons/icon16.png", "icons/icon32.png", "icons/icon48.png", "icons/icon128.png"
+  "icons/icon16.png", "icons/icon32.png", "icons/icon48.png", "icons/icon128.png",
+  ...localeFiles
 ];
 const chromiumFiles = ["manifest.json", ...common];
 const safariExtras = ["PRIVACY.md", "platform/safari/README.md"];
@@ -37,6 +40,21 @@ const firefoxManifest = JSON.parse(await readFile(resolve(root, "platform/firefo
 if (chromiumManifest.manifest_version !== 3) throw new Error("Chromium Manifest V3 is required.");
 if (firefoxManifest.manifest_version !== 2) throw new Error("Firefox Android package must use its event-page manifest.");
 if (chromiumManifest.version !== firefoxManifest.version) throw new Error("Platform manifest versions differ.");
+if (chromiumManifest.default_locale !== "en" || firefoxManifest.default_locale !== "en") {
+  throw new Error("Both browser manifests must use English as the default locale.");
+}
+for (const manifest of [chromiumManifest, firefoxManifest]) {
+  if (manifest.name !== "__MSG_extensionName__") throw new Error("Extension name must be localized through extensionName.");
+  if (manifest.description !== "__MSG_extensionDescription__") throw new Error("Extension description must be localized through extensionDescription.");
+}
+for (const locale of localeCodes) {
+  const messages = JSON.parse(await readFile(resolve(root, `_locales/${locale}/messages.json`), "utf8"));
+  const name = messages.extensionName?.message;
+  const description = messages.extensionDescription?.message;
+  if (!name || !description) throw new Error(`Missing store identity messages for locale ${locale}.`);
+  if ([...name].length > 45) throw new Error(`Localized extension name exceeds 45 characters for ${locale}.`);
+  if ([...description].length > 132) throw new Error(`Localized extension description exceeds 132 characters for ${locale}.`);
+}
 if (!chromiumManifest.permissions.every((permission) => permission === "storage")) throw new Error("Unexpected Chromium extension permission.");
 if (chromiumManifest.content_security_policy) throw new Error("Custom CSP is not expected in the free edition.");
 if (firefoxManifest.browser_specific_settings?.gecko?.strict_min_version !== "140.0") {
@@ -107,7 +125,7 @@ async function zipDirectory(source, output) {
 }
 
 const checkedFiles = await verifyRuntime(chromiumFiles);
-console.log(`PASS package checks · MaglaSync ${chromiumManifest.version} · Chromium MV3 + Firefox event page`);
+console.log(`PASS package checks · MaglaSync ${chromiumManifest.version} · Chromium MV3 + Firefox event page · ${localeCodes.length} locales`);
 console.log(`PASS offline boundary · ${checkedFiles} runtime text files`);
 
 if (process.argv.includes("--check")) process.exit(0);
@@ -145,7 +163,8 @@ try {
   await verifyRuntime([
     "manifest.json", "background.bundle.js", "content/content.js", "content/content.css",
     "popup/popup.html", "popup/popup.js", "popup/popup.css",
-    "dashboard/dashboard.html", "dashboard/dashboard.bundle.js", "dashboard/dashboard.css"
+    "dashboard/dashboard.html", "dashboard/dashboard.bundle.js", "dashboard/dashboard.css",
+    ...localeFiles
   ], firefoxDir);
   for (const script of ["background.bundle.js", "dashboard/dashboard.bundle.js"]) {
     const syntax = spawnSync(process.execPath, ["--check", resolve(firefoxDir, script)], { encoding: "utf8" });

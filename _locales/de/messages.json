@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "MaglaSync Free – KI-Projektgedächtnis",
+    "description": "Localized extension name shown by the browser and store."
+  },
+  "extensionDescription": {
+    "message": "Lokales Projektgedächtnis für ChatGPT, Claude und Gemini. In neuen KI-Chats weiterarbeiten, ohne alles neu zu erklären.",
+    "description": "Localized extension description shown by the browser and store."
+  }
+}

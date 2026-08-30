@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "MaglaSync Free – AI 專案記憶",
+    "description": "Localized extension name shown by the browser and store."
+  },
+  "extensionDescription": {
+    "message": "適用於 ChatGPT、Claude 和 Gemini 的本機專案記憶。切換到新的 AI 聊天時，不必重新解釋全部背景即可繼續。",
+    "description": "Localized extension description shown by the browser and store."
+  }
+}
