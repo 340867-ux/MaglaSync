@@ -1,0 +1,70 @@
+{
+  "schema": "maglasync-telegram-campaign-v1",
+  "campaign_id": "maglasync-telegram-ru-v1",
+  "created_at": "2026-08-30",
+  "product": {
+    "name": "MaglaSync Free",
+    "landing_url": "https://sync.magla.ru/",
+    "source_url": "https://github.com/340867-ux/MaglaSync",
+    "chrome_url": "https://chromewebstore.google.com/detail/maglasync-free/hhcmedgckaedhlegpgphflmmmhfaegpi",
+    "media_path": "assets/promo/telegram-card-ru.png"
+  },
+  "existing_magla_intake": {
+    "topic": "ChatGPT, Claude, Gemini, AI-инструменты и автоматизация",
+    "geography": "Россия и СНГ",
+    "additional_terms": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "Cursor",
+      "n8n",
+      "AI агенты",
+      "нейросети",
+      "автоматизация",
+      "вайб-кодинг",
+      "продуктивность"
+    ],
+    "excluded_words": [
+      "казино",
+      "ставки",
+      "беттинг",
+      "криптосигналы"
+    ],
+    "excluded_topics": [
+      "gambling",
+      "adult"
+    ],
+    "excluded_locations": []
+  },
+  "delivery": {
+    "mode": "external_public_groups",
+    "first_wave_max_targets": 25,
+    "action_interval_seconds": 30,
+    "recurrence": "one_time_first_wave",
+    "auto_repeat": false,
+    "post_variant_strategy": "rotate_by_target",
+    "target_seed_path": "growth/telegram/maglasync_target_seed_v1.csv",
+    "post_pack_path": "growth/telegram/maglasync_posts_ru_v1.md"
+  },
+  "guards": {
+    "current_target_check_required_before_send": true,
+    "public_group_or_discussion_only": true,
+    "skip_broadcast_channels_without_posting_rights": true,
+    "skip_if_current_rules_forbid_promotion_or_links": true,
+    "skip_if_membership_or_post_permission_missing": true,
+    "do_not_persist_private_invite_hashes": true,
+    "no_personal_dm_campaign": true,
+    "no_duplicate_resend": true,
+    "success_requires_telegram_message_receipt": true,
+    "success_requires_message_id": true,
+    "false_positive_success_forbidden": true
+  },
+  "evidence": {
+    "record_target_username": true,
+    "record_message_id": true,
+    "record_public_post_url_when_available": true,
+    "record_sent_at": true,
+    "record_failure_reason": true,
+    "submitted_is_not_published": true
+  }
+}
