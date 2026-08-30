@@ -3,23 +3,31 @@
 Canonical links:
 
 - Product: https://sync.magla.ru/
-- Product (temporary): https://340867-ux.github.io/MaglaSync/
+- Install chooser (EN): https://sync.magla.ru/en/install/
+- Install chooser (RU): https://sync.magla.ru/install/
+- Chrome Web Store: https://chromewebstore.google.com/detail/maglasync-free/hhcmedgckaedhlegpgphflmmmhfaegpi
+- Firefox Add-ons: https://addons.mozilla.org/addon/maglasync-free/
 - Source: https://github.com/340867-ux/MaglaSync
-- Download: https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip
+
+The signed browser stores are the default installation path for ordinary users. The repository ZIP remains a development/review artifact, not the primary acquisition CTA.
 
 ## Show HN
 
-**Title:** Show HN: MaglaSync – local continuity between ChatGPT, Claude, and Gemini
+**Title:** Show HN: MaglaSync – local project memory across ChatGPT, Claude, and Gemini
 
 **Text:**
 
 > I built MaglaSync because long-running AI projects keep losing context when a chat becomes too long or I switch models.
 >
-> It is a free Manifest V3 browser extension that keeps one project journal locally. Every chat starts disconnected. After the user connects a project chat, MaglaSync keeps a short recent buffer, extracts structured decisions and next steps, and shows the current context for review before placing it in another chat. It never presses Send.
+> It is a free open-source browser extension that keeps one project journal locally. Every chat starts disconnected. After the user connects a project chat, MaglaSync keeps a bounded recent buffer plus structured decisions, blockers, reported results, and next steps. Before anything moves to another chat, the user reviews and can edit the handoff. MaglaSync never presses Send.
 >
-> There is no account, API key, analytics, backend, or remote runtime code. The source, privacy disclosure, tests, and installable ZIP are public. The current GitHub edition uses Chrome's Load unpacked flow while the store listing is prepared.
+> There is no MaglaSync account, AI API key, analytics library, advertising runtime, or backend for the Free workflow. The source, privacy disclosure, tests, Chrome listing, and Firefox listing are public.
 >
-> I would especially value feedback on the context format, privacy boundary, and compatibility with real long-running projects.
+> Chrome: https://chromewebstore.google.com/detail/maglasync-free/hhcmedgckaedhlegpgphflmmmhfaegpi
+> Firefox: https://addons.mozilla.org/addon/maglasync-free/
+> Source: https://github.com/340867-ux/MaglaSync
+>
+> I would especially value feedback from people using multiple AI providers on projects that last longer than one chat.
 
 ## Product Hunt
 
@@ -35,7 +43,9 @@ Canonical links:
 >
 > The Free edition deliberately avoids a backend. One project stays in browser extension storage, every chat starts disconnected, and a structured continuity block carries decisions, reported results, blockers, and next steps forward. The user reviews and edits the handoff before placing it in a chat, and presses Send.
 >
-> This release is intentionally small. I am looking for real compatibility reports before adding multiple projects, device sync, or team features.
+> It is now available through signed Chrome and Firefox listings. This release is intentionally small: I want real compatibility and workflow feedback before adding multiple projects, device sync, or team features.
+>
+> Install: https://sync.magla.ru/en/install/
 
 ## Reddit or community post
 
@@ -47,14 +57,19 @@ Canonical links:
 >
 > It stores one project locally in the browser, reads messages only from chats the user explicitly connects, and shows the current goal, rules, decisions, reported results, blockers, and next steps for review before placement. It does not send automatically.
 >
-> No account, API key, analytics, or backend. The source and installable release are on GitHub. I am looking for honest feedback from people who use AI chats for long-running work.
+> No MaglaSync account, AI API key, analytics, advertising runtime, or backend for the Free workflow. The source is public and the signed extension is available for both Chrome and Firefox.
+>
+> Install: https://sync.magla.ru/en/install/
+> Source: https://github.com/340867-ux/MaglaSync
+>
+> I am looking for honest feedback from people who use AI chats for long-running work.
 
 ## Short social post
 
-> New open-source release: MaglaSync Free carries one project's context between ChatGPT, Claude, and Gemini. Local storage, no account, no API key, and it never presses Send. Demo and download: https://sync.magla.ru/en/
+> MaglaSync Free keeps one project's working context continuous across ChatGPT, Claude, and Gemini. Local storage, no MaglaSync account, no AI API key, and you review the handoff before sending. Chrome + Firefox: https://sync.magla.ru/en/install/
 
 ## Russian post
 
-> Выпустили MaglaSync Free — бесплатное расширение, которое переносит состояние проекта между ChatGPT, Claude и Gemini. Каждый чат изначально отключён; пользователь сам подключает только проектные разговоры. Контекст сначала показывается для проверки и редактирования. Без аккаунта, API-ключа и внешнего сервера; отправку всегда делает пользователь. Демо и скачивание: https://sync.magla.ru/
+> Выпустили MaglaSync Free — бесплатное расширение для продолжения одного проекта между ChatGPT, Claude и Gemini. Журнал проекта хранится локально, каждый чат изначально отключён, контекст перед переносом можно проверить и изменить. Без аккаунта MaglaSync и API-ключа. Chrome и Firefox: https://sync.magla.ru/install/
 
 Full Russian/CIS campaign pack: [PROMO_RU.md](PROMO_RU.md).

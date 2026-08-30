@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "MaglaSync Free",
-  "version": "1.2.1",
-  "description": "Continue projects across AI chats you explicitly connect.",
+  "version": "1.2.2",
+  "description": "Local project memory across ChatGPT, Claude, and Gemini. Continue in new AI chats without re-explaining everything.",
   "minimum_chrome_version": "114",
   "permissions": ["storage"],
   "background": {
