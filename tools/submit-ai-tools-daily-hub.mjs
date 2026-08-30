@@ -17,6 +17,7 @@ const report = {
   generatedAt: new Date().toISOString(),
   target: TARGET,
   submissionId: payload.submission_id,
+  attempt: payload.attempt ?? 1,
   status: 'NOT_ATTEMPTED',
   clickedSubmit: false,
   submitted: false,
@@ -41,6 +42,10 @@ if (payload.submission_id !== 'ai-tools-daily-hub-maglasync-free-2026-08-30-v1')
 if (payload.toolUrl !== 'https://sync.magla.ru/en/') fail('BLOCKED_PAYLOAD', 'Unexpected public product URL.');
 if (payload.category !== 'productivity' || payload.pricingType !== 'free' || payload.hasFreePlan !== true) {
   fail('BLOCKED_PAYLOAD', 'Only the Productivity / Free listing is authorized.');
+}
+if ((payload.attempt ?? 1) > 2) fail('BLOCKED_PAYLOAD', 'More than one pre-submit retry is not authorized.');
+if ((payload.attempt ?? 1) === 2 && payload.previous_attempt_status !== 'BLOCKED_PREFLIGHT_NO_CLICK') {
+  fail('BLOCKED_PAYLOAD', 'Retry is allowed only after a proven preflight block with no Submit click.');
 }
 if (!contactEmail || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(contactEmail) || /noreply/i.test(contactEmail)) {
   fail('BLOCKED_CONTACT', 'A valid non-noreply maintainer email is required at runtime.');
@@ -68,16 +73,26 @@ try {
   await page.waitForTimeout(2500);
   const bodyBefore = await page.locator('body').innerText();
   const frames = page.frames().map(frame => frame.url());
-  const freeEvidence = /Free\s*\$0/i.test(bodyBefore)
-    && /Is the free listing really free\?/i.test(bodyBefore)
-    && /completely free/i.test(bodyBefore)
-    && /No credit card required/i.test(bodyBefore);
+  const freeFaqEvidence = /Is the free listing really free\?/i.test(bodyBefore);
+  const completelyFreeEvidence = /completely free/i.test(bodyBefore);
+  const noCardEvidence = /No credit card required/i.test(bodyBefore);
+  const submitButtonEvidence = /Submit Tool for Review/i.test(bodyBefore);
+  const freeEvidence = freeFaqEvidence && completelyFreeEvidence && noCardEvidence && submitButtonEvidence;
   const captchaEvidence = /captcha|recaptcha|hcaptcha|turnstile/i.test(bodyBefore)
     || frames.some(url => /recaptcha|hcaptcha|turnstile/i.test(url));
   const loginEvidence = /login required|log in to submit|sign in to submit|continue with google|continue with github/i.test(bodyBefore);
 
-  Object.assign(report.preflight, { freeEvidence, captchaEvidence, loginEvidence, frames });
-  if (!freeEvidence) fail('BLOCKED_PREFLIGHT', 'Expected $0/free/no-credit-card route is no longer visible.');
+  Object.assign(report.preflight, {
+    freeEvidence,
+    freeFaqEvidence,
+    completelyFreeEvidence,
+    noCardEvidence,
+    submitButtonEvidence,
+    captchaEvidence,
+    loginEvidence,
+    frames,
+  });
+  if (!freeEvidence) fail('BLOCKED_PREFLIGHT', 'Expected permanent free/no-credit-card route is no longer visible.');
   if (captchaEvidence) fail('BLOCKED_PREFLIGHT', 'CAPTCHA detected; automated submission is forbidden.');
   if (loginEvidence) fail('BLOCKED_PREFLIGHT', 'Login requirement detected; stop before submission.');
 
