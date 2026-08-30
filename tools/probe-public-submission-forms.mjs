@@ -5,7 +5,7 @@ const targets = [
   { name: 'ExtensionHub', url: 'https://extensionhub.in/submit' },
   { name: 'ChromeXts', url: 'https://www.chromexts.com/' },
   { name: 'Resource.fyi', url: 'https://resource.fyi/' },
-  { name: 'TestNest', url: 'https://testnest.website/' },
+  { name: 'TestNest AI Review', url: 'https://testnest.website/ai-review' },
 ];
 
 const browser = await chromium.launch({ headless: true });
