@@ -7,6 +7,7 @@ AI Catchup,AI media/newsletter,sent,email:hello@news.aicatchup.com,Editorial sto
 AI News HQ,AI media,sent,email:editorial intake,Editorial pitch
 VentureBeat,media/news,sent,email:tips@venturebeat.com,AI/product news tip
 AI Valley,AI directory/newsletter,sent,email:community@aivalley.io,Free tool/newsletter submission
+AI Valley / aivalley.ai,AI directory,recovery_email_sent_after_form_mail_failed,email:barsee@aivalley.ai,Official web form reached Contact Form 7 but returned mail_failed; one recovery email sent to official site address; no duplicate form retry
 RankVipAI,AI editorial,sent,email:contact@rankvipai.com,Editorial consideration only
 Neuro Automata,RU AI media multi-platform,sent,email:neuroautoinfo@gmail.com,Telegram/YouTube/VK/Dzen/Rutube/X editorial contact
 ToolWise,AI directory/editorial,recovery_sent_after_bounce,email:hello@toolwise.ai,Original editorial@toolwise.ai bounced; one recovery only
@@ -28,7 +29,7 @@ ReadInBrief,AI media/editorial,paid_offer_declined_unpaid_route_offered,email:he
 WorthTryingAI,AI editorial,bounced,email:hello@worthtryingai.com,Delivery failed; do not retry without verified route
 TechRadar / Becca Caddy,consumer AI media/editorial,sent_2026-08-30,email:becca@beccacaddy.com,Consumer multi-AI continuity angle; unpaid editorial only; do not repeat unless replied
 Kevin Stratvert,consumer AI creator/video,sent_2026-08-30,email:website@kevinstratvert.com,Tutorial angle for ordinary users starting a fresh ChatGPT Claude or Gemini chat without re-explaining; unpaid only; do not repeat unless replied
-Utsav Techie,consumer AI creator/video,sent_2026-08-30,email:contact.utsavtechie@enlyft.in,Multi-model continuity angle for students creators business and everyday users; unpaid only; do not repeat unless replied
+Utsav Techie,consumer AI creator/video,bounced_dead_public_address_2026-08-30,email:contact.utsavtechie@enlyft.in,550 No Such User; do not retry the same address; only use a newly verified official route if found
 The Neuron,consumer AI newsletter/editorial,sent_2026-08-30,email:team@theneurondaily.com,Pitched for normal-person AI tool coverage around stopping repeated project explanations; unpaid only; do not repeat unless replied
 HackerNoon,media/editorial,bounced,email:stories@hackernoon.com,Mailbox invalid; official route is account-based Submit Story for Review
 TheTopAIGear,AI directory,bounced,email:aitool@thetopaigear.com,Mailbox invalid; do not retry without verified official route
