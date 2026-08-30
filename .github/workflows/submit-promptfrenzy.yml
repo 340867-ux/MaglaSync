@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - growth/submissions/promptfrenzy-v1.json
+      - .github/workflows/submit-promptfrenzy.yml
 
 permissions:
   contents: read
@@ -17,23 +18,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Wait for the public verification link
+      - name: Verify the public reciprocal link from GitHub source
         run: |
           set -euo pipefail
-          READY=0
-          for attempt in $(seq 1 36); do
-            PAGE="$(curl --silent --show-error --fail --location \
-              -H 'Cache-Control: no-cache' \
-              "https://sync.magla.ru/en/press/?promptfrenzy-check=${GITHUB_SHA}-${attempt}" || true)"
-            if printf '%s' "$PAGE" | grep -Fq 'data-submission="promptfrenzy-20260830"' \
-              && printf '%s' "$PAGE" | grep -Fq 'href="https://www.promptfrenzy.com/directory"'; then
-              READY=1
-              break
-            fi
-            sleep 10
-          done
-          if [ "$READY" != "1" ]; then
-            echo 'PromptFrenzy verification link was not visible on the public MaglaSync press page.' >&2
+          PAGE="$(curl --silent --show-error --fail --location \
+            -H 'Cache-Control: no-cache' \
+            https://raw.githubusercontent.com/340867-ux/MaglaSync/main/site/en/press/index.html)"
+          if ! printf '%s' "$PAGE" | grep -Fq 'data-submission="promptfrenzy-20260830"' \
+            || ! printf '%s' "$PAGE" | grep -Fq 'href="https://www.promptfrenzy.com/directory"'; then
+            echo 'PromptFrenzy verification link was not present in the public MaglaSync press-page source.' >&2
             exit 1
           fi
 
