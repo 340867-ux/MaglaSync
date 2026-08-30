@@ -8,6 +8,14 @@ const targets = [
   { name: 'TestNest AI Review', url: 'https://testnest.website/ai-review' },
   { name: 'Extension Bazaar', url: 'https://extensionbazaar.com/submit-extension/' },
   { name: 'Web Store Extensions', url: 'https://webstoreextensions.com/submit' },
+  { name: 'AIFindr', url: 'https://aifindr.org/submit' },
+  { name: 'AISO Tools', url: 'https://aisotools.com/submit' },
+  { name: 'AI Tool Directory', url: 'https://ai-tool.ai/submit-tool' },
+  { name: 'ListAI', url: 'https://listai.cc/submit' },
+  { name: 'AI Tools Daily Hub', url: 'https://aitoolsdailyhub.com/submit-a-tool/' },
+  { name: 'AI Valley', url: 'https://aivalley.ai/submit-tool/' },
+  { name: 'LocalAlternative', url: 'https://www.localalternative.io/submit' },
+  { name: 'InfoRelay', url: 'https://inforelay.ai/submit/' },
 ];
 
 const browser = await chromium.launch({ headless: true });
