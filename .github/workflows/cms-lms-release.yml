@@ -1,0 +1,78 @@
+name: CMS/LMS Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'integrations/releases/CMS_LMS_0_1_0_RELEASE'
+      - '.github/workflows/cms-lms-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify fixed release marker
+        run: |
+          set -euo pipefail
+          test "$(cat integrations/releases/CMS_LMS_0_1_0_RELEASE)" = "cms-lms-v0.1.0"
+
+      - name: Validate PHP syntax
+        run: |
+          set -euo pipefail
+          php -l integrations/wordpress/maglasync-context/maglasync-context.php
+          php -l integrations/drupal/maglasync_context/src/Controller/MaglaSyncContextController.php
+          php -l integrations/moodle/local/maglasync_context/version.php
+          php -l integrations/moodle/local/maglasync_context/lib.php
+          php -l integrations/moodle/local/maglasync_context/index.php
+          php -l integrations/moodle/local/maglasync_context/db/access.php
+          php -l integrations/moodle/local/maglasync_context/classes/privacy/provider.php
+
+      - name: Build release archives
+        run: |
+          set -euo pipefail
+          mkdir -p dist/integrations
+          (
+            cd integrations/wordpress
+            zip -qr ../../dist/integrations/maglasync-context-wordpress-0.1.0.zip maglasync-context
+          )
+          (
+            cd integrations/drupal
+            zip -qr ../../dist/integrations/maglasync-context-drupal-0.1.0.zip maglasync_context
+          )
+          (
+            cd integrations/moodle/local
+            zip -qr ../../../dist/integrations/maglasync-context-moodle-0.1.0.zip maglasync_context
+          )
+          sha256sum dist/integrations/*.zip | tee dist/integrations/SHA256SUMS.txt
+
+      - name: Verify archive roots
+        run: |
+          set -euo pipefail
+          unzip -Z1 dist/integrations/maglasync-context-wordpress-0.1.0.zip | head -1 | grep '^maglasync-context/'
+          unzip -Z1 dist/integrations/maglasync-context-drupal-0.1.0.zip | head -1 | grep '^maglasync_context/'
+          unzip -Z1 dist/integrations/maglasync-context-moodle-0.1.0.zip | head -1 | grep '^maglasync_context/'
+
+      - name: Publish immutable versioned release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="cms-lms-v0.1.0"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; refusing to replace published assets."
+            exit 0
+          fi
+          gh release create "$TAG" \
+            dist/integrations/maglasync-context-wordpress-0.1.0.zip \
+            dist/integrations/maglasync-context-drupal-0.1.0.zip \
+            dist/integrations/maglasync-context-moodle-0.1.0.zip \
+            dist/integrations/SHA256SUMS.txt \
+            --target main \
+            --title "MaglaSync Context Bridges v0.1.0" \
+            --notes "First public companion-plugin release for WordPress, Drupal and Moodle. Each plugin builds a local, reviewable MAGLASYNC_CONTEXT_V1 handoff and sends nothing automatically. WordPress Plugin Check, Drupal Coder/DrupalPractice, and Moodle Plugin CI gates passed before release."
