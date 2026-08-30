@@ -8,7 +8,9 @@ const guides = [
   "chatgpt-loses-context",
   "chatgpt-memory-extension",
   "chatgpt-to-claude",
-  "claude-memory"
+  "claude-memory",
+  "move-ai-chat-between-chatgpt-claude-gemini",
+  "new-chat-before-context-is-lost"
 ];
 
 for (const slug of guides) {
