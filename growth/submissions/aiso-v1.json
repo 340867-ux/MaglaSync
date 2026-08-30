@@ -1,0 +1,11 @@
+{
+  "submission_id": "aiso-maglasync-free-2026-08-30-v1",
+  "toolName": "MaglaSync Free",
+  "url": "https://sync.magla.ru/en/",
+  "category": "Productivity",
+  "shortDescription": "Keep one project continuous across ChatGPT, Claude and Gemini without re-explaining everything.",
+  "description": "MaglaSync Free helps ordinary AI users continue the same project across ChatGPT, Claude and Gemini. It keeps a compact local project journal with goals, key decisions, constraints, results, blockers and next steps, then shows a reviewable handoff before the user places it into a fresh chat. The Free edition requires no MaglaSync account, AI API key, cloud backend or analytics, never sends automatically, and is open source under the MIT License.",
+  "pricing": "Free",
+  "pricingDetails": "Free forever for one local project; no credit card or subscription required.",
+  "features": "Cross-AI project continuity, local project journal, review-before-handoff, ChatGPT support, Claude support, Gemini support, no account, no AI API key, open source"
+}
