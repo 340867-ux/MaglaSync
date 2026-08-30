@@ -1,0 +1,36 @@
+name: Dispatch Firefox submission v1.2.4 once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/dispatch-firefox-v124-once.yml
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lock this dispatch to MaglaSync v1.2.4
+        run: |
+          set -euo pipefail
+          VERSION="$(node -p 'JSON.parse(require("fs").readFileSync("manifest.json","utf8")).version')"
+          test "$VERSION" = "1.2.4"
+          test "$GITHUB_REF_NAME" = "main"
+
+      - name: Dispatch Firefox-only store submission
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh workflow run store-submit.yml \
+            --ref main \
+            -f target=firefox \
+            -f confirm=SUBMIT
+          echo "Requested guarded Firefox-only store submission for MaglaSync v1.2.4."
