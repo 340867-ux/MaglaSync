@@ -16,9 +16,18 @@ test('AI Tools Daily Hub submission is one-shot and free-only', () => {
   assert.equal(payload.hasFreePlan, true);
 });
 
-test('AI Tools Daily Hub submitter binds only the $0 no-card form state', () => {
-  assert.match(submitter, /Free\\s\*\\\$0/);
+test('AI Tools Daily Hub retry is bound to the proven no-click preflight stop', () => {
+  assert.equal(payload.attempt, 2);
+  assert.equal(payload.previous_attempt_status, 'BLOCKED_PREFLIGHT_NO_CLICK');
+  assert.match(submitter, /More than one pre-submit retry is not authorized/);
+  assert.match(submitter, /Retry is allowed only after a proven preflight block with no Submit click/);
+});
+
+test('AI Tools Daily Hub submitter binds durable free-route evidence and free form state', () => {
+  assert.match(submitter, /Is the free listing really free/);
+  assert.match(submitter, /completely free/);
   assert.match(submitter, /No credit card required/);
+  assert.match(submitter, /Submit Tool for Review/);
   assert.match(submitter, /selectOption\(\{ label: 'Productivity' \}\)/);
   assert.match(submitter, /selectOption\(\{ label: 'Free' \}\)/);
   assert.match(submitter, /Payment fields unexpectedly appeared/);
