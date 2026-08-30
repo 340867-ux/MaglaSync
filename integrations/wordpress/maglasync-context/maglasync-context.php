@@ -4,7 +4,8 @@
  * Description: Build a local, reviewable AI context handoff from the current post or page and copy it for ChatGPT, Claude, or Gemini.
  * Version: 0.1.0
  * Author: MaglaSync
- * License: MIT
+ * License: GPL-2.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: maglasync-context
  */
 
