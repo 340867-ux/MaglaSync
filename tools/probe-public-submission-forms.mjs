@@ -8,6 +8,8 @@ const targets = [
   { name: 'TestNest AI Review', url: 'https://testnest.website/ai-review' },
   { name: 'Extension Bazaar', url: 'https://extensionbazaar.com/submit-extension/' },
   { name: 'Web Store Extensions', url: 'https://webstoreextensions.com/submit' },
+  { name: 'AIFindr', url: 'https://aifindr.org/submit' },
+  { name: 'AISO Tools', url: 'https://aisotools.com/submit' },
 ];
 
 const browser = await chromium.launch({ headless: true });
