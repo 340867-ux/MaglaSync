@@ -20,12 +20,13 @@ ToolLibraryOnline,AI directory,sent,email:contact@toollibraryonline.com,Manual r
 WeCanUseAI,AI directory,sent,email:contact@wecanuseai.com,Free standard listing only
 ThinkAI.tools,AI directory/editorial,sent,email:thinkai.tools@gmail.com,Unpaid editorial review only
 AITrendTool,AI directory/editorial,sent,email:hello@aitrendtool.com,Free editorial review; no paid tier requested
-Console.dev,developer editorial,sent,email:hello@console.dev,Developer-angle tool suggestion
+Console.dev,developer editorial,received_auto_review_ack,email:hello@console.dev,Submission received for newsletter review; no publication claimed
 Last Week in AI,AI newsletter/podcast,sent,email:contact@lastweekinai.com,Tools & Apps news tip
-We Compare AI,AI directory/editorial,sent,email:submissions@wecompareai.com,Free standard submission
+We Compare AI,AI directory/editorial,bounced,email:submissions@wecompareai.com,Mailbox invalid; do not retry without verified route
 PitchWall,startup/media,sent,email:support@pitchwall.co,Educational guest-post pitch with affiliation disclosure
-ReadInBrief,AI media/editorial,sent,email:hello@readinbrief.com,Educational article pitch with affiliation disclosure
-WorthTryingAI,AI editorial,sent,email:hello@worthtryingai.com,Free editorial queue only
+ReadInBrief,AI media/editorial,paid_offer_declined_unpaid_route_offered,email:hello@readinbrief.com,They offered paid editorial collaboration; paid route declined and unpaid editorial option offered
+WorthTryingAI,AI editorial,bounced,email:hello@worthtryingai.com,Delivery failed; do not retry without verified route
+TechRadar / Becca Caddy,consumer AI media/editorial,sent_2026-08-30,email:becca@beccacaddy.com,Consumer multi-AI continuity angle; unpaid editorial only; do not repeat unless replied
 HackerNoon,media/editorial,bounced,email:stories@hackernoon.com,Mailbox invalid; official route is account-based Submit Story for Review
 TheTopAIGear,AI directory,bounced,email:aitool@thetopaigear.com,Mailbox invalid; do not retry without verified official route
 AI Breakfast,newsletter,bounced,email:aibreakfast@mail.beehiiv.com,Mailbox invalid; do not retry

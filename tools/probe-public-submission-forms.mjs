@@ -16,6 +16,7 @@ const targets = [
   { name: 'AI Valley', url: 'https://aivalley.ai/submit-tool/' },
   { name: 'LocalAlternative', url: 'https://www.localalternative.io/submit' },
   { name: 'InfoRelay', url: 'https://inforelay.ai/submit/' },
+  { name: 'Forward Future Tools', url: 'https://forwardfuture.com/tools/submit' },
 ];
 
 const browser = await chromium.launch({ headless: true });
@@ -50,6 +51,12 @@ for (const target of targets) {
         placeholder: el.getAttribute('placeholder'),
         text: (el.textContent || '').trim().slice(0, 120),
         ariaLabel: el.getAttribute('aria-label'),
+        options: el.tagName.toLowerCase() === 'select'
+          ? [...el.querySelectorAll('option')].map(option => ({
+              value: option.getAttribute('value'),
+              text: (option.textContent || '').trim().slice(0, 120),
+            })).slice(0, 80)
+          : undefined,
       })),
     })));
 
