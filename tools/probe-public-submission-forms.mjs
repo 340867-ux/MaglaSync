@@ -10,6 +10,8 @@ const targets = [
   { name: 'Web Store Extensions', url: 'https://webstoreextensions.com/submit' },
   { name: 'AIFindr', url: 'https://aifindr.org/submit' },
   { name: 'AISO Tools', url: 'https://aisotools.com/submit' },
+  { name: 'AI Tool Directory', url: 'https://ai-tool.ai/submit-tool' },
+  { name: 'ListAI', url: 'https://listai.cc/submit' },
 ];
 
 const browser = await chromium.launch({ headless: true });
