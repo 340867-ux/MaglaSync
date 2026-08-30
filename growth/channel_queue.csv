@@ -1,0 +1,22 @@
+channel,type,cost,status,submission_route,priority,notes
+The Rundown Supertools,AI directory/editorial,0,sent_2026-08-30,email:support@therundown.ai,A,Official page explicitly invites tool recommendations by email
+SubmitAI Tools,AI directory,0,sent_2026-08-30,email:contact@submitaitools.org,A,Official site offers free submissions
+Toolvern,AI directory,0,sent_2026-08-30,email:support@toolvern.com,A,Official site says email uses same free queue
+AIFindr,open-source AI directory,0,queued_form,https://aifindr.org/submit,A,Free form or GitHub PR; open-source fit
+ToolScout,AI directory,0,queued_account_form,https://toolscout.ai/submit,A,Free human-reviewed listing; sign-in required
+AISO Tools,AI directory,0,queued_form,https://aisotools.com/submit,A,Free permanent listing; do not buy queue skip
+TiloBox,free/open-source software directory,0,queued_form,https://www.tilobox.com/,A,Strong free/open-source fit
+AI Tool Directory,AI directory,0,queued_form,https://ai-tool.ai/submit-tool,A,Free basic listing and relevant audience
+MyFreeAISource,free/open-source AI directory,0,queued_form,https://myfreeaisource.com/submit-ai-tool/,A,Explicitly prioritizes useful free/open-source tools
+ExtensionLaunch,browser extension directory,0,queued_account_form,https://extensionlaunch.com/,A,Chrome-specific discovery; listing is free
+Product Hunt,launch community,0,queued_account_launch,https://www.producthunt.com/,A,Free launch; needs prepared launch timing and owner account
+Hacker News,developer community,0,queued_manual_post,https://news.ycombinator.com/,A,Show HN should be a genuine technical launch not repeated promotion
+AlternativeTo,software discovery,0,queued_account_form,https://alternativeto.net/,B,Free listing; useful for alternative/comparison discovery
+SaaSHub,software discovery,0,queued_account_form,https://www.saashub.com/,B,Free discovery listing
+StackShare,developer tools discovery,0,queued_account_form,https://stackshare.io/,B,Potential developer audience fit
+Peerlist Launchpad,developer launch community,0,queued_account_launch,https://peerlist.io/,B,Free launch route
+DevHunt,developer tool launch,0,queued_account_launch,https://devhunt.org/,B,Relevant if positioned as developer/AI workflow tool
+Reddit r/chrome_extensions,community,0,queued_rule_check,https://www.reddit.com/r/chrome_extensions/,A,Post only after reading current self-promotion rules; no cross-post spam
+Reddit r/browserextensions,community,0,queued_rule_check,https://www.reddit.com/r/browserextensions/,A,Relevant browser-extension audience
+Reddit r/ClaudeAI,community,0,queued_rule_check,https://www.reddit.com/r/ClaudeAI/,B,Problem fit proven by similar discussions; respect showcase/karma rules
+Reddit r/SideProject,community,0,queued_rule_check,https://www.reddit.com/r/SideProject/,B,Founder/product feedback audience
