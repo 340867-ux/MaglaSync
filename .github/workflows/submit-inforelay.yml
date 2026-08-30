@@ -16,10 +16,26 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+
+      - name: Refuse reruns or payload updates
+        run: |
+          set -euo pipefail
+          if [ "${GITHUB_RUN_ATTEMPT:-1}" != "1" ]; then
+            echo 'This submission workflow may not be re-run.' >&2
+            exit 1
+          fi
+          STATUS="$(git diff-tree --no-commit-id --name-status -r HEAD -- growth/submissions/inforelay-v1.json)"
+          EXPECTED="$(printf 'A\tgrowth/submissions/inforelay-v1.json')"
+          if [ "$STATUS" != "$EXPECTED" ]; then
+            echo "Expected a first-time payload add, got: $STATUS" >&2
+            exit 1
+          fi
 
       - name: Bind maintainer contact from signed commit metadata
         run: |

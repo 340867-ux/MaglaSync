@@ -19,6 +19,14 @@ test('InfoRelay submission is a single scoped free-listing trigger', () => {
   assert.equal(Object.hasOwn(payload, 'submitterEmail'), false);
 });
 
+test('InfoRelay workflow refuses reruns and later payload edits', () => {
+  assert.match(workflow, /fetch-depth:\s*2/);
+  assert.match(workflow, /GITHUB_RUN_ATTEMPT/);
+  assert.match(workflow, /may not be re-run/);
+  assert.match(workflow, /git diff-tree/);
+  assert.match(workflow, /Expected a first-time payload add/);
+});
+
 test('InfoRelay submitter requires the exact free no-login/no-captcha route', () => {
   assert.match(submitter, /Submit your tool for a free listing/);
   assert.match(submitter, /no spam, no pay-to-play ranking/);
