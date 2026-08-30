@@ -35,10 +35,10 @@ async function shareMaglaSync() {
 }
 
 function openStoreReview() {
-  const reviewUrl = isFirefox
-    ? "https://addons.mozilla.org/addon/maglasync-free/reviews/"
-    : "https://chromewebstore.google.com/detail/maglasync-free/hhcmedgckaedhlegpgphflmmmhfaegpi/reviews";
-  extensionApi.tabs.create({ url: reviewUrl });
+  const storeUrl = isFirefox
+    ? "https://addons.mozilla.org/addon/maglasync-free/"
+    : "https://chromewebstore.google.com/detail/maglasync-free/hhcmedgckaedhlegpgphflmmmhfaegpi";
+  extensionApi.tabs.create({ url: storeUrl });
   window.close();
 }
 
