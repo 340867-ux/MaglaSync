@@ -16,6 +16,7 @@ const report = {
   generatedAt: new Date().toISOString(),
   target: TARGET,
   submissionId: payload.submission_id,
+  attempt: payload.attempt ?? 1,
   status: 'NOT_ATTEMPTED',
   clickedSubmit: false,
   submitted: false,
@@ -41,6 +42,10 @@ if (payload.submission_id !== 'forward-future-maglasync-free-2026-08-30-v1') {
 }
 if (payload.pricing !== 'Free') fail('BLOCKED_PAYLOAD', 'Only the Free listing is authorized.');
 if (payload.websiteUrl !== 'https://sync.magla.ru/en/') fail('BLOCKED_PAYLOAD', 'Unexpected public product URL.');
+if ((payload.attempt ?? 1) > 2) fail('BLOCKED_PAYLOAD', 'More than one pre-submit retry is not authorized.');
+if ((payload.attempt ?? 1) === 2 && payload.previous_attempt_status !== 'BLOCKED_PREFLIGHT_NO_CLICK') {
+  fail('BLOCKED_PAYLOAD', 'Retry is allowed only after a proven preflight block with no Submit click.');
+}
 
 const browser = await chromium.launch({ headless: true });
 let page;
@@ -102,9 +107,19 @@ try {
   await form.locator('#description').fill(payload.description);
   await form.locator('#features').fill(payload.features);
   await form.locator('#useCases').fill(payload.useCases);
-  await form.locator('#pricing').selectOption({ label: payload.pricing });
-  await form.locator('#industry').selectOption({ label: payload.industry });
-  await form.locator('#profession').selectOption({ label: payload.profession });
+  await form.locator('#pricing').selectOption(payload.pricing);
+  await form.locator('#industry').selectOption(payload.industry);
+  await form.locator('#profession').selectOption(payload.profession);
+
+  const selectedTaxonomy = {
+    pricing: await form.locator('#pricing').inputValue(),
+    industry: await form.locator('#industry').inputValue(),
+    profession: await form.locator('#profession').inputValue(),
+  };
+  report.preflight.selectedTaxonomy = selectedTaxonomy;
+  if (selectedTaxonomy.pricing !== payload.pricing || selectedTaxonomy.industry !== payload.industry || selectedTaxonomy.profession !== payload.profession) {
+    fail('BLOCKED_PREFLIGHT', `Selected taxonomy does not match payload: ${JSON.stringify(selectedTaxonomy)}`);
+  }
 
   const tagInput = form.locator('input#tags:visible');
   if (await tagInput.count()) {
