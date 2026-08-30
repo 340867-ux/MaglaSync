@@ -1,0 +1,23 @@
+{
+  "submission_id": "listai-maglasync-free-2026-08-30-v1",
+  "status": "SUBMITTED_CONFIRMED",
+  "submitted": true,
+  "submitted_at": "2026-08-30T19:06:26.086Z",
+  "route": "https://listai.cc/submit",
+  "category": "Productivity",
+  "preflight": {
+    "http_status": 200,
+    "free_evidence": true,
+    "captcha": false,
+    "login_required": false,
+    "required_payment": false
+  },
+  "confirmation": {
+    "api_url": "https://listai.cc/api/submit",
+    "api_status": 200,
+    "api_body": {"success": true},
+    "page_text": "Submission Received!"
+  },
+  "workflow_run_id": 33329912829,
+  "workflow_artifact_sha256": "66a5a1e757aad482e18d97d6019cba0714d2bb896369e35d44c3e22bf35ae4af"
+}
