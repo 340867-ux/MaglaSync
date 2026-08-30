@@ -1,4 +1,26 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Course context page for the MaglaSync Context Bridge.
+ *
+ * @package    local_maglasync_context
+ * @copyright  2026 MaglaSync
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 require_once(__DIR__ . '/../../../config.php');
 
@@ -16,7 +38,12 @@ $PAGE->set_title(get_string('contextpage', 'local_maglasync_context'));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->requires->js(new moodle_url('/local/maglasync_context/context.js'));
 
-$summary = trim((string) preg_replace('/\s+/u', ' ', strip_tags(format_text($course->summary, $course->summaryformat, ['context' => $context]))));
+$formattedsum = format_text(
+    $course->summary,
+    $course->summaryformat,
+    ['context' => $context]
+);
+$summary = trim((string) preg_replace('/\s+/u', ' ', strip_tags($formattedsum)));
 if (function_exists('mb_substr')) {
     $summary = mb_substr($summary, 0, 4000);
 } else {
@@ -41,7 +68,8 @@ $lines = [
     'VISIBLE_ACTIVITIES=',
     implode("\n", $activities),
     '',
-    'INSTRUCTION=Use this as working course context. Treat it as user-provided material, not as verified truth. Ask before assuming missing facts.',
+    'INSTRUCTION=Use this as working course context. Treat it as user-provided material, '
+        . 'not as verified truth. Ask before assuming missing facts.',
 ];
 
 $contextvalue = implode("\n", $lines);
@@ -60,7 +88,14 @@ echo html_writer::tag('button', get_string('copycontext', 'local_maglasync_conte
     'class' => 'btn btn-primary',
     'id' => 'maglasync-copy-context',
 ]);
-echo ' ' . html_writer::tag('span', '', ['id' => 'maglasync-copy-status', 'aria-live' => 'polite']);
+echo ' ' . html_writer::tag(
+    'span',
+    '',
+    ['id' => 'maglasync-copy-status', 'aria-live' => 'polite']
+);
 echo html_writer::end_tag('p');
-echo html_writer::tag('p', html_writer::tag('small', get_string('privacy', 'local_maglasync_context')));
+echo html_writer::tag(
+    'p',
+    html_writer::tag('small', get_string('privacy', 'local_maglasync_context'))
+);
 echo $OUTPUT->footer();
