@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.2 — 2026-08-30
+
+- Fixed popup startup ordering so the browser extension API is initialized before the first state render.
+- Added an explicit, user-triggered `Share MaglaSync` action; it never auto-posts, reads contacts, or adds growth permissions.
+- Improved the extension description around local project memory across ChatGPT, Claude, and Gemini.
+- Added direct signed-store install pages for Chrome and Firefox in English and Russian.
+- Added substantive organic-search guides for AI chat memory and ChatGPT-to-Claude project continuity.
+- Added the zero-budget Organic 50K operating system and a tracked distribution queue.
+- Updated publication and launch documentation to use the live Chrome Web Store and Firefox Add-ons routes instead of developer-mode ZIP installation for ordinary users.
+
 ## 1.2.1 — 2026-08-26
 
 - Added Firefox's mandatory built-in no-data-collection declaration.
