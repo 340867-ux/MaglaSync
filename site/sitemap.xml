@@ -13,4 +13,6 @@
   <url><loc>https://sync.magla.ru/en/claude-memory/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://sync.magla.ru/en/move-ai-chat-between-chatgpt-claude-gemini/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://sync.magla.ru/en/new-chat-before-context-is-lost/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sync.magla.ru/en/maglasync-for-edge/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sync.magla.ru/en/maglasync-for-brave/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
