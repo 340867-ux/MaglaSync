@@ -2,10 +2,11 @@
 Contributors: 340867-ux
 Tags: ai, chatgpt, claude, gemini, productivity
 Requires at least: 6.0
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 0.1.0
-License: MIT
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Build a local, reviewable AI context handoff from the current WordPress post or page.
 
