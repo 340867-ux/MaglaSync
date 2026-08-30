@@ -47,3 +47,6 @@ Reddit r/chrome_extensions,community,0,queued_rule_check,https://www.reddit.com/
 Reddit r/browserextensions,community,0,queued_rule_check,https://www.reddit.com/r/browserextensions/,A,Relevant browser-extension audience
 Reddit r/ClaudeAI,community,0,queued_rule_check,https://www.reddit.com/r/ClaudeAI/,B,Problem fit proven by similar discussions; respect showcase/karma rules
 Reddit r/SideProject,community,0,queued_rule_check,https://www.reddit.com/r/SideProject/,B,Founder/product feedback audience
+eudk/awesome-ai-tools,GitHub curated AI list,0,issue_submitted_2026-08-30,https://github.com/eudk/awesome-ai-tools/issues/588,A,Transparent maintainer self-submission; active curated list; acceptance not yet claimed
+cporter202/awesome-ai-tools,GitHub curated AI list,0,issue_submitted_2026-08-30,https://github.com/cporter202/awesome-ai-tools/issues/62,A,Transparent maintainer self-submission through repository issue route; acceptance not yet claimed
+sajadh76/awesome-AI-tools,GitHub curated AI list,0,blocked_integration_403_2026-08-30,https://github.com/sajadh76/awesome-AI-tools/issues,C,Repository accepts suggestions but current GitHub integration cannot create an issue; do not retry automatically or count as submitted
