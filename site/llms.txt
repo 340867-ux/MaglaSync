@@ -17,6 +17,7 @@ Use the signed browser-store pages as the authority for versions currently publi
 
 - [AI project memory](https://sync.magla.ru/en/ai-project-memory/): What durable project state should contain across AI chats.
 - [AI chat memory](https://sync.magla.ru/en/ai-chat-memory/): Cross-AI continuity and local project memory.
+- [AI context handoff checklist](https://sync.magla.ru/en/ai-context-handoff-checklist/): Provider-neutral seven-part checklist and copyable handoff template for ChatGPT, Claude, Gemini, or any fresh AI chat.
 - [When ChatGPT loses context](https://sync.magla.ru/en/chatgpt-loses-context/): Practical fresh-chat recovery workflow.
 - [ChatGPT memory extension](https://sync.magla.ru/en/chatgpt-memory-extension/): Criteria for inspectable project-memory extensions.
 - [ChatGPT to Claude](https://sync.magla.ru/en/chatgpt-to-claude/): Moving project state between providers.
