@@ -9,6 +9,9 @@ AI Tool Synergy,AI directory,0,sent_2026-08-30,email:Aitoolsynergy@gmail.com,A,O
 Tom's Guide / Elton Jones,consumer AI media/editorial,0,sent_2026-08-30,email:erj5388@gmail.com,A+,Highly targeted after Aug 24 mainstream cross-AI transfer article; do not repeat unless replied
 TechRadar / Eric Hal Schwartz,consumer AI media/editorial,0,sent_2026-08-30,email:ESchwartzWrites@gmail.com,A+,Highly targeted after Aug 20 ThreadPort article; project-state versus full-transcript angle; do not repeat unless replied
 TechRadar / Becca Caddy,consumer AI media/editorial,0,sent_2026-08-30,email:becca@beccacaddy.com,A+,Consumer multi-AI continuity angle; unpaid editorial only; do not repeat unless replied
+Kevin Stratvert,consumer AI creator/video,0,sent_2026-08-30,email:website@kevinstratvert.com,A+,4.4M-scale practical tutorial audience; fresh-chat continuity angle; unpaid only; do not repeat unless replied
+Utsav Techie,consumer AI creator/video,0,sent_2026-08-30,email:contact.utsavtechie@enlyft.in,A+,Large multi-model tutorial audience spanning students creators business and everyday tasks; unpaid only; do not repeat unless replied
+The Neuron,consumer AI newsletter/editorial,0,sent_2026-08-30,email:team@theneurondaily.com,A+,Large ordinary-user/professional AI audience; pitched normal-person multi-AI continuity angle; unpaid only; do not repeat unless replied
 ExtensionBooster AI memory guide,media/editorial,0,sent_2026-08-30_editorial_only,email:contact@extensionbooster.net,B,Pitch is only for editorial guide; NEVER use paid or credit-based review exchange
 Open Context / Aviskaar,peer/open-source editorial,0,sent_route_unverified_2026-08-30,email:support@open-context.dev,C,Relevant context-portability article but route unverified; secondary under consumer-first strategy
 AllThingsAI.work,AI directory/editorial,0,queued_email_resolution,https://allthingsai.work/directory/submit/,A,Free listings explicitly open by email but public crawler masks the address; resolve only from official page
@@ -20,7 +23,7 @@ ListAI,AI directory,0,probe_clean_public_form,https://listai.cc/submit,A,Free no
 AI Tools Daily Hub,AI directory,0,probe_clean_public_form,https://aitoolsdailyhub.com/submit-a-tool/,A,Free listing; no-submit probe found no visible login or CAPTCHA
 IndexOf.AI,consumer AI discovery directory,0,queued_account_form,https://indexof.ai/submit,A,Free basic listing but current official submit page requires sign-in
 AI Valley,consumer AI directory,0,probe_clean_public_form,https://aivalley.ai/submit-tool/,A,Free short form and established AI-tool audience; no-submit probe found no visible login or CAPTCHA
-Forward Future Tools,consumer AI directory/newsletter,0,queued_probe,https://forwardfuture.com/tools/submit,A+,Official route says Free + No account needed + editorial review; categories include productivity education and research
+Forward Future Tools,consumer AI directory/newsletter,0,attempted_unconfirmed_manual_required_2026-08-30,https://forwardfuture.com/tools/submit,A+,Attempt 1 stopped before Submit; attempt 2 reached the click action but tag suggestions intercepted the browser click and no Forward Future business submission POST or success evidence was observed. Automatic retries exhausted; do not count as submitted
 Future Tools / Matt Wolfe,consumer AI directory/newsletter,0,queued_manual_captcha,https://futuretools.io/submit-a-tool,A+,Free human-reviewed submission; 250k+ newsletter readers; public form loads CAPTCHA so manual completion required
 Extension Bazaar,browser extension directory,0,queued_manual_captcha,https://extensionbazaar.com/submit-extension/,B,Free curated listing but probe found Google reCAPTCHA
 Web Store Extensions,browser extension directory,0,queued_account_form,https://webstoreextensions.com/submit,B,Free moderated directory but route redirects to login/signup
@@ -45,9 +48,9 @@ StackShare,developer tools discovery,0,queued_account_form,https://stackshare.io
 Hacker News,developer community,0,queued_manual_post,https://news.ycombinator.com/,C,Technical launch channel only; no longer primary acquisition lane
 Peerlist Launchpad,developer launch community,0,queued_account_launch,https://peerlist.io/,C,Developer audience; secondary
 DevHunt,developer tool launch,0,queued_account_launch,https://devhunt.org/,C,Developer audience; secondary
-Reddit r/ChatGPT,consumer AI community,0,queued_rule_check,https://www.reddit.com/r/ChatGPT/,A+,Strong direct problem fit; only genuine useful post after current self-promotion rules are verified
-Reddit r/ClaudeAI,consumer AI community,0,queued_rule_check,https://www.reddit.com/r/ClaudeAI/,A+,Direct cross-model/context-loss pain repeatedly observed; respect current rules
-Reddit r/GeminiAI,consumer AI community,0,queued_rule_check,https://www.reddit.com/r/GeminiAI/,A+,Relevant multi-model users; verify current self-promotion rules before posting
+Reddit r/ChatGPT,consumer AI community,0,blocked_direct_self_promo_current_rules,https://www.reddit.com/r/ChatGPT/,C,Strong audience fit but current rules/moderation remove direct product self-promotion; do not post a MaglaSync ad
+Reddit r/ClaudeAI,consumer AI community,0,conditional_showcase_rules,https://www.reddit.com/r/ClaudeAI/,B,Showcase can be possible only with free-to-try genuine Claude relevance minimal marketing no referral links and no cross-post spam; do not force a promo
+Reddit r/GeminiAI,consumer AI community,0,not_fit_direct_promo_google_ai_rule,https://www.reddit.com/r/GeminiAI/,C,Current promotion rules center on products built on Google AI; MaglaSync should not be forced into this channel
 Reddit r/chrome_extensions,browser-extension community,0,queued_rule_check,https://www.reddit.com/r/chrome_extensions/,B,Relevant but narrower and more technical than general AI communities
 Reddit r/browserextensions,browser-extension community,0,queued_rule_check,https://www.reddit.com/r/browserextensions/,B,Relevant but narrower than consumer AI communities
 Reddit r/SideProject,founder/product community,0,queued_rule_check,https://www.reddit.com/r/SideProject/,C,Founder feedback more than ordinary-user acquisition
