@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="../styles.css">
   <title>Установить MaglaSync Free — Chrome или Firefox</title>
   <style>
-    .store-wrap{max-width:920px;margin:0 auto;padding:72px 24px}.store-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:32px 0}.store-card{border:1px solid #e5e7eb;border-radius:24px;padding:28px;background:#fff}.store-card h2{margin:0 0 10px}.store-card p{min-height:72px}.store-card .button{display:inline-block;margin-top:8px}.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}.proof div{padding:18px;border-radius:18px;background:#f8fafc}.back{display:inline-block;margin-top:28px}.small{font-size:.92rem;color:#667085}@media(max-width:720px){.store-grid,.proof{grid-template-columns:1fr}.store-card p{min-height:auto}}
+    .store-wrap{max-width:920px;margin:0 auto;padding:72px 24px}.store-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:32px 0}.store-card{position:relative;border:1px solid #e5e7eb;border-radius:24px;padding:28px;background:#fff}.store-card.recommended{box-shadow:0 0 0 3px rgba(17,24,39,.12)}.store-card h2{margin:0 0 10px}.store-card p{min-height:72px}.store-card .button{display:inline-block;margin-top:8px}.recommendation{display:none;margin:0 0 16px;padding:7px 10px;border-radius:999px;background:#111827;color:#fff;font-size:.76rem;font-weight:700;letter-spacing:.05em}.recommended .recommendation{display:inline-block}.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}.proof div{padding:18px;border-radius:18px;background:#f8fafc}.back{display:inline-block;margin-top:28px}.small{font-size:.92rem;color:#667085}@media(max-width:720px){.store-grid,.proof{grid-template-columns:1fr}.store-card p{min-height:auto}}
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MaglaSync Free","applicationCategory":"BrowserApplication","operatingSystem":"Windows, macOS, Linux","description":"Локальный контекст проекта между ChatGPT, Claude и Gemini.","url":"https://sync.magla.ru/install/","offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"}}</script>
 </head>
@@ -27,13 +27,15 @@
     <p class="lead">MaglaSync переносит выбранное вами состояние проекта между ChatGPT, Claude и Gemini. Журнал хранится локально, каждый чат сначала отключён, а передачу контекста вы проверяете до помещения текста в чат.</p>
 
     <div class="store-grid">
-      <article class="store-card">
+      <article id="chrome-store" class="store-card">
+        <span class="recommendation">РЕКОМЕНДУЕТСЯ ДЛЯ ЭТОГО БРАУЗЕРА</span>
         <p class="eyebrow">CHROME / CHROMIUM</p>
         <h2>Google Chrome</h2>
         <p>Основная версия для Chrome и настольных Chromium-браузеров, принимающих расширения из Chrome Web Store.</p>
         <a class="button primary" href="https://chromewebstore.google.com/detail/maglasync-free/hhcmedgckaedhlegpgphflmmmhfaegpi?utm_source=maglasync-site&utm_medium=organic&utm_campaign=install">Установить в Chrome</a>
       </article>
-      <article class="store-card">
+      <article id="firefox-store" class="store-card">
+        <span class="recommendation">РЕКОМЕНДУЕТСЯ ДЛЯ ЭТОГО БРАУЗЕРА</span>
         <p class="eyebrow">FIREFOX</p>
         <h2>Mozilla Firefox</h2>
         <p>Версия Firefox распространяется через Mozilla Add-ons и использует ту же локальную модель проекта.</p>
@@ -47,8 +49,18 @@
       <div><strong>Без аналитического сервера</strong><p class="small">Free не отправляет журнал проекта на серверы MAGLA.</p></div>
     </div>
 
+    <p class="small">Рекомендация выше вычисляется только на этой странице по строке браузера. Она не отправляется в MaglaSync и не сохраняется.</p>
     <p class="small">Исходный код, политика приватности, границы целостности и история релизов опубликованы на GitHub.</p>
     <a class="text-link back" href="../">← Вернуться к MaglaSync</a>
   </main>
+  <script>
+    (() => {
+      const ua = navigator.userAgent || "";
+      const firefox = /Firefox\//.test(ua);
+      const chromium = /(?:Chrome|Chromium|Edg|OPR)\//.test(ua) && !firefox;
+      if (firefox) document.querySelector("#firefox-store")?.classList.add("recommended");
+      else if (chromium) document.querySelector("#chrome-store")?.classList.add("recommended");
+    })();
+  </script>
 </body>
 </html>
