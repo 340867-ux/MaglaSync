@@ -10,4 +10,6 @@
   <url><loc>https://sync.magla.ru/en/chatgpt-memory-extension/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://sync.magla.ru/en/chatgpt-to-claude/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://sync.magla.ru/en/claude-memory/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sync.magla.ru/en/move-ai-chat-between-chatgpt-claude-gemini/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sync.magla.ru/en/new-chat-before-context-is-lost/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
