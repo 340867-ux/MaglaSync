@@ -1,0 +1,13 @@
+{
+  "submission_id": "ai-tools-daily-hub-maglasync-free-2026-08-30-v1",
+  "toolName": "MaglaSync Free",
+  "toolUrl": "https://sync.magla.ru/en/",
+  "tagline": "Start a fresh AI chat without explaining your whole project again.",
+  "shortDescription": "MaglaSync Free keeps a compact local project state so ordinary users can continue the same work across ChatGPT, Claude and Gemini without copying an entire transcript or rebuilding the brief.",
+  "fullDescription": "MaglaSync Free is a browser extension for people who use ChatGPT, Claude or Gemini on long-running work, study, research, writing, purchases or business projects. It keeps goals, key decisions, constraints, results, blockers and next steps in a local project journal, then shows a reviewable handoff before the user places it into a fresh chat. The Free edition requires no MaglaSync account, AI API key, cloud backend or analytics, and never sends a message automatically.",
+  "category": "productivity",
+  "pricingType": "free",
+  "pricingDetail": "Free forever for one local project; no credit card or subscription required.",
+  "hasFreePlan": true,
+  "submitterName": "Andrei"
+}
