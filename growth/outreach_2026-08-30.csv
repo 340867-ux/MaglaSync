@@ -1,0 +1,37 @@
+channel,type,status,route,notes
+The Rundown AI,newsletter/editorial,sent,email:support@therundown.ai,Official free Recommend a Tool intake
+TechCrunch,media/news,sent,email:tips@techcrunch.com,News tip only
+FREEMAX,RU AI media/Telegram,sent,email:contact@freemax.red,Free news suggestion only
+Launch Llama,startup/newsletter,sent,email:contact@launchllama.co,Free listing/newsletter consideration
+AI Catchup,AI media/newsletter,sent,email:hello@news.aicatchup.com,Editorial story tip
+AI News HQ,AI media,sent,email:editorial intake,Editorial pitch
+VentureBeat,media/news,sent,email:tips@venturebeat.com,AI/product news tip
+AI Valley,AI directory/newsletter,sent,email:community@aivalley.io,Free tool/newsletter submission
+RankVipAI,AI editorial,sent,email:contact@rankvipai.com,Editorial consideration only
+Neuro Automata,RU AI media multi-platform,sent,email:neuroautoinfo@gmail.com,Telegram/YouTube/VK/Dzen/Rutube/X editorial contact
+ToolWise,AI directory/editorial,recovery_sent_after_bounce,email:hello@toolwise.ai,Original editorial@toolwise.ai bounced; one recovery only
+FindMyAITool,AI directory,sent,email intake,Free/basic only
+Humbaa,AI directory,sent,email intake,Free/basic only
+Unisender Konvert,RU media/editorial,sent,editorial email,Neural-networks editorial pitch
+YouTube creator 1,creator/video,sent,public business email,Targeted AI-tool/browser-extension review pitch
+YouTube creator 2,creator/video,sent,public business email,Targeted AI-tool/browser-extension review pitch
+YouTube creator 3,creator/video,sent,public business email,Targeted AI-tool/browser-extension review pitch
+ToolLibraryOnline,AI directory,sent,email:contact@toollibraryonline.com,Manual review request with direct store URLs
+WeCanUseAI,AI directory,sent,email:contact@wecanuseai.com,Free standard listing only
+ThinkAI.tools,AI directory/editorial,sent,email:thinkai.tools@gmail.com,Unpaid editorial review only
+AITrendTool,AI directory/editorial,sent,email:hello@aitrendtool.com,Free editorial review; no paid tier requested
+Console.dev,developer editorial,sent,email:hello@console.dev,Developer-angle tool suggestion
+Last Week in AI,AI newsletter/podcast,sent,email:contact@lastweekinai.com,Tools & Apps news tip
+We Compare AI,AI directory/editorial,sent,email:submissions@wecompareai.com,Free standard submission
+PitchWall,startup/media,sent,email:support@pitchwall.co,Educational guest-post pitch with affiliation disclosure
+ReadInBrief,AI media/editorial,sent,email:hello@readinbrief.com,Educational article pitch with affiliation disclosure
+WorthTryingAI,AI editorial,sent,email:hello@worthtryingai.com,Free editorial queue only
+HackerNoon,media/editorial,bounced,email:stories@hackernoon.com,Mailbox invalid; official route is account-based Submit Story for Review
+TheTopAIGear,AI directory,bounced,email:aitool@thetopaigear.com,Mailbox invalid; do not retry without verified official route
+AI Breakfast,newsletter,bounced,email:aibreakfast@mail.beehiiv.com,Mailbox invalid; do not retry
+OpenSource.com,open-source media,bounced,email:open@opensource.com,Old mailbox invalid; do not retry
+ToolWise original,AI directory/editorial,bounced,email:editorial@toolwise.ai,Recovered once via official hello@toolwise.ai
+AI for Developers,GitHub curated developer list,blocked_403,GitHub issue route,Rules explicitly invite issues but integration cannot write; not submitted
+PromptFrenzy,AI directory,blocked_external_badge_fetch,API POST,Attempt 3 reached POST then HTTP 400 badge verification failed because their server could not fetch sync.magla.ru
+Chrome Web Store update,store,blocked_missing_credentials,GitHub store-submit workflow,CWS_CLIENT_ID CWS_CLIENT_SECRET CWS_REFRESH_TOKEN CWS_PUBLISHER_ID absent; no upload
+Firefox Add-ons update,store,blocked_missing_credentials,GitHub store-submit workflow,AMO_JWT_ISSUER and AMO_JWT_SECRET absent; no upload
