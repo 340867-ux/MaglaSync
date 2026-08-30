@@ -6,6 +6,8 @@ const targets = [
   { name: 'ChromeXts', url: 'https://www.chromexts.com/' },
   { name: 'Resource.fyi', url: 'https://resource.fyi/' },
   { name: 'TestNest AI Review', url: 'https://testnest.website/ai-review' },
+  { name: 'Extension Bazaar', url: 'https://extensionbazaar.com/submit-extension/' },
+  { name: 'Web Store Extensions', url: 'https://webstoreextensions.com/submit' },
 ];
 
 const browser = await chromium.launch({ headless: true });
