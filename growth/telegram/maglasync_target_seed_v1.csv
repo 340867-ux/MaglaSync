@@ -1,15 +1,15 @@
-target_username,cluster,language,priority,target_kind,permission_state,send_allowed,notes
-@zerocoders,no-code_ai,RU,A,public_group,current_check_required,UNKNOWN,Large no-code and AI community; verify current rules before send
-@chat_GPT_zerocoder,chatgpt_ai,RU,A,public_group,current_check_required,UNKNOWN,ChatGPT community; high product fit
-@n8n_community,automation_ai,RU,A,public_group,current_check_required,UNKNOWN,n8n automation community; high workflow fit
-@bothub_chat,multi_ai,RU,A,public_group,current_check_required,UNKNOWN,ChatGPT Claude Gemini community; direct cross-AI fit
-@ai_community_dev,ai_agents_dev,RU,A,public_group,current_check_required,UNKNOWN,AI agents LLM Cursor Claude Codex n8n community
-@integromat_russia,automation,RU,A,public_group,current_check_required,UNKNOWN,Make automation community
-@cursor_community_zerocoder,ai_coding,RU,A,public_group,current_check_required,UNKNOWN,Cursor AI community
-@vibe_coders_zerocoder,ai_coding,RU,A,public_group,current_check_required,UNKNOWN,Vibe coding community
-@supabase_zerocoder,developer_tools,RU,B,public_group,current_check_required,UNKNOWN,Developer community; adjacent productivity audience
-@aigeochat,ai_marketing,RU,B,public_group,current_check_required,UNKNOWN,AI and GEO marketing community
-@vibe_marketing_zerocoder,ai_marketing,RU,B,public_group,current_check_required,UNKNOWN,AI marketing community
-@ai_community_chat,ai_business,RU,B,public_group,current_check_required,UNKNOWN,AI business community
-@iMe_ai,telegram_ai,RU,B,public_group,current_check_required,UNKNOWN,Telegram client and automation-adjacent community
-@claudesg,claude_ai,EN,B,public_group,current_check_required,UNKNOWN,Claude-focused English community; use EN copy only
+target_username,cluster,language,priority,target_kind,public_page_verified_at,members_observed,permission_state,send_allowed,rule_hint,notes
+@zerocoders,no-code_ai,RU,A,public_group,2026-08-30,18001,current_check_required,UNKNOWN,/rules,Large no-code and AI community; current public page exposes community rules command
+@chat_GPT_zerocoder,chatgpt_ai,RU,A,public_group,2026-08-30,13552,current_check_required,UNKNOWN,admin_contact_exposed,ChatGPT community; high product fit
+@n8n_community,automation_ai,RU,A,public_group,2026-08-30,9088,current_check_required,UNKNOWN,unknown,n8n automation community; high workflow fit
+@bothub_chat,multi_ai,RU,A,public_group,2026-08-30,3042,current_check_required,UNKNOWN,unknown,ChatGPT Claude Gemini community; direct cross-AI fit
+@ai_community_dev,ai_agents_dev,RU,A,public_group,2026-08-30,2492,current_check_required,UNKNOWN,technical_help_chat,AI agents LLM Cursor Claude Codex n8n community
+@integromat_russia,automation,RU,A,public_group,2026-08-30,3975,current_check_required,UNKNOWN,admin_contact_exposed,Make automation community
+@cursor_community_zerocoder,ai_coding,RU,A,public_group,2026-08-30,789,current_check_required,UNKNOWN,admin_contact_exposed,Cursor AI community
+@vibe_coders_zerocoder,ai_coding,RU,A,public_group,2026-08-30,756,current_check_required,UNKNOWN,admin_contact_exposed,Vibe coding community
+@supabase_zerocoder,developer_tools,RU,B,public_group,2026-08-30,1175,current_check_required,UNKNOWN,unknown,Developer community; adjacent productivity audience
+@aigeochat,ai_marketing,RU,B,public_group,2026-08-30,938,current_check_required,UNKNOWN,unknown,AI and GEO marketing community
+@vibe_marketing_zerocoder,ai_marketing,RU,B,public_group,2026-08-30,393,current_check_required,UNKNOWN,admin_contact_exposed,AI marketing community
+@ai_community_chat,ai_business,RU,B,public_group,2026-08-30,413,current_check_required,UNKNOWN,collaboration_contact_exposed,AI business community
+@iMe_ai,telegram_ai,RU,C,public_group,2026-08-30,5418,current_check_required,UNKNOWN,unknown,Telegram-client community with crypto adjacency; do not use in first wave unless topical fit passes
+@claudesg,claude_ai,EN,C,public_group,2026-08-30,4154,current_check_required,UNKNOWN,unknown,Claude-focused English community; requires EN copy and separate fit check
