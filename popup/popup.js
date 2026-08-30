@@ -1,3 +1,5 @@
+const extensionApi = globalThis.browser ?? globalThis.chrome;
+
 const noProject = document.querySelector("#no-project");
 const projectView = document.querySelector("#project");
 const health = document.querySelector("#health");
@@ -5,12 +7,29 @@ const health = document.querySelector("#health");
 document.querySelector("#start").addEventListener("click", openDashboard);
 document.querySelector("#edit").addEventListener("click", openDashboard);
 document.querySelector("#open-dashboard").addEventListener("click", openDashboard);
+document.querySelector("#share").addEventListener("click", shareMaglaSync);
 document.querySelector("#capture-enabled").addEventListener("change", saveSettings);
 document.querySelector("#save-full-history").addEventListener("change", saveSettings);
 
 function openDashboard() {
   extensionApi.runtime.openOptionsPage();
   window.close();
+}
+
+async function shareMaglaSync() {
+  const button = document.querySelector("#share");
+  const shareUrl = "https://sync.magla.ru/en/install/?ref=extension-share";
+  try {
+    await navigator.clipboard.writeText(shareUrl);
+    const previousText = button.textContent;
+    button.textContent = "Link copied";
+    setTimeout(() => {
+      button.textContent = previousText;
+    }, 1600);
+  } catch {
+    extensionApi.tabs.create({ url: shareUrl });
+    window.close();
+  }
 }
 
 async function saveSettings() {
@@ -45,4 +64,3 @@ async function render() {
 }
 
 render();
-const extensionApi = globalThis.browser ?? globalThis.chrome;
