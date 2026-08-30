@@ -17,6 +17,7 @@ const report = {
   generatedAt: new Date().toISOString(),
   target: TARGET,
   submissionId: payload.submission_id,
+  attempt: payload.attempt ?? 1,
   status: 'NOT_ATTEMPTED',
   clickedSubmit: false,
   submitted: false,
@@ -39,7 +40,13 @@ function fail(status, message) {
 
 if (payload.submission_id !== 'aiso-maglasync-free-2026-08-30-v1') fail('BLOCKED_PAYLOAD', 'Unexpected submission id.');
 if (payload.url !== 'https://sync.magla.ru/en/') fail('BLOCKED_PAYLOAD', 'Unexpected public product URL.');
-if (payload.category !== 'Productivity' || payload.pricing !== 'Free') fail('BLOCKED_PAYLOAD', 'Only Productivity / Free is authorized.');
+if (payload.category !== 'Productivity' || payload.categoryValue !== 'productivity' || payload.pricing !== 'Free' || payload.pricingValue !== 'free') {
+  fail('BLOCKED_PAYLOAD', 'Only Productivity / Free is authorized.');
+}
+if ((payload.attempt ?? 1) > 2) fail('BLOCKED_PAYLOAD', 'More than one pre-submit retry is not authorized.');
+if ((payload.attempt ?? 1) === 2 && payload.previous_attempt_status !== 'BLOCKED_PREFLIGHT_NO_CLICK') {
+  fail('BLOCKED_PAYLOAD', 'Retry is allowed only after a proven preflight block with no Submit click.');
+}
 if (!contactEmail || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(contactEmail) || /noreply/i.test(contactEmail)) {
   fail('BLOCKED_CONTACT', 'A valid non-noreply maintainer email is required at runtime.');
 }
@@ -91,24 +98,30 @@ try {
   const pricingOptions = await form.locator('select[name="pricing"] option').evaluateAll(options => options.map(o => ({ value: o.value, text: (o.textContent || '').trim() })));
   report.preflight.categoryOptions = categoryOptions;
   report.preflight.pricingOptions = pricingOptions;
-  if (!categoryOptions.some(o => o.text === payload.category || o.value === payload.category)) fail('BLOCKED_PREFLIGHT', 'Productivity category is not available.');
-  if (!pricingOptions.some(o => o.text === payload.pricing || o.value === payload.pricing)) fail('BLOCKED_PREFLIGHT', 'Free pricing option is not available.');
+  if (!categoryOptions.some(o => o.value === payload.categoryValue)) fail('BLOCKED_PREFLIGHT', `Category value ${payload.categoryValue} is not available.`);
+  if (!pricingOptions.some(o => o.value === payload.pricingValue)) fail('BLOCKED_PREFLIGHT', `Pricing value ${payload.pricingValue} is not available.`);
 
   await form.locator('input[name="tool_name"]').fill(payload.toolName);
   await form.locator('input[name="url"]').fill(payload.url);
-  await form.locator('select[name="category"]').selectOption({ label: payload.category });
+  await form.locator('select[name="category"]').selectOption(payload.categoryValue);
   await form.locator('input[name="short_description"]').fill(payload.shortDescription);
   await form.locator('textarea[name="description"]').fill(payload.description);
-  await form.locator('select[name="pricing"]').selectOption({ label: payload.pricing });
+  await form.locator('select[name="pricing"]').selectOption(payload.pricingValue);
   await form.locator('input[name="pricing_details"]').fill(payload.pricingDetails);
   await form.locator('textarea[name="features"]').fill(payload.features);
   await form.locator('input[name="email"]').fill(contactEmail);
 
-  const selectedCategory = (await form.locator('select[name="category"] option:checked').textContent() || '').trim();
-  const selectedPricing = (await form.locator('select[name="pricing"] option:checked').textContent() || '').trim();
-  report.preflight.selectedCategory = selectedCategory;
-  report.preflight.selectedPricing = selectedPricing;
-  if (selectedCategory !== payload.category || selectedPricing !== payload.pricing) fail('BLOCKED_PREFLIGHT', 'Selected AISO form state does not match the authorized free listing.');
+  const selectedCategoryValue = await form.locator('select[name="category"]').inputValue();
+  const selectedPricingValue = await form.locator('select[name="pricing"]').inputValue();
+  const selectedCategoryText = (await form.locator('select[name="category"] option:checked').textContent() || '').trim();
+  const selectedPricingText = (await form.locator('select[name="pricing"] option:checked').textContent() || '').trim();
+  Object.assign(report.preflight, { selectedCategoryValue, selectedPricingValue, selectedCategoryText, selectedPricingText });
+  if (selectedCategoryValue !== payload.categoryValue || selectedPricingValue !== payload.pricingValue) {
+    fail('BLOCKED_PREFLIGHT', 'Selected AISO form values do not match the authorized free listing.');
+  }
+  if (!/Productivity/i.test(selectedCategoryText) || selectedPricingText !== payload.pricing) {
+    fail('BLOCKED_PREFLIGHT', 'Selected AISO labels do not represent Productivity / Free.');
+  }
 
   const freeTierButton = form.getByRole('button', { name: /Free\s*\$0/i });
   if (await freeTierButton.count() === 1) {
