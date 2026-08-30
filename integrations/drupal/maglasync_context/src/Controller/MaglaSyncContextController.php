@@ -8,8 +8,20 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 
+/**
+ * Builds a reviewable local AI context packet from a Drupal node.
+ */
 final class MaglaSyncContextController extends ControllerBase {
 
+  /**
+   * Renders the context bridge for a node the current user may view.
+   *
+   * @param \Drupal\node\NodeInterface $node
+   *   The node used to build the context packet.
+   *
+   * @return array
+   *   A render array containing the reviewable context and copy action.
+   */
   public function nodeContext(NodeInterface $node): array {
     $parts = [];
     $parts[] = 'MAGLASYNC_CONTEXT_V1';
