@@ -13,7 +13,7 @@ const results = [];
 
 for (const target of targets) {
   const page = await browser.newPage();
-  const record = { name: target.name, url: target.url, status: 'UNKNOWN', forms: [], frames: [], blockers: [] };
+  const record = { name: target.name, url: target.url, status: 'UNKNOWN', forms: [], frames: [], blockers: [], relevantLinks: [] };
   try {
     const response = await page.goto(target.url, { waitUntil: 'domcontentloaded', timeout: 45000 });
     record.httpStatus = response?.status() ?? null;
@@ -42,6 +42,11 @@ for (const target of targets) {
         ariaLabel: el.getAttribute('aria-label'),
       })),
     })));
+
+    record.relevantLinks = await page.locator('a').evaluateAll(links => links.map(a => ({
+      text: (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 160),
+      href: a.href || null,
+    })).filter(link => /review|submit|launch|app|tool/i.test(`${link.text} ${link.href || ''}`)).slice(0, 40));
 
     record.frames = page.frames().map(frame => ({ url: frame.url() }));
     record.status = 'PROBED_NO_SUBMISSION';
