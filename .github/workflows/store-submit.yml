@@ -1,0 +1,179 @@
+name: Submit browser stores
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Store submission target
+        required: true
+        default: both
+        type: choice
+        options:
+          - both
+          - chrome
+          - firefox
+      confirm:
+        description: Type SUBMIT to upload the current manifest version for store review
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  CHROME_EXTENSION_ID: hhcmedgckaedhlegpgphflmmmhfaegpi
+
+jobs:
+  build-and-submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Confirm external submission
+        env:
+          CONFIRM: ${{ inputs.confirm }}
+        run: |
+          if [ "$CONFIRM" != "SUBMIT" ]; then
+            echo "Refusing external store submission: confirm input must be exactly SUBMIT." >&2
+            exit 1
+          fi
+
+      - name: Verify and build reproducible packages
+        run: |
+          node --test
+          node tools/package.mjs --check
+          node tools/package.mjs
+          node tools/firefox-lint.mjs
+          VERSION="$(node -p 'JSON.parse(require("fs").readFileSync("manifest.json","utf8")).version')"
+          echo "MAGLASYNC_VERSION=$VERSION" >> "$GITHUB_ENV"
+          test -f "dist/maglasync-free-chromium-v${VERSION}.zip"
+          test -f "dist/maglasync-free-firefox-v${VERSION}.zip"
+          test -f "dist/maglasync-free-firefox-source-v${VERSION}.zip"
+
+      - name: Validate Chrome Web Store credentials
+        if: ${{ inputs.target == 'chrome' || inputs.target == 'both' }}
+        env:
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
+        run: |
+          for name in CLIENT_ID CLIENT_SECRET REFRESH_TOKEN PUBLISHER_ID; do
+            if [ -z "${!name}" ]; then
+              echo "Missing required GitHub secret for Chrome submission: $name" >&2
+              exit 1
+            fi
+          done
+
+      - name: Obtain Chrome Web Store access token
+        if: ${{ inputs.target == 'chrome' || inputs.target == 'both' }}
+        env:
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+        run: |
+          RESPONSE="$(curl --fail-with-body --silent --show-error \
+            https://oauth2.googleapis.com/token \
+            --data-urlencode "client_secret=$CLIENT_SECRET" \
+            --data-urlencode "grant_type=refresh_token" \
+            --data-urlencode "refresh_token=$REFRESH_TOKEN" \
+            --data-urlencode "client_id=$CLIENT_ID")"
+          TOKEN="$(python3 -c 'import json,sys; print(json.load(sys.stdin)["access_token"])' <<< "$RESPONSE")"
+          test -n "$TOKEN"
+          echo "::add-mask::$TOKEN"
+          echo "CWS_ACCESS_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+
+      - name: Upload Chrome package and wait for processing
+        if: ${{ inputs.target == 'chrome' || inputs.target == 'both' }}
+        env:
+          PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
+        run: |
+          set -euo pipefail
+          PACKAGE="dist/maglasync-free-chromium-v${MAGLASYNC_VERSION}.zip"
+          BASE="https://chromewebstore.googleapis.com"
+          UPLOAD_URL="$BASE/upload/v2/publishers/$PUBLISHER_ID/items/$CHROME_EXTENSION_ID:upload"
+          STATUS_URL="$BASE/v2/publishers/$PUBLISHER_ID/items/$CHROME_EXTENSION_ID:fetchStatus"
+
+          curl --fail-with-body --silent --show-error \
+            -H "Authorization: Bearer $CWS_ACCESS_TOKEN" \
+            -X POST -T "$PACKAGE" "$UPLOAD_URL" | tee /tmp/cws-status.json
+
+          state() {
+            python3 -c 'import json,sys; print(json.load(open("/tmp/cws-status.json")).get("uploadState", ""))'
+          }
+
+          STATE="$(state)"
+          for attempt in $(seq 1 20); do
+            if [ "$STATE" != "UPLOAD_IN_PROGRESS" ]; then
+              break
+            fi
+            sleep 3
+            curl --fail-with-body --silent --show-error \
+              -H "Authorization: Bearer $CWS_ACCESS_TOKEN" \
+              "$STATUS_URL" > /tmp/cws-status.json
+            cat /tmp/cws-status.json
+            STATE="$(state)"
+          done
+
+          if [ "$STATE" = "UPLOAD_IN_PROGRESS" ]; then
+            echo "Chrome upload is still processing; refusing to call publish blindly." >&2
+            exit 1
+          fi
+          case "$STATE" in
+            *FAIL*|*ERROR*)
+              echo "Chrome upload reported failure state: $STATE" >&2
+              exit 1
+              ;;
+          esac
+          echo "Chrome upload processing state: ${STATE:-not-returned}; proceeding to publish endpoint validation."
+
+      - name: Submit Chrome version for review
+        if: ${{ inputs.target == 'chrome' || inputs.target == 'both' }}
+        env:
+          PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
+        run: |
+          curl --fail-with-body --silent --show-error \
+            -H "Authorization: Bearer $CWS_ACCESS_TOKEN" \
+            -X POST \
+            "https://chromewebstore.googleapis.com/v2/publishers/$PUBLISHER_ID/items/$CHROME_EXTENSION_ID:publish" \
+            | tee /tmp/cws-publish.json
+          echo "Chrome Web Store submission requested for MaglaSync ${MAGLASYNC_VERSION}."
+
+      - name: Validate Mozilla Add-ons credentials
+        if: ${{ inputs.target == 'firefox' || inputs.target == 'both' }}
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: |
+          if [ -z "$WEB_EXT_API_KEY" ] || [ -z "$WEB_EXT_API_SECRET" ]; then
+            echo "Missing AMO_JWT_ISSUER or AMO_JWT_SECRET GitHub secret." >&2
+            exit 1
+          fi
+
+      - name: Prepare Firefox submission directory
+        if: ${{ inputs.target == 'firefox' || inputs.target == 'both' }}
+        run: |
+          FIREFOX_DIR="$RUNNER_TEMP/maglasync-firefox-${MAGLASYNC_VERSION}"
+          mkdir -p "$FIREFOX_DIR"
+          unzip -q "dist/maglasync-free-firefox-v${MAGLASYNC_VERSION}.zip" -d "$FIREFOX_DIR"
+          test "$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).browser_specific_settings.gecko.id' "$FIREFOX_DIR/manifest.json")" = "maglasync@magla.ru"
+          echo "FIREFOX_SUBMISSION_DIR=$FIREFOX_DIR" >> "$GITHUB_ENV"
+
+      - name: Submit Firefox version for public listing review
+        if: ${{ inputs.target == 'firefox' || inputs.target == 'both' }}
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: |
+          npx --yes web-ext@10.6.0 sign \
+            --source-dir "$FIREFOX_SUBMISSION_DIR" \
+            --channel listed \
+            --api-key "$WEB_EXT_API_KEY" \
+            --api-secret "$WEB_EXT_API_SECRET" \
+            --approval-timeout 0 \
+            --upload-source-code "dist/maglasync-free-firefox-source-v${MAGLASYNC_VERSION}.zip"
+          echo "Mozilla Add-ons submission requested for MaglaSync ${MAGLASYNC_VERSION}."
