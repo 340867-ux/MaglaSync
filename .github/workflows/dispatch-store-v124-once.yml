@@ -1,0 +1,42 @@
+name: Dispatch store submission v1.2.4 once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/dispatch-store-v124-once.yml
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lock this dispatch to MaglaSync v1.2.4
+        run: |
+          set -euo pipefail
+          VERSION="$(node -p 'JSON.parse(require("fs").readFileSync("manifest.json","utf8")).version')"
+          if [ "$VERSION" != "1.2.4" ]; then
+            echo "Refusing one-time store dispatch: expected manifest 1.2.4, got $VERSION" >&2
+            exit 1
+          fi
+
+      - name: Dispatch the existing guarded store workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$REPO/actions/workflows/store-submit.yml/dispatches" \
+            -f ref=main \
+            -f 'inputs[target]=both' \
+            -f 'inputs[confirm]=SUBMIT'
+          echo "Dispatched guarded Chrome + Firefox submission workflow for MaglaSync v1.2.4."
