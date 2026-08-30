@@ -3,4 +3,3 @@ type: module
 description: 'Build a local, reviewable AI context handoff from Drupal content.'
 package: MaglaSync
 core_version_requirement: ^10 || ^11
-version: 0.1.0
