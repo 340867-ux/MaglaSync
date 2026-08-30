@@ -1,0 +1,12 @@
+{
+  "submission_id": "forward-future-maglasync-free-2026-08-30-v1",
+  "name": "MaglaSync Free",
+  "websiteUrl": "https://sync.magla.ru/en/",
+  "description": "MaglaSync Free helps people continue the same project across ChatGPT, Claude and Gemini without re-explaining everything. It keeps a compact local project state — goals, key decisions, constraints, results, blockers and next steps — and lets the user review it before continuing in a fresh AI chat.",
+  "features": "Continue projects across ChatGPT, Claude and Gemini\nCompact local project state instead of copying full transcripts\nReview and edit every handoff before it is placed into a chat\nNo MaglaSync account, AI API key, cloud backend or analytics",
+  "useCases": "Use MaglaSync when a long AI chat becomes unwieldy, when you want a fresh conversation, or when another model is better for the next step. Writers, researchers, students, consultants, small-business users and other everyday AI users can carry the current project state into a fresh chat without reconstructing the brief from scratch.",
+  "pricing": "Free",
+  "industry": "Technology",
+  "profession": "Other",
+  "tags": ["productivity", "AI workflow", "ChatGPT", "Claude", "Gemini", "project memory"]
+}
