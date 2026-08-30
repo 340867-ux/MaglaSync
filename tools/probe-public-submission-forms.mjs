@@ -16,6 +16,7 @@ const targets = [
   { name: 'AI Valley', url: 'https://aivalley.ai/submit-tool/' },
   { name: 'LocalAlternative', url: 'https://www.localalternative.io/submit' },
   { name: 'InfoRelay', url: 'https://inforelay.ai/submit/' },
+  { name: 'Forward Future Tools', url: 'https://forwardfuture.com/tools/submit' },
 ];
 
 const browser = await chromium.launch({ headless: true });
