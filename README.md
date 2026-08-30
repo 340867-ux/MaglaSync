@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip"><img alt="MaglaSync 1.2.0 download" src="https://img.shields.io/badge/download-v1.2.0-6d28d9"></a>
+  <a href="https://sync.magla.ru/en/install/"><img alt="Install MaglaSync Free" src="https://img.shields.io/badge/install-Chrome%20%7C%20Firefox-6d28d9"></a>
   <a href="https://github.com/340867-ux/MaglaSync/actions/workflows/quality.yml"><img alt="Quality" src="https://github.com/340867-ux/MaglaSync/actions/workflows/quality.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-56d6b6"></a>
   <a href="https://github.com/340867-ux/MaglaSync/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/340867-ux/MaglaSync?style=flat"></a>
@@ -16,8 +16,8 @@
 <p align="center">
   <a href="https://sync.magla.ru/">Product page</a> ·
   <a href="https://sync.magla.ru/en/">English</a> ·
-  <a href="https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip">Download</a> ·
-  <a href="INSTALL.md">2-minute install</a> ·
+  <a href="https://sync.magla.ru/en/install/">Install</a> ·
+  <a href="INSTALL.md">Developer install</a> ·
   <a href="PRIVACY.md">Privacy</a>
 </p>
 
@@ -66,22 +66,15 @@ flowchart LR
 
 At the start of a connected project conversation, MaglaSync includes a small continuity rule. When the AI reaches a material decision or result, it can return a `maglasync` update block. The extension reads that block into the project journal. AI-reported completion is labelled as reported, not independently verified by MaglaSync.
 
-## Install the GitHub edition
+## Install MaglaSync
 
-Until the Chrome Web Store listing is approved, the GitHub release installs through Chrome's standard developer mode:
+For ordinary users, use the signed browser-store editions:
 
-1. [Download `maglasync-free-chromium-v1.2.0.zip`](https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip).
-2. Unzip it.
-3. Open `chrome://extensions` in Chrome or Edge.
-4. Turn on **Developer mode**.
-5. Click **Load unpacked** and select the unzipped folder.
-6. Pin MaglaSync and create the free project.
+- **Chrome / Chromium:** [Chrome Web Store](https://chromewebstore.google.com/detail/maglasync-free/hhcmedgckaedhlegpgphflmmmhfaegpi)
+- **Firefox:** [Mozilla Add-ons](https://addons.mozilla.org/addon/maglasync-free/)
+- **Install selector:** [sync.magla.ru/en/install/](https://sync.magla.ru/en/install/)
 
-Full illustrated instructions: [INSTALL.md](INSTALL.md).
-
-> **Publishing from Safari?** Safari may automatically expand a downloaded ZIP. Download the [Safari-preserved publisher archive](https://sync.magla.ru/downloads/maglasync-free-chromium-v1.2.0.zip.keep), remove only the final `.keep` from its filename, and upload the resulting `.zip` to Chrome Web Store.
-
-> GitHub cannot provide one-click installation for ordinary Chrome users. Public one-click installation requires a Chrome Web Store listing. This repository and release are the inspectable GitHub edition.
+The GitHub ZIP remains available only as an inspectable technical fallback for developers, reviewers, and reproducible release checks. Manual developer-mode instructions are in [INSTALL.md](INSTALL.md).
 
 ## Privacy you can verify
 
@@ -111,10 +104,11 @@ No paid edition is required to keep using one local project.
 
 | Package | Status |
 | --- | --- |
-| Chromium: Chrome 114+, Edge 114+ | Supported GitHub edition; Chrome Web Store published (owner-reported on 2026-08-26) |
+| Chromium: Chrome 114+, Edge 114+ | Chrome Web Store published; current public store version is tracked in `docs/PUBLISHING_STATUS.md` |
 | Brave and Opera desktop | Uses the Chromium package; not release-gated on every version |
-| Firefox desktop and Android | v1.2.1 AMO candidate and reviewer source ready; Mozilla signing and real-device acceptance tests pending |
-| Safari on macOS, iPhone, and iPad | v1.2.1 Web Packager source ready; TestFlight, real-device testing, and App Review pending |
+| Firefox desktop | Mozilla Add-ons published; v1.2.1 approved for public use on 2026-08-29 |
+| Firefox Android | Package support exists; real-device compatibility remains a separate acceptance concern |
+| Safari on macOS, iPhone, and iPad | Web Packager source prepared; TestFlight, real-device testing, and App Review remain pending |
 | Chrome on Android | Chrome does not provide a mobile extension install channel |
 
 The browser store is the proper installer for an extension. We do not ship a misleading `.exe` or `.dmg` that merely tries to sideload the same package. See the honest [platform matrix](docs/PLATFORM_MATRIX.md) and [Free/Pro architecture](docs/ARCHITECTURE.md).
@@ -147,6 +141,7 @@ Read [SECURITY.md](SECURITY.md) before high-stakes use.
 - Russian Telegram, YouTube, TikTok, VK, and Habr copy is ready in the [CIS promo pack](docs/PROMO_RU.md).
 - Chrome Web Store submission materials are ready in [`assets/store`](assets/store) with exact field copy in [the listing pack](docs/CHROME_WEB_STORE_LISTING.md).
 - Store publication state and evidence level are tracked in [the publishing status journal](docs/PUBLISHING_STATUS.md).
+- The zero-budget acquisition system and channel queue live under [`growth/`](growth/).
 
 ## License
 
