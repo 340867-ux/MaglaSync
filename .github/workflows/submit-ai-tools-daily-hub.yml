@@ -1,0 +1,68 @@
+name: Submit MaglaSync to AI Tools Daily Hub once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - growth/submissions/ai-tools-daily-hub-v1.json
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Bind maintainer contact from signed commit metadata
+        run: |
+          set -euo pipefail
+          CONTACT_EMAIL="$(git log -1 --format='%ae')"
+          if [ -z "$CONTACT_EMAIL" ] || printf '%s' "$CONTACT_EMAIL" | grep -qi 'noreply'; then
+            echo 'A usable maintainer email was not present in commit metadata.' >&2
+            exit 1
+          fi
+          echo "AI_TOOLS_DAILY_HUB_CONTACT_EMAIL=$CONTACT_EMAIL" >> "$GITHUB_ENV"
+
+      - name: Verify one-time free-listing marker
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p = json.loads(Path('growth/submissions/ai-tools-daily-hub-v1.json').read_text())
+          assert p['submission_id'] == 'ai-tools-daily-hub-maglasync-free-2026-08-30-v1'
+          assert p['toolUrl'] == 'https://sync.magla.ru/en/'
+          assert p['category'] == 'productivity'
+          assert p['pricingType'] == 'free'
+          assert p['hasFreePlan'] is True
+          print('AI_TOOLS_DAILY_HUB_MARKER_OK=1')
+          PY
+
+      - name: Install isolated Playwright
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/maglasync-ai-tools-daily-hub
+          cd /tmp/maglasync-ai-tools-daily-hub
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+          ln -s /tmp/maglasync-ai-tools-daily-hub/node_modules "$GITHUB_WORKSPACE/node_modules"
+
+      - name: Submit one permanent free listing
+        run: node tools/submit-ai-tools-daily-hub.mjs
+
+      - name: Upload submission evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-tools-daily-hub-submission-evidence
+          path: reports/growth/ai-tools-daily-hub-v1/
+          if-no-files-found: warn
+          retention-days: 14
