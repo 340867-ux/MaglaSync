@@ -23,12 +23,14 @@ test("PromptFrenzy submission is a one-marker push action with no secrets", () =
   assert.match(workflow, /PROMPTFRENZY_ALREADY_LISTED/);
 });
 
-test("PromptFrenzy payload stays public, free, and product-accurate", () => {
+test("PromptFrenzy payload matches the current public schema and stays free", () => {
   assert.match(workflow, /"name": "MaglaSync Free"/);
-  assert.match(workflow, /"pricing": "free"/);
+  assert.match(workflow, /"url": "https:\/\/sync\.magla\.ru\/en\/"/);
+  assert.match(workflow, /"description": "Local project memory across ChatGPT, Claude, and Gemini/);
   assert.match(workflow, /"category": "productivity"/);
+  assert.match(workflow, /"tags": \["ai-memory", "project-memory", "local-first", "browser-extension", "context"\]/);
+  assert.match(workflow, /"pricing": "free"/);
+  assert.match(workflow, /"logo": "https:\/\/sync\.magla\.ru\/icon128\.png"/);
   assert.match(workflow, /"badge_url": "https:\/\/sync\.magla\.ru\/en\/press\/"/);
-  assert.match(workflow, /"works_with": \["chatgpt", "claude", "gemini"\]/);
-  assert.match(workflow, /"platforms": \["browser-extension", "windows", "macos", "linux"\]/);
-  assert.doesNotMatch(workflow, /paid|credit card|payment|review exchange/i);
+  assert.doesNotMatch(workflow, /pricing_detail|key_features|works_with|platforms|submitted_by/);
 });
