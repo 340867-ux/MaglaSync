@@ -1,0 +1,5 @@
+context:
+  js:
+    js/maglasync-context.js: {}
+  dependencies:
+    - core/drupal
