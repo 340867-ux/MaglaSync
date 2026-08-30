@@ -1,0 +1,5 @@
+maglasync_context.node:
+  route_name: maglasync_context.node
+  title: 'AI Context'
+  base_route: entity.node.canonical
+  weight: 50
