@@ -12,8 +12,10 @@ test("store submission is manual and explicitly confirmed", () => {
 
 test("Chrome submission uses Web Store API v2 and the published extension id", () => {
   assert.match(workflow, /hhcmedgckaedhlegpgphflmmmhfaegpi/);
-  assert.match(workflow, /chromewebstore\.googleapis\.com\/upload\/v2\/publishers/);
-  assert.match(workflow, /chromewebstore\.googleapis\.com\/v2\/publishers/);
+  assert.match(workflow, /BASE="https:\/\/chromewebstore\.googleapis\.com"/);
+  assert.match(workflow, /UPLOAD_URL="\$BASE\/upload\/v2\/publishers\//);
+  assert.match(workflow, /STATUS_URL="\$BASE\/v2\/publishers\//);
+  assert.match(workflow, /chromewebstore\.googleapis\.com\/v2\/publishers\/\$PUBLISHER_ID\/items\/\$CHROME_EXTENSION_ID:publish/);
   assert.match(workflow, /CWS_REFRESH_TOKEN/);
   assert.match(workflow, /CWS_PUBLISHER_ID/);
 });
