@@ -4,6 +4,25 @@ Goal: 50,000 installs on Chrome Web Store and 50,000 installs on Mozilla Add-ons
 
 Budget rule: paid ads, paid directory placement, sponsorships, paid review acceleration, purchased traffic, incentivized installs, and purchased reviews are out of scope.
 
+## Audience priority — consumer first
+
+MaglaSync is not a developer-only product. The primary acquisition audience is ordinary people who already use ChatGPT, Claude, or Gemini for work, study, purchases, research, planning, writing, or long-running personal projects and are tired of re-explaining the same context.
+
+Channel priority is therefore:
+
+1. ordinary AI users actively experiencing context loss, long-chat fatigue, or switching between AI tools;
+2. creators, newsletters, media, communities, comparison sites, and browser-extension discovery surfaces used by those people;
+3. productivity, education, research, writing, consulting, small-business, and general AI audiences;
+4. developer/open-source directories and technical communities as a secondary discovery/proof channel.
+
+Developer attention is useful, but it must not dominate distribution merely because the product is open source or technically interesting. A channel wins only if it can plausibly put MaglaSync in front of real end users.
+
+The default message to ordinary users is the pain and outcome, not the architecture:
+
+**Start a fresh ChatGPT, Claude, or Gemini chat without explaining your whole project again.**
+
+Privacy/local-first/open-source details are conversion proof after the benefit is understood, not the lead message.
+
 ## North-star metrics
 
 Track Chrome and Firefox separately.
@@ -52,26 +71,30 @@ Priority query families:
 - local AI memory browser extension
 - private AI memory extension
 - move project context between AI chats
+- start a new ChatGPT chat without losing context
+- stop re-explaining my project to AI
+- switch from ChatGPT to Claude without starting over
 
 Each search page must answer a real question and avoid doorway-page duplication.
 
-### Loop D — community proof
+### Loop D — consumer community proof
 
-Open-source release / useful technical write-up / real user problem -> community discussion -> GitHub/site -> store -> install -> feedback -> stronger release -> next discussion.
+Real user problem / useful demonstration / relatable use case -> consumer AI discussion or creator coverage -> store -> install -> feedback -> stronger product -> next discussion.
 
-Priority communities:
-- Hacker News / Show HN
-- Product Hunt
-- relevant Reddit communities when their self-promotion rules permit it
-- browser-extension communities
-- open-source and privacy communities
-- AI workflow communities
+Priority surfaces:
+- ChatGPT, Claude, Gemini, general-AI, productivity, study, research, writing, and small-business communities where self-promotion rules permit it;
+- YouTube/TikTok/Telegram/newsletter creators who show ordinary AI workflows;
+- browser-extension discovery communities;
+- Product Hunt and similar launch/discovery communities;
+- Hacker News, open-source, developer, and privacy communities as secondary proof channels.
 
-No mass-posting of identical copy across communities.
+No mass-posting of identical copy across communities. Technical launch language must not be reused unchanged for a consumer audience.
 
 ### Loop E — directory compounding
 
 Free legitimate directory submission -> permanent listing/backlink -> search discovery + direct traffic -> store install.
+
+Prioritize directories whose visitors are actively looking for AI/productivity tools. Developer-only directories are lower priority unless they have meaningful general-user discovery or search visibility.
 
 Prioritize directories that are free without forced payment. Badge/backlink exchanges are optional and must not be added to the main landing page unless they materially help users.
 
@@ -125,7 +148,7 @@ Focus: compounding search + referral + community + store ranking. Preserve produ
 3. Search for new MaglaSync mentions and backlinks.
 4. Read incoming Gmail responses to directory/editorial submissions.
 5. Fix activation/conversion defects before adding traffic.
-6. Submit to the next small batch of legitimate free channels.
+6. Submit to the next small batch of legitimate free consumer-relevant channels; treat developer-only directories as secondary.
 7. Publish one useful, non-duplicative piece of content or release proof when there is something real to say.
 8. Record channel outcomes in `growth/channel_queue.csv`.
 9. Stop or change channels that repeatedly produce no discovery.
@@ -134,7 +157,11 @@ Focus: compounding search + referral + community + store ranking. Preserve produ
 
 Primary promise:
 
-**Keep one project continuous across ChatGPT, Claude, and Gemini — without re-explaining everything.**
+**Start a fresh ChatGPT, Claude, or Gemini chat without explaining your whole project again.**
+
+Supporting line:
+
+**Keep one project continuous across ChatGPT, Claude, and Gemini.**
 
 Supporting proof:
 - free and open source;
