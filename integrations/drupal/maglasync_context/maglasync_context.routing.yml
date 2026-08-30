@@ -1,0 +1,11 @@
+maglasync_context.node:
+  path: '/node/{node}/maglasync-context'
+  defaults:
+    _controller: '\Drupal\maglasync_context\Controller\MaglaSyncContextController::nodeContext'
+    _title: 'MaglaSync AI Context'
+  requirements:
+    _entity_access: 'node.view'
+  options:
+    parameters:
+      node:
+        type: entity:node
