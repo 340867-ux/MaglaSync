@@ -12,11 +12,24 @@ test('AISO submission is one-shot and free-only', () => {
   assert.doesNotMatch(workflow, /schedule:/);
   assert.doesNotMatch(workflow, /pull_request:/);
   assert.equal(payload.category, 'Productivity');
+  assert.equal(payload.categoryValue, 'productivity');
   assert.equal(payload.pricing, 'Free');
+  assert.equal(payload.pricingValue, 'free');
   assert.equal(payload.url, 'https://sync.magla.ru/en/');
 });
 
-test('AISO submitter binds only the free no-card route', () => {
+test('AISO retry is bound to the proven no-click preflight stop', () => {
+  assert.equal(payload.attempt, 2);
+  assert.equal(payload.previous_attempt_status, 'BLOCKED_PREFLIGHT_NO_CLICK');
+  assert.match(submitter, /More than one pre-submit retry is not authorized/);
+  assert.match(submitter, /Retry is allowed only after a proven preflight block with no Submit click/);
+});
+
+test('AISO submitter binds stable free category and pricing values', () => {
+  assert.match(submitter, /selectOption\(payload\.categoryValue\)/);
+  assert.match(submitter, /selectOption\(payload\.pricingValue\)/);
+  assert.match(submitter, /selectedCategoryValue/);
+  assert.match(submitter, /selectedPricingValue/);
   assert.match(submitter, /listing is free/);
   assert.match(submitter, /No card required/);
   assert.match(submitter, /Submit Tool\\s\*\[—-\]\\s\*Free/);
