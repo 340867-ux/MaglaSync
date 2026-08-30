@@ -14,13 +14,19 @@ test("PromptFrenzy verification link is static, dofollow, and tracker-free", () 
   assert.doesNotMatch(press, /<script[^>]+src=["']https?:\/\//i);
 });
 
-test("PromptFrenzy submission is a one-marker push action with no secrets", () => {
-  assert.match(workflow, /paths:\s*\n\s*- growth\/submissions\/promptfrenzy-v1\.json/);
+test("PromptFrenzy submission remains a narrow push action with no secrets", () => {
+  assert.match(workflow, /paths:\s*\n\s*- growth\/submissions\/promptfrenzy-v1\.json\s*\n\s*- \.github\/workflows\/submit-promptfrenzy\.yml/);
   assert.match(workflow, /branches:\s*\n\s*- main/);
   assert.doesNotMatch(workflow, /workflow_dispatch/);
   assert.doesNotMatch(workflow, /secrets\./);
   assert.match(workflow, /https:\/\/www\.promptfrenzy\.com\/api\/directory\/submit/);
   assert.match(workflow, /PROMPTFRENZY_ALREADY_LISTED/);
+});
+
+test("PromptFrenzy preflight uses stable public GitHub source instead of custom-domain DNS", () => {
+  assert.match(workflow, /https:\/\/raw\.githubusercontent\.com\/340867-ux\/MaglaSync\/main\/site\/en\/press\/index\.html/);
+  assert.doesNotMatch(workflow, /promptfrenzy-check=/);
+  assert.doesNotMatch(workflow, /seq 1 36/);
 });
 
 test("PromptFrenzy payload matches the current public schema and stays free", () => {
