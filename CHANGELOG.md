@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.3 — 2026-08-30
+
+- Added an earned, user-triggered **Leave an honest review** action after at least three saved project updates.
+- The review action stays hidden while the project integrity check reports an error and never opens automatically.
+- Routes review feedback to the signed Chrome Web Store or Mozilla Add-ons listing for the browser in use.
+- Adds no analytics, growth permission, incentive, account, contact access, or automatic review flow.
+
 ## 1.2.2 — 2026-08-30
 
 - Fixed popup startup ordering so the browser extension API is initialized before the first state render.
