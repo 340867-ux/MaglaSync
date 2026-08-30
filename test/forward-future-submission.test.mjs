@@ -16,6 +16,20 @@ test('Forward Future submission is a single scoped free-listing trigger', () => 
   assert.equal(payload.websiteUrl, 'https://sync.magla.ru/en/');
 });
 
+test('Forward Future retry is bound to the proven no-click preflight stop', () => {
+  assert.equal(payload.attempt, 2);
+  assert.equal(payload.previous_attempt_status, 'BLOCKED_PREFLIGHT_NO_CLICK');
+  assert.match(submitter, /More than one pre-submit retry is not authorized/);
+  assert.match(submitter, /Retry is allowed only after a proven preflight block with no Submit click/);
+});
+
+test('Forward Future taxonomy uses stable option values rather than display labels', () => {
+  assert.match(submitter, /#pricing'\)\.selectOption\(payload\.pricing\)/);
+  assert.match(submitter, /#industry'\)\.selectOption\(payload\.industry\)/);
+  assert.match(submitter, /#profession'\)\.selectOption\(payload\.profession\)/);
+  assert.match(submitter, /selectedTaxonomy/);
+});
+
 test('Forward Future submitter fails closed on route changes and requires confirmation', () => {
   assert.match(submitter, /https:\/\/forwardfuture\.com\/tools\/submit/);
   assert.match(submitter, /No account needed/);

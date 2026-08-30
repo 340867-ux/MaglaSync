@@ -1,5 +1,7 @@
 {
   "submission_id": "forward-future-maglasync-free-2026-08-30-v1",
+  "attempt": 2,
+  "previous_attempt_status": "BLOCKED_PREFLIGHT_NO_CLICK",
   "name": "MaglaSync Free",
   "websiteUrl": "https://sync.magla.ru/en/",
   "description": "MaglaSync Free helps people continue the same project across ChatGPT, Claude and Gemini without re-explaining everything. It keeps a compact local project state — goals, key decisions, constraints, results, blockers and next steps — and lets the user review it before continuing in a fresh AI chat.",
