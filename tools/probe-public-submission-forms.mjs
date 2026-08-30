@@ -12,6 +12,8 @@ const targets = [
   { name: 'AISO Tools', url: 'https://aisotools.com/submit' },
   { name: 'AI Tool Directory', url: 'https://ai-tool.ai/submit-tool' },
   { name: 'ListAI', url: 'https://listai.cc/submit' },
+  { name: 'AI Tools Daily Hub', url: 'https://aitoolsdailyhub.com/submit-a-tool/' },
+  { name: 'AI Valley', url: 'https://aivalley.ai/submit-tool/' },
 ];
 
 const browser = await chromium.launch({ headless: true });
