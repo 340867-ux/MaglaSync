@@ -20,3 +20,13 @@ test("share loop is explicit and user-triggered", () => {
   assert.doesNotMatch(popupSource, /setInterval\([^)]*shareMaglaSync/);
   assert.doesNotMatch(popupSource, /setTimeout\([^)]*shareMaglaSync/);
 });
+
+test("review loop is earned, honest, and user-triggered", () => {
+  assert.match(popupHtml, /id="review" class="secondary hidden">Leave an honest review</);
+  assert.match(popupSource, /addEventListener\("click", openStoreReview\)/);
+  assert.match(popupSource, /checkpointCount < 3 \|\| integrityErrors\.length !== 0/);
+  assert.match(popupSource, /addons\.mozilla\.org\/addon\/maglasync-free\//);
+  assert.match(popupSource, /chromewebstore\.google\.com\/detail\/maglasync-free\/hhcmedgckaedhlegpgphflmmmhfaegpi/);
+  assert.doesNotMatch(popupSource, /setInterval\([^)]*openStoreReview/);
+  assert.doesNotMatch(popupSource, /setTimeout\([^)]*openStoreReview/);
+});

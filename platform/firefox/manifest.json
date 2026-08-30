@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "MaglaSync Free",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Local project memory across ChatGPT, Claude, and Gemini. Continue in new AI chats without re-explaining everything.",
   "permissions": [
     "storage",
