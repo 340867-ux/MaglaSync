@@ -31,7 +31,7 @@ ExtensionLaunch,browser extension directory,0,waiting_free_route_reply,email:sup
 TiloBox,free/open-source software directory,0,queued_form,https://www.tilobox.com/,B,Secondary free/open-source fit
 MyFreeAISource,free/open-source AI directory,0,queued_form,https://myfreeaisource.com/submit-ai-tool/,B,Useful free/open-source discovery but lower than consumer AI channels
 LocalAlternative,local-first AI directory,0,queued_manual_review_login_signal,https://www.localalternative.io/submit,B,Probe saw a public form plus login signal; inspect manually before any submission
-InfoRelay,AI discovery index,0,probe_clean_public_form,https://inforelay.ai/submit/,B,Free hand-reviewed machine-readable directory; useful search/agent citation channel
+InfoRelay,AI discovery index,0,attempted_unconfirmed_server_config_error_2026-08-30,https://inforelay.ai/submit/,B,One guarded POST returned HTTP 303 and redirected to /submitted/?error=config; prior generic-page-text success inference was rejected as false positive; do not auto-retry
 ToolLibraryOnline,AI directory,0,queued_account_form,https://toollibraryonline.com/submit-a-tool,B,Free submission after account sign-in; hands-on review
 ToolCrush,AI directory,0,queued_form,https://toolcrush.io/submit,B,Free submission currently open; manual review
 The Next AI,AI directory,0,queued_form,https://www.thenextai.com/submit-ai-tool/,B,Free permanent basic listing; skip paid Featured

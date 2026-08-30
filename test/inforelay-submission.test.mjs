@@ -37,6 +37,14 @@ test('InfoRelay submitter requires the exact free no-login/no-captcha route', ()
   assert.match(submitter, /Honeypot field must remain empty/);
 });
 
+test('InfoRelay submitter rejects explicit error redirects before success heuristics', () => {
+  assert.match(submitter, /searchParams\.get\('error'\)/);
+  assert.match(submitter, /server failure redirect/);
+  assert.match(submitter, /Do not count or retry automatically/);
+  assert.match(submitter, /finalUrl\.pathname === '\/submitted\/'/);
+  assert.doesNotMatch(submitter, /review\(\?:ed\)\?\[\^\\n\]\*submission/);
+});
+
 test('InfoRelay submitter proves clickability and requires direct success evidence', () => {
   assert.match(submitter, /click\(\{ trial: true/);
   assert.match(submitter, /SUBMITTED_CONFIRMED/);

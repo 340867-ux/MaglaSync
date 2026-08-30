@@ -22,6 +22,7 @@ const report = {
   submissionResponse: null,
   finalUrl: null,
   confirmationEvidence: null,
+  failureEvidence: null,
 };
 
 function writeReport() {
@@ -159,23 +160,30 @@ try {
   await page.waitForTimeout(2000);
   report.finalUrl = page.url();
   const bodyAfter = await page.locator('body').innerText().catch(() => '');
+  const finalUrl = new URL(report.finalUrl);
+  const errorParam = finalUrl.searchParams.get('error');
+  if (errorParam) {
+    report.failureEvidence = { type: 'error_redirect', value: { url: report.finalUrl, error: errorParam } };
+    fail('ATTEMPTED_UNCONFIRMED', `InfoRelay returned a server failure redirect: error=${errorParam}. Do not count or retry automatically.`);
+  }
 
   let parsed = null;
   try { parsed = JSON.parse(responseBody); } catch {}
   const responseSuccess = Boolean(parsed && parsed.success === true);
   const responseMessage = parsed && typeof parsed.message === 'string' ? parsed.message : '';
-  const responseTextSuccess = /submitted|submission.{0,100}(received|created|success)|thank you|review/i.test(responseMessage || responseBody);
-  const pageTextMatch = bodyAfter.match(/thank you[^\n]*|submission (?:has been )?(?:received|submitted)[^\n]*|submitted successfully[^\n]*|review(?:ed)?[^\n]*submission[^\n]*/i);
+  const responseTextSuccess = /submitted successfully|submission (?:has been )?(?:received|created)|thank you for submitting/i.test(responseMessage || responseBody);
+  const pageTextMatch = bodyAfter.match(/thank you for submitting[^\n]*|submission (?:has been )?(?:received|submitted)[^\n]*|submitted successfully[^\n]*/i);
+  const successPage = finalUrl.pathname === '/submitted/' && !finalUrl.searchParams.has('error');
 
   if (responseSuccess) report.confirmationEvidence = { type: 'response_json', value: { success: true, message: responseMessage.slice(0, 500) } };
   else if (submissionResponse.status() >= 200 && submissionResponse.status() < 300 && responseTextSuccess) {
     report.confirmationEvidence = { type: 'response_text', value: responseBody.slice(0, 1000) };
-  } else if (pageTextMatch) {
-    report.confirmationEvidence = { type: 'page_text', value: pageTextMatch[0].slice(0, 500) };
+  } else if (successPage && pageTextMatch) {
+    report.confirmationEvidence = { type: 'success_page_text', value: pageTextMatch[0].slice(0, 500) };
   }
 
   if (!report.confirmationEvidence) {
-    fail('ATTEMPTED_UNCONFIRMED', 'Submit was clicked but InfoRelay returned no direct success evidence; do not count as submitted.');
+    fail('ATTEMPTED_UNCONFIRMED', 'Submit was clicked but InfoRelay returned no direct success evidence; do not count or retry automatically.');
   }
 
   report.status = 'SUBMITTED_CONFIRMED';

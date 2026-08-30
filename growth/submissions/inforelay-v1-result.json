@@ -1,0 +1,21 @@
+{
+  "submission_id": "inforelay-maglasync-free-2026-08-30-v1",
+  "attempted_at": "2026-08-30T20:26:01.913Z",
+  "workflow_run_id": 33333603947,
+  "artifact_id": 9738358012,
+  "corrected_status": "ATTEMPTED_UNCONFIRMED_SERVER_CONFIG_ERROR",
+  "submitted_confirmed": false,
+  "automatic_retry_allowed": false,
+  "request_evidence": {
+    "endpoint": "https://inforelay.ai/api/submit-tool",
+    "http_status": 303,
+    "final_url": "https://inforelay.ai/submitted/?error=config"
+  },
+  "reconciliation": {
+    "original_workflow_report_status": "SUBMITTED_CONFIRMED",
+    "original_confirmation_evidence_type": "page_text",
+    "original_confirmation_evidence": "reviews your submission (usually within a few days).",
+    "verdict": "FALSE_POSITIVE_REJECTED",
+    "reason": "The explicit error=config redirect is failure evidence and overrides generic instructional page text. The submission must not be counted as confirmed and must not be retried automatically."
+  }
+}
