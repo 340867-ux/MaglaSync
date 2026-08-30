@@ -39,6 +39,7 @@ jobs:
         run: |
           mkdir -p /tmp/drupal-coder
           cd /tmp/drupal-coder
+          composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
           composer require --dev --no-interaction --prefer-dist drupal/coder:^9.0
       - name: Run Drupal and DrupalPractice standards
         run: |
