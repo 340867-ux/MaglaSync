@@ -3,28 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Compare AI memory browser extensions for ChatGPT, Claude and Gemini by storage model, account requirement, browser support, source availability and user control.">
+  <meta name="description" content="Compare AI memory and chat-transfer browser extensions for ChatGPT, Claude and Gemini: project memory, transcript transfer, local storage, accounts and user control.">
   <meta name="theme-color" content="#111827">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="AI memory extensions for ChatGPT, Claude and Gemini: what to compare">
-  <meta property="og:description" content="A practical comparison of browser-based AI memory approaches, including local storage, account requirements, browser support and explicit user control.">
+  <meta property="og:title" content="AI memory and chat-transfer extensions for ChatGPT, Claude and Gemini">
+  <meta property="og:description" content="Compare project memory, full-transcript transfer, compressed handoff and broader AI memory approaches by privacy, scope and user control.">
   <meta property="og:url" content="https://sync.magla.ru/en/ai-memory-extensions-comparison/">
   <meta property="og:image" content="https://sync.magla.ru/social-preview.png">
   <link rel="canonical" href="https://sync.magla.ru/en/ai-memory-extensions-comparison/">
   <link rel="stylesheet" href="../../styles.css">
-  <title>AI Memory Extensions Comparison | ChatGPT, Claude & Gemini</title>
+  <title>AI Memory & Chat Transfer Extensions Comparison | ChatGPT, Claude & Gemini</title>
   <style>.article{max-width:980px;margin:0 auto;padding:64px 24px 96px}.article h1{font-size:clamp(2.2rem,6vw,4.4rem);line-height:1.04}.article h2{margin-top:44px}.article p,.article li{font-size:1.05rem;line-height:1.72}.table-wrap{overflow:auto;margin:28px 0}.compare{width:100%;border-collapse:collapse;min-width:760px}.compare th,.compare td{padding:14px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}.compare th{background:#f8fafc}.callout{margin:30px 0;padding:24px;border-radius:20px;background:#f8fafc;border:1px solid #e5e7eb}.install-row{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0}.small{font-size:.92rem!important;color:#667085}</style>
 </head>
 <body>
   <main class="article">
-    <p class="eyebrow">GUIDE · AI MEMORY EXTENSIONS</p>
-    <h1>AI memory extensions are not all solving the same problem.</h1>
-    <p class="lead">Some tools save reusable facts. Some archive full conversations. Some inject a personal profile. Others carry a reviewed project state between fresh chats. Before installing one, compare the control model as carefully as the feature list.</p>
+    <p class="eyebrow">GUIDE · AI MEMORY & CHAT TRANSFER</p>
+    <h1>AI memory extensions and chat-transfer tools solve different problems.</h1>
+    <p class="lead">Some tools move a whole transcript. Some compress a conversation for the next AI. Some save reusable facts or searchable history. Others carry a reviewed project state between fresh chats. The best choice depends on what you actually need to preserve.</p>
 
     <h2>What to compare</h2>
     <ul>
       <li><strong>Storage:</strong> local-only, optional cloud sync, or server-backed.</li>
-      <li><strong>Scope:</strong> personal facts, full transcripts, searchable archives, or project state.</li>
+      <li><strong>Scope:</strong> personal facts, full transcripts, searchable archives, compressed handoffs, or project state.</li>
       <li><strong>User control:</strong> automatic capture/injection versus explicit save, connect, review and send steps.</li>
       <li><strong>Browser support:</strong> Chrome only or Chrome plus Firefox.</li>
       <li><strong>Source transparency:</strong> whether the extension source is publicly inspectable.</li>
@@ -35,7 +35,10 @@
       <table class="compare">
         <thead><tr><th>Tool</th><th>Publicly described approach</th><th>Storage / account model</th><th>Browser availability noted publicly</th></tr></thead>
         <tbody>
-          <tr><td><strong>MaglaSync Free</strong></td><td>Project continuity across explicitly connected AI chats, with a reviewable handoff before the user sends it.</td><td>Local browser storage; no MaglaSync account or backend.</td><td>Chrome and Firefox.</td></tr>
+          <tr><td><strong>MaglaSync Free</strong></td><td>Project continuity across explicitly connected AI chats, with a structured, reviewable handoff before the user sends it.</td><td>Local browser storage; no MaglaSync account or backend.</td><td>Chrome and Firefox.</td></tr>
+          <tr><td><strong>ThreadPort</strong></td><td>Moves the full conversation transcript between ChatGPT, Claude and Gemini so the next AI can continue from the existing thread.</td><td>Public coverage emphasizes transfer without storing chats on a developer server.</td><td>Chrome extension.</td></tr>
+          <tr><td><strong>PromptHop</strong></td><td>Captures the current conversation and prepares a shortened handoff for another AI, with the user sending the result.</td><td>Public store description emphasizes conversation transfer and token reduction.</td><td>Chrome listing.</td></tr>
+          <tr><td><strong>Rethread</strong></td><td>Cross-AI memory for facts, preferences, decisions and project context across a broader set of AI services.</td><td>Public site describes local-by-default memory and no account requirement.</td><td>Chrome extension.</td></tr>
           <tr><td><strong>MemVault</strong></td><td>Reusable memory items that can be inserted across ChatGPT, Claude and Gemini.</td><td>Described as local/private; free tier plus one-time Pro upgrade.</td><td>Chrome listing.</td></tr>
           <tr><td><strong>Personal AI Memory</strong></td><td>Automatic local capture and searchable archive of AI conversations.</td><td>Described as local IndexedDB storage.</td><td>Chrome listing.</td></tr>
           <tr><td><strong>Fractal Memory</strong></td><td>Capture conversation context from one AI and inject it into another session or provider.</td><td>Public listing emphasizes cross-platform context transfer.</td><td>Chrome listing.</td></tr>
@@ -44,6 +47,10 @@
       </table>
     </div>
     <p class="small">Comparison is based on public product/store descriptions observed in August 2026. Features can change; verify each current store listing before installing.</p>
+
+    <h2>Full transcript transfer or project state?</h2>
+    <p>A full transcript can be useful when the exact conversation matters and the next model should see the whole thread. A compact project state is useful when a project has accumulated many chats and the important payload is the current goal, decisions, completed work, blockers and next steps rather than every message that led there.</p>
+    <p>Those are different workflows. MaglaSync Free deliberately chooses the second one: it maintains a project journal and generates a reviewable handoff from that state instead of treating one conversation transcript as the project itself.</p>
 
     <h2>Where MaglaSync is deliberately narrower</h2>
     <p>MaglaSync Free is not trying to build an invisible universal profile or silently archive every AI conversation. A chat starts outside the project until the user explicitly connects it. The project handoff is shown for review and can be edited before anything is placed into a supported AI chat. The user remains the final sender.</p>
@@ -58,6 +65,7 @@
       <li>If you mainly want a searchable archive, choose a tool built around conversation capture and retrieval.</li>
       <li>If you want reusable personal facts or preferences, a memory-item or profile tool may be simpler.</li>
       <li>If you want to move an entire transcript, choose a transcript-transfer workflow.</li>
+      <li>If you want to reduce a conversation before handing it to another model, choose a compressed-transfer workflow.</li>
       <li>If you want a controlled working state for a long project, prioritize explicit project scope, review and portability.</li>
     </ul>
 
@@ -67,7 +75,7 @@
       <a class="button primary" href="https://addons.mozilla.org/addon/maglasync-free/?utm_source=maglasync-site&utm_medium=organic&utm_campaign=ai-memory-extensions-comparison">Add to Firefox</a>
     </div>
     <p class="small">Free · open source · local-first · no MaglaSync account or AI API key.</p>
-    <p><a class="text-link" href="../chatgpt-memory-extension/">What a memory extension should do</a> · <a class="text-link" href="../ai-chat-memory/">Cross-AI chat memory</a> · <a class="text-link" href="../ai-context-handoff-checklist/">Context handoff checklist</a></p>
+    <p><a class="text-link" href="../move-ai-chat-between-chatgpt-claude-gemini/">Move AI chat between ChatGPT, Claude and Gemini</a> · <a class="text-link" href="../chatgpt-memory-extension/">What a memory extension should do</a> · <a class="text-link" href="../ai-context-handoff-checklist/">Context handoff checklist</a></p>
   </main>
 </body>
 </html>
