@@ -1,0 +1,38 @@
+name: Public submission form probe
+
+on:
+  pull_request:
+    paths:
+      - 'tools/probe-public-submission-forms.mjs'
+      - '.github/workflows/public-form-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated Playwright
+        run: |
+          mkdir -p /tmp/maglasync-form-probe
+          cd /tmp/maglasync-form-probe
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+          ln -s /tmp/maglasync-form-probe/node_modules "$GITHUB_WORKSPACE/node_modules"
+      - name: Probe allowlisted public forms without submitting
+        run: node tools/probe-public-submission-forms.mjs
+      - name: Assert probe never submits
+        run: |
+          node -e "const r=require('./reports/growth/PUBLIC_FORM_PROBE.json'); if(r.submitted!==false) process.exit(1)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-form-probe
+          path: reports/growth/PUBLIC_FORM_PROBE.json
+          retention-days: 7
