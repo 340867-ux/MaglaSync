@@ -57,20 +57,10 @@ jobs:
             "url": "https://sync.magla.ru/en/",
             "description": "Local project memory across ChatGPT, Claude, and Gemini with explicit chat connection and user-reviewed handoffs.",
             "category": "productivity",
-            "pricing": "free",
-            "badge_url": "https://sync.magla.ru/en/press/",
             "tags": ["ai-memory", "project-memory", "local-first", "browser-extension", "context"],
-            "pricing_detail": "Free one-project local edition; no MaglaSync account or AI API key required.",
-            "key_features": [
-              "Stores one project journal locally in browser extension storage",
-              "Requires explicit per-chat connection before a conversation joins project memory",
-              "Prepares a user-reviewable handoff for fresh ChatGPT, Claude, or Gemini chats",
-              "Leaves the final Send action to the user"
-            ],
-            "works_with": ["chatgpt", "claude", "gemini"],
-            "platforms": ["browser-extension", "windows", "macos", "linux"],
+            "pricing": "free",
             "logo": "https://sync.magla.ru/icon128.png",
-            "submitted_by": "340867-ux"
+            "badge_url": "https://sync.magla.ru/en/press/"
           }
           JSON
           python3 -m json.tool /tmp/promptfrenzy-payload.json >/dev/null
