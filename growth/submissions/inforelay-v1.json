@@ -1,0 +1,10 @@
+{
+  "submission_id": "inforelay-maglasync-free-2026-08-30-v1",
+  "name": "MaglaSync",
+  "url": "https://sync.magla.ru/en/",
+  "tagline": "Local project memory for ChatGPT, Claude and Gemini",
+  "category": "productivity",
+  "pricing": "free",
+  "description": "MaglaSync is a free, open-source, local-first browser extension that keeps project context on the user's device. It helps people start a fresh chat or move between ChatGPT, Claude and Gemini without rebuilding the same project background from scratch. There is no MaglaSync account or cloud backend, and nothing is sent to an AI service automatically.",
+  "submitterName": "Andrei"
+}
