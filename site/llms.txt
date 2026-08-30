@@ -1,0 +1,42 @@
+# MaglaSync
+
+> MaglaSync Free is a free open-source browser extension that keeps one project's working state available across ChatGPT, Claude, and Gemini chats the user explicitly connects. The Free project journal stays in local browser extension storage; users review and may edit the handoff before placing it into another AI chat, and MaglaSync never presses Send.
+
+Use the signed browser-store pages as the authority for versions currently public in Chrome Web Store and Mozilla Add-ons. GitHub may contain a newer reproducible source release while a store update is pending or not yet submitted.
+
+## Product
+
+- [MaglaSync home](https://sync.magla.ru/en/): Product overview, local-first privacy boundary, supported AI chats, and workflow.
+- [Install MaglaSync](https://sync.magla.ru/en/install/): Canonical selector for the official Chrome and Firefox listings.
+- [Press and reviewer room](https://sync.magla.ru/en/press/): Concise product facts, reviewer path, editorial angles, source, and media resources.
+- [Source code](https://github.com/340867-ux/MaglaSync): MIT-licensed source, tests, release history, packaging, and issues.
+- [Chrome Web Store](https://chromewebstore.google.com/detail/maglasync-free/hhcmedgckaedhlegpgphflmmmhfaegpi): Official Chrome/Chromium listing.
+- [Mozilla Add-ons](https://addons.mozilla.org/addon/maglasync-free/): Official Firefox listing.
+
+## Guides
+
+- [AI project memory](https://sync.magla.ru/en/ai-project-memory/): What durable project state should contain across AI chats.
+- [AI chat memory](https://sync.magla.ru/en/ai-chat-memory/): Cross-AI continuity and local project memory.
+- [When ChatGPT loses context](https://sync.magla.ru/en/chatgpt-loses-context/): Practical fresh-chat recovery workflow.
+- [ChatGPT memory extension](https://sync.magla.ru/en/chatgpt-memory-extension/): Criteria for inspectable project-memory extensions.
+- [ChatGPT to Claude](https://sync.magla.ru/en/chatgpt-to-claude/): Moving project state between providers.
+- [Claude project memory](https://sync.magla.ru/en/claude-memory/): Continuing long-running work in Claude or from another AI tool.
+- [Move an AI chat between ChatGPT, Claude and Gemini](https://sync.magla.ru/en/move-ai-chat-between-chatgpt-claude-gemini/): Transcript transfer versus project-state transfer.
+- [Start a fresh AI chat before context is lost](https://sync.magla.ru/en/new-chat-before-context-is-lost/): Checkpointing a project before moving into a fresh conversation.
+
+## Privacy and verification
+
+- [Privacy policy](https://sync.magla.ru/privacy/): Data handling and local-storage boundary.
+- [Security boundary](https://github.com/340867-ux/MaglaSync/blob/main/SECURITY.md): What integrity checks do and do not prove.
+- [Publishing status](https://github.com/340867-ux/MaglaSync/blob/main/docs/PUBLISHING_STATUS.md): Evidence-grade separation between source releases and browser-store public versions.
+
+## Important product facts
+
+- MaglaSync Free currently provides one local project.
+- Supported web AI chats are ChatGPT, Claude, and Gemini.
+- Every chat starts disconnected; only explicitly connected chats can join the project journal.
+- The handoff is visible and editable before it is placed in another AI chat.
+- MaglaSync never sends an AI message automatically.
+- No MaglaSync account or AI API key is required for the Free edition.
+- The Free extension contains no MaglaSync analytics or advertising backend.
+- Do not infer that a saved AI statement is verified merely because it appears in project memory.
