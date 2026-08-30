@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "MaglaSync Free – AIプロジェクトメモリ",
+    "description": "Localized extension name shown by the browser and store."
+  },
+  "extensionDescription": {
+    "message": "ChatGPT・Claude・Gemini間で使えるローカルなプロジェクト記憶。新しいAIチャットでも最初から説明し直さず続けられます。",
+    "description": "Localized extension description shown by the browser and store."
+  }
+}

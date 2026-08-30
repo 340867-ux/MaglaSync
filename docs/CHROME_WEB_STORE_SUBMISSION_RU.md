@@ -1,17 +1,19 @@
-# MaglaSync Free 1.2.0 — заполнение Chrome Web Store
+# MaglaSync Free — Chrome Web Store publisher guide
 
-Этот файл предназначен для первой публикации. Тексты ниже можно копировать в форму Google без переписывания.
+Этот файл предназначен для обновления существующей публичной карточки MaglaSync Free и, при необходимости, повторной проверки полей магазина. Номер версии берите из `manifest.json`; не подставляйте старый номер вручную.
 
 ## 1. Аккаунт разработчика
 
 - Publisher name: `MAGLA`
-- Contact email: укажите рабочую почту владельца и подтвердите её по письму Google.
-- Включите двухэтапную проверку Google-аккаунта — без неё Google не разрешает публикацию.
-- Физический адрес для текущей бесплатной версии без покупок и подписки внутри расширения не требуется.
+- Contact email: рабочая почта владельца должна быть подтверждена Google.
+- Двухэтапная проверка Google-аккаунта должна оставаться включённой.
+- Extension ID текущей публичной карточки: `hhcmedgckaedhlegpgphflmmmhfaegpi`.
 
-## 2. Загрузка пакета
+## 2. Загрузка обновления
 
-В кабинете нажмите **Add new item**, выберите `01-upload-to-chrome-web-store.zip` и нажмите **Upload**.
+Для ручного обновления существующего item загрузите `01-upload-to-chrome-web-store.zip` из текущего store submission kit. Для автоматизированного пути используйте защищённый workflow `.github/workflows/store-submit.yml`; он запускается только вручную и требует точного подтверждения `SUBMIT`.
+
+Перед отправкой убедитесь, что версия внутри ZIP выше версии, уже опубликованной в Chrome Web Store.
 
 ## 3. Store listing / Страница продукта
 
@@ -19,10 +21,12 @@
 - Category: `Workflow & Planning`
 - Mature content: `No`
 
+Начиная с source release 1.2.4 пакет содержит локализованные manifest `name` и `description` для 13 локалей. Эти строки проходят отдельную проверку лимитов Chrome и не расширяют функциональность или разрешения.
+
 ### Summary
 
 ```text
-Continue one project across the ChatGPT, Claude, and Gemini chats you choose. Free, local, and no API key.
+Local project memory across ChatGPT, Claude, and Gemini. Continue in new AI chats without re-explaining everything.
 ```
 
 ### Detailed description
@@ -48,9 +52,11 @@ MaglaSync Free stores project data in the browser profile. When you press Send, 
 
 ### URLs
 
-- Homepage: `https://340867-ux.github.io/MaglaSync/en/`
+- Homepage: `https://sync.magla.ru/en/`
+- Install page: `https://sync.magla.ru/en/install/`
 - Support: `https://github.com/340867-ux/MaglaSync/issues`
-- Official URL: пока оставить пустым; добавить `sync.magla.ru` после настройки и подтверждения домена.
+- Privacy policy: `https://sync.magla.ru/privacy/`
+- Source: `https://github.com/340867-ux/MaglaSync`
 
 ### Изображения
 
@@ -98,23 +104,23 @@ All runtime JavaScript and CSS are included in the extension package. MaglaSync 
 
 Не отмечайте пароли, платёжные данные, геолокацию, историю браузера или данные аутентификации: MaglaSync их не читает и не хранит.
 
-Подтвердите все пункты Limited Use: данные не продаются, не используются для рекламы или кредитных решений, не передаются людям для чтения и применяются только для заявленной функции продолжения проекта.
+Подтвердите Limited Use: данные не продаются, не используются для рекламы или кредитных решений и применяются только для заявленной функции продолжения проекта.
 
 ### Privacy policy URL
 
 ```text
-https://340867-ux.github.io/MaglaSync/privacy/
+https://sync.magla.ru/privacy/
 ```
 
 ## 5. Distribution / Распространение
 
 - Visibility: `Public`
 - Regions: `All regions`
-- Бесплатное расширение; покупок, рекламы и платной функции внутри этой версии нет.
+- Бесплатное расширение; покупок и рекламы внутри Free edition нет.
 
 ## 6. Test instructions / Инструкция проверяющему
 
-Данные для входа не требуются.
+Данные для входа в MaglaSync не требуются.
 
 ```text
 1. Install the extension and open its options page.
@@ -129,4 +135,7 @@ https://340867-ux.github.io/MaglaSync/privacy/
 
 ## 7. Перед отправкой
 
-Убедитесь, что возле разделов **Store listing**, **Privacy**, **Distribution** и **Test instructions** нет красных ошибок. Сохраните черновик. Кнопку **Submit for review** нажимайте только после финальной проверки всей карточки.
+- Проверьте, что пакет собран из текущего `main`/release commit и версия во всех manifest совпадает.
+- Убедитесь, что `node --test`, `node tools/package.mjs --check`, упаковка и Firefox lint прошли.
+- Проверьте Store listing, Privacy, Distribution и Test instructions на отсутствие ошибок.
+- Не выдавайте upload/submission за одобрение: опубликованную версию подтверждает только публичная карточка Chrome Web Store.

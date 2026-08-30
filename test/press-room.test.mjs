@@ -14,7 +14,7 @@ test("press room routes reviewers to signed stores and public source", () => {
 });
 
 test("press room distinguishes source release from store review", () => {
-  assert.match(press, /Current source release<\/strong><p>v1\.2\.3/);
+  assert.match(press, /Current source release<\/strong><p>v1\.2\.4/);
   assert.match(press, /Browser-store review and rollout can lag the source release/);
   assert.doesNotMatch(press, /50,?000 users/i);
   assert.doesNotMatch(press, /best AI memory/i);

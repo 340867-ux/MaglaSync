@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "MaglaSync Free – ذاكرة مشاريع الذكاء",
+    "description": "Localized extension name shown by the browser and store."
+  },
+  "extensionDescription": {
+    "message": "ذاكرة محلية للمشروعات عبر ChatGPT وClaude وGemini. واصل العمل في محادثات ذكاء جديدة دون إعادة شرح كل شيء.",
+    "description": "Localized extension description shown by the browser and store."
+  }
+}

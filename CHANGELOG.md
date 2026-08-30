@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.4 — 2026-08-30
+
+- Localized the browser/store extension name and short description for 13 high-reach locales: English, Russian, Spanish, Brazilian Portuguese, German, French, Indonesian, Japanese, Korean, Hindi, Simplified Chinese, Traditional Chinese, and Arabic.
+- Kept the product identity factual in every locale: local project memory across ChatGPT, Claude, and Gemini, with no new feature claims.
+- Added deterministic packaging and validation for every locale, including Chrome's 45-character name limit and 132-character description limit.
+- Added no permissions, analytics, backend, account requirement, or automatic sharing behavior.
+
 ## 1.2.3 — 2026-08-30
 
 - Added an earned, user-triggered **Leave an honest review** action after at least three saved project updates.

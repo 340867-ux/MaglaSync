@@ -18,13 +18,14 @@ Run from the root of this source archive:
 node tools/package.mjs --firefox-only
 ```
 
-The submitted extension is written to:
+Read the submitted version directly from the reviewed manifest:
 
-```text
-dist/maglasync-free-firefox-v1.2.1.zip
+```bash
+VERSION="$(node -p 'JSON.parse(require("fs").readFileSync("manifest.json","utf8")).version')"
+echo "dist/maglasync-free-firefox-v${VERSION}.zip"
 ```
 
-The build is deterministic: it copies the reviewed runtime files, removes the ES module import/export markers from the local source, concatenates `shared/core.js` with the background and dashboard entry points, normalizes file permissions and timestamps, and creates the ZIP with Info-ZIP metadata stripping enabled.
+The build is deterministic: it copies the reviewed runtime files and locale metadata, removes the ES module import/export markers from the local source, concatenates `shared/core.js` with the background and dashboard entry points, normalizes file permissions and timestamps, and creates the ZIP with Info-ZIP metadata stripping enabled.
 
 No code is minified, obfuscated, fetched, generated remotely, or downloaded during the build. The generated `background.bundle.js` and `dashboard/dashboard.bundle.js` remain human-readable.
 
