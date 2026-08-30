@@ -1,3 +1,4 @@
+const isFirefox = typeof globalThis.browser !== "undefined";
 const extensionApi = globalThis.browser ?? globalThis.chrome;
 
 const noProject = document.querySelector("#no-project");
@@ -8,6 +9,7 @@ document.querySelector("#start").addEventListener("click", openDashboard);
 document.querySelector("#edit").addEventListener("click", openDashboard);
 document.querySelector("#open-dashboard").addEventListener("click", openDashboard);
 document.querySelector("#share").addEventListener("click", shareMaglaSync);
+document.querySelector("#review").addEventListener("click", openStoreReview);
 document.querySelector("#capture-enabled").addEventListener("change", saveSettings);
 document.querySelector("#save-full-history").addEventListener("change", saveSettings);
 
@@ -30,6 +32,14 @@ async function shareMaglaSync() {
     extensionApi.tabs.create({ url: shareUrl });
     window.close();
   }
+}
+
+function openStoreReview() {
+  const reviewUrl = isFirefox
+    ? "https://addons.mozilla.org/addon/maglasync-free/reviews/"
+    : "https://chromewebstore.google.com/detail/maglasync-free/hhcmedgckaedhlegpgphflmmmhfaegpi/reviews";
+  extensionApi.tabs.create({ url: reviewUrl });
+  window.close();
 }
 
 async function saveSettings() {
@@ -57,8 +67,10 @@ async function render() {
   const active = new Set((state.chatBindings || [])
     .filter((binding) => binding.projectId === state.project.id && binding.goalVersion === goalVersion)
     .map((binding) => binding.chatId));
+  const checkpointCount = state.checkpoints.filter((checkpoint) => active.has(checkpoint.chatId)).length;
   document.querySelector("#chat-count").textContent = active.size;
-  document.querySelector("#checkpoint-count").textContent = state.checkpoints.filter((checkpoint) => active.has(checkpoint.chatId)).length;
+  document.querySelector("#checkpoint-count").textContent = checkpointCount;
+  document.querySelector("#review").classList.toggle("hidden", checkpointCount < 3 || integrityErrors.length !== 0);
   document.querySelector("#capture-enabled").checked = state.settings.captureEnabled;
   document.querySelector("#save-full-history").checked = state.settings.saveFullHistory;
 }
